@@ -1,0 +1,45 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const title = "IPTV Guides & Tutorials | iptv uk";
+const description = "Learn everything about IPTV. From setting up Tivimate and Smarters to troubleshooting buffering issues. Your ultimate UK IPTV knowledge base.";
+
+const guides = [
+  { title: "How to setup IPTV on Firestick", slug: "setup-iptv-firestick" },
+  { title: "Best Settings for Tivimate Premium", slug: "tivimate-best-settings" },
+  { title: "How to fix IPTV buffering issues", slug: "fix-iptv-buffering" }
+];
+---
+
+<Layout title={title} description={description}>
+  <!-- Sticky Header -->
+  <header class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex-shrink-0">
+        <a href="/" class="text-2xl font-bold text-secondary tracking-tight">iptv uk</a>
+      </div>
+      <div class="flex items-center">
+        <a href="/#pricing" class="bg-primary text-white px-5 py-2 rounded-full font-semibold hover:bg-red-700 transition-all">Get Started</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow bg-gray-50">
+    <section class="bg-[#001440] text-white py-16 text-center">
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Knowledge Base</h1>
+      <p class="text-xl text-blue-200">Technical guides, setup tutorials, and IPTV tips.</p>
+    </section>
+
+    <section class="py-20 max-w-5xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {guides.map(guide => (
+          <a href={`/guides/${guide.slug}`} class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md hover:border-primary transition-all group">
+            <h3 class="text-xl font-bold text-secondary group-hover:text-primary mb-3">{guide.title}</h3>
+            <p class="text-gray-500 mb-4">Read our comprehensive guide to get the most out of your premium streaming experience.</p>
+            <span class="text-primary font-semibold">Read More &rarr;</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  </main>
+</Layout>

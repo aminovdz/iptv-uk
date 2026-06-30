@@ -1,0 +1,67 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+export function getStaticPaths() {
+  const guides = [
+    { slug: "setup-iptv-firestick", title: "How to setup IPTV on Firestick", content: "Setting up IPTV on a Firestick is incredibly easy. Simply install the Downloader app, fetch your preferred player like Smarters or Tivimate, and enter your iptv uk credentials." },
+    { slug: "tivimate-best-settings", title: "Best Settings for Tivimate Premium", content: "To get the most out of Tivimate with iptv uk, ensure you adjust the buffer size to 'Large' in the playback settings and enable AFR (Auto Frame Rate) for smooth sports viewing." },
+    { slug: "fix-iptv-buffering", title: "How to fix IPTV buffering issues", content: "If you experience buffering, first restart your router and device. Connecting via ethernet instead of WiFi dramatically improves stability. iptv uk's anti-freeze technology usually handles the rest." }
+  ];
+  return guides.map(guide => ({
+    params: { slug: guide.slug },
+    props: { guide },
+  }));
+}
+
+const { guide } = Astro.props;
+const title = `${guide.title} | iptv uk Guides`;
+const description = guide.content.substring(0, 150) + "...";
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": guide.title,
+  "author": {
+    "@type": "Organization",
+    "name": "iptv uk"
+  }
+};
+---
+
+<Layout title={title} description={description}>
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+
+  <header class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex-shrink-0">
+        <a href="/" class="text-2xl font-bold text-secondary tracking-tight">iptv uk</a>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="/guides" class="text-gray-600 hover:text-primary font-medium">Back to Guides</a>
+        <a href="/#pricing" class="bg-primary text-white px-5 py-2 rounded-full font-semibold hover:bg-red-700 transition-all">Get Started</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow bg-gray-50 py-20">
+    <article class="max-w-3xl mx-auto px-4">
+      <div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 md:p-12">
+        <h1 class="text-3xl md:text-4xl font-extrabold text-secondary mb-8">{guide.title}</h1>
+        <div class="prose prose-lg text-gray-700 max-w-none">
+          <p>{guide.content}</p>
+        </div>
+      </div>
+
+      <!-- Permanent Promotional Banner -->
+      <div class="mt-12 bg-gradient-to-r from-secondary to-[#001440] rounded-3xl p-8 text-center text-white shadow-xl shadow-blue-900/20">
+        <h3 class="text-2xl font-bold mb-4">Tired of complicated setups and buffering?</h3>
+        <p class="text-blue-100 mb-6 max-w-xl mx-auto">
+          Switch to <strong class="text-white">iptv uk</strong> today for instant activation, 4K quality, and zero buffering on any device.
+        </p>
+        <a href="/#pricing" class="inline-block bg-primary hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition-transform transform hover:scale-105">
+          View Plans from £7
+        </a>
+      </div>
+    </article>
+  </main>
+</Layout>

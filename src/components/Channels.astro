@@ -1,0 +1,52 @@
+---
+// Channels.astro
+import { Image } from 'astro:assets';
+import channelsImage from '../assets/channels.jpg';
+---
+<section class="py-24 bg-white border-t border-gray-100">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="lg:flex items-center gap-16">
+      <div class="lg:w-1/2">
+        <h2 class="text-3xl md:text-4xl font-bold text-secondary">Thousands of Premium Channels at your fingertips</h2>
+        <p class="mt-6 text-lg text-gray-600 leading-relaxed">
+          Our <strong>Best IPTV UK</strong> subscription grants you access to an immense catalog of global channels. Whether you're a sports fanatic, movie buff, or documentary enthusiast, we have everything you need.
+        </p>
+        <ul class="mt-8 grid grid-cols-2 gap-4">
+          <li class="flex items-center text-gray-700 font-medium">
+            <span class="mr-2 text-primary">●</span> Live UK Sports
+          </li>
+          <li class="flex items-center text-gray-700 font-medium">
+            <span class="mr-2 text-primary">●</span> Unlimited Movies & Series
+          </li>
+          <li class="flex items-center text-gray-700 font-medium">
+            <span class="mr-2 text-primary">●</span> Local UK & US Channels
+          </li>
+          <li class="flex items-center text-gray-700 font-medium">
+            <span class="mr-2 text-primary">●</span> Documentaries & News
+          </li>
+          <li class="flex items-center text-gray-700 font-medium">
+            <span class="mr-2 text-primary">●</span> Kids & Family Networks
+          </li>
+          <li class="flex items-center text-gray-700 font-medium">
+            <span class="mr-2 text-primary">●</span> Pay-Per-View Events (PPV)
+          </li>
+        </ul>
+      </div>
+      <div class="mt-12 lg:mt-0 lg:w-1/2 relative">
+        <div class="absolute -inset-4 bg-secondary/5 blur-3xl rounded-full"></div>
+        <Image src={channelsImage} alt="Vast catalog of UK IPTV channels and VOD" class="relative z-10 rounded-3xl shadow-2xl border border-gray-200 transform hover:scale-105 transition duration-700" format="webp" />
+        
+        <!-- Decorative badge -->
+        <div class="absolute -bottom-6 -left-6 z-20 bg-white p-4 rounded-2xl shadow-xl border border-gray-100 hidden sm:block">
+          <div class="flex items-center gap-3">
+            <div class="h-10 w-10 bg-primary rounded-full flex items-center justify-center text-white font-bold italic text-sm">LIVE</div>
+            <div>
+              <p class="text-xs font-bold text-secondary uppercase">Premium Quality</p>
+              <p class="text-[10px] text-gray-500">4K Ultra High Definition</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

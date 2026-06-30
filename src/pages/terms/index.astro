@@ -1,0 +1,55 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const title = "Terms of Service | iptv uk";
+const description = "Read the Terms of Service and conditions for using iptv uk's premium IPTV streaming services.";
+---
+
+<Layout title={title} description={description}>
+  <header class="bg-secondary text-white py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Terms of Service</h1>
+      <p class="text-blue-200">Last updated: {new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })}</p>
+    </div>
+  </header>
+
+  <main class="py-16 bg-white">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 prose prose-lg prose-blue">
+      <h2>1. Introduction</h2>
+      <p>Welcome to <strong>iptv uk</strong>. By accessing our website and using our IPTV services, you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you may not use our service.</p>
+
+      <h2>2. Service Usage</h2>
+      <p>Our service is provided on an "as is" and "as available" basis. We strive to provide 99.9% uptime, but we do not guarantee that the service will be uninterrupted or error-free. The quality of the stream may vary depending on your internet connection speed and device capabilities. A minimum internet speed of 15 Mbps is recommended for HD and 30 Mbps for 4K streaming.</p>
+
+      <h2>3. Account Responsibilities</h2>
+      <ul>
+        <li>You must be at least 18 years old to purchase a subscription.</li>
+        <li>Your subscription is for personal, non-commercial use only.</li>
+        <li>Account sharing (using the same subscription on multiple devices simultaneously beyond your plan's allowance) is strictly prohibited and will result in immediate account termination without a refund.</li>
+      </ul>
+
+      <h2>4. Payments and Refunds</h2>
+      <p>All payments are processed securely. We offer a <strong>7-day money-back guarantee</strong> for new subscribers who are not satisfied with the service. After 7 days, all sales are final and no refunds will be issued. Free trials are provided to ensure the service meets your expectations before purchasing.</p>
+
+      <h2>5. Content Availability</h2>
+      <p>The channel lineup and VOD catalog are subject to change without prior notice. We do not host any of the content ourselves; we act solely as a conduit for accessing publicly available streams on the internet. We cannot guarantee the permanent availability of any specific channel or event.</p>
+
+      <h2>6. Intellectual Property</h2>
+      <p>iptv uk respects intellectual property rights. We do not own, host, or distribute any copyrighted material. Our service merely provides links to third-party content. If you are a copyright owner and believe your content is being infringed, please contact us for immediate removal from our indexing.</p>
+
+      <h2>7. Changes to Terms</h2>
+      <p>We reserve the right to modify these terms at any time. Your continued use of the service following any changes indicates your acceptance of the new terms.</p>
+
+      <div class="mt-12 p-6 bg-gray-50 rounded-xl border border-gray-200 text-center">
+        <p class="mb-0">If you have any questions about these Terms, please <a href="/#contact" class="text-primary font-bold hover:underline">contact our support team</a>.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-[#001440] text-blue-200 py-8 border-t border-blue-900 text-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-sm">
+      <a href="/" class="hover:text-white mb-4 inline-block font-bold">&larr; Back to Home</a>
+      <p>&copy; {new Date().getFullYear()} iptv uk. All rights reserved.</p>
+    </div>
+  </footer>
+</Layout>

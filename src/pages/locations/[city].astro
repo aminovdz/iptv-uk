@@ -1,0 +1,105 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Features from '../../components/Features.astro';
+import Pricing from '../../components/Pricing.astro';
+import Testimonials from '../../components/Testimonials.astro';
+import Channels from '../../components/Channels.astro';
+import { Image } from 'astro:assets';
+
+export function getStaticPaths() {
+  const cities = ['London', 'Birmingham', 'Manchester', 'Edinburgh', 'Liverpool'];
+  return cities.map(city => ({
+    params: { city: city.toLowerCase() },
+    props: { cityName: city },
+  }));
+}
+
+const { cityName } = Astro.props;
+const title = `Best IPTV in ${cityName} | Premium UK IPTV Provider`;
+const description = `Looking for the best IPTV service in ${cityName}? Experience 4K UK live TV, sports, and movies with zero buffering. Join iptv uk today.`;
+
+const localSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": `iptv uk ${cityName}`,
+  "image": `${Astro.site || Astro.url.origin}/logo.png`,
+  "areaServed": {
+    "@type": "City",
+    "name": cityName
+  },
+  "priceRange": "£7 - £47",
+  "description": `Premium IPTV provider serving ${cityName}, offering 4K UHD streaming with no buffering.`,
+  "telephone": "Online Support",
+  "url": Astro.url.href
+};
+---
+
+<Layout title={title} description={description}>
+  <script type="application/ld+json" set:html={JSON.stringify(localSchema)} />
+
+  <!-- Sticky Header -->
+  <header class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex-shrink-0">
+        <a href="/" class="text-2xl font-bold text-secondary tracking-tight">iptv uk</a>
+      </div>
+      <nav class="hidden md:flex gap-8">
+        <a href="/#features" class="text-gray-700 hover:text-primary font-medium transition-colors">Features</a>
+        <a href="/#pricing" class="text-gray-700 hover:text-primary font-medium transition-colors">Pricing</a>
+      </nav>
+      <div class="flex items-center">
+        <a href="/#pricing" class="bg-primary text-white px-5 py-2 rounded-full font-semibold hover:bg-red-700 transition-all">Get Started</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+    <!-- Localized Hero Section -->
+    <section class="relative bg-gradient-to-b from-secondary to-[#001440] text-white pt-24 pb-32 overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <Image src={import('../../assets/uk_skyline.jpg')} alt={`IPTV services in ${cityName}`} class="h-full w-full object-cover opacity-20" format="webp" />
+      </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <span class="inline-block py-1 px-3 rounded-full bg-white/10 border border-white/20 text-sm font-semibold mb-6">Serving {cityName} and Surrounding Areas</span>
+        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
+          The <span class="text-primary">Best IPTV in {cityName}</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto">
+          Stream thousands of UK live channels, sports, and movies in 4K UHD. Dedicated servers ensuring zero buffering for all {cityName} residents.
+        </p>
+        <a href="/#pricing" class="bg-primary hover:bg-red-700 text-white text-lg font-bold py-4 px-8 rounded-full transition-transform transform hover:scale-105 shadow-xl shadow-primary/40">
+          View Subscription Plans
+        </a>
+      </div>
+    </section>
+
+    <!-- Localized SEO Text Section -->
+    <section class="py-24 bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold text-secondary mb-6">Why {cityName} Chooses iptv uk</h2>
+        <p class="text-gray-600 text-lg mb-6">
+          Residents across {cityName} demand high-quality, uninterrupted streaming, especially during major live sporting events. At iptv uk, our robust network infrastructure guarantees that you get the fastest load times and maximum uptime, making us the top iptv provider in the region.
+        </p>
+        <p class="text-gray-600 text-lg">
+          Forget about expensive cable contracts. With our competitive pricing starting at just £7/month, you have access to a world of entertainment directly from your living room in {cityName}.
+        </p>
+      </div>
+    </section>
+
+    <!-- Injected Global Components for Long-Form SEO -->
+    <Features />
+    
+    <Pricing />
+
+    <Channels />
+    
+    <Testimonials />
+
+  </main>
+
+  <footer class="bg-[#001440] text-blue-200 py-8 border-t border-blue-900 text-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-sm">
+      &copy; {new Date().getFullYear()} iptv uk. Proudly serving {cityName}.
+    </div>
+  </footer>
+</Layout>

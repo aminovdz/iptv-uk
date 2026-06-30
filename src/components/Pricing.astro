@@ -1,0 +1,71 @@
+---
+// Pricing.astro
+---
+<section id="pricing" class="py-24 bg-secondary relative overflow-hidden text-white">
+  <div class="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-primary rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+  <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+  
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl md:text-5xl font-bold mb-4">Simple, Transparent Pricing</h2>
+      <p class="text-lg text-blue-200">Choose the perfect plan for your premium entertainment needs.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- 1 Month -->
+      <div class="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-8 flex flex-col hover:-translate-y-2 transition-transform duration-300 order-4 md:order-1">
+        <h3 class="text-2xl font-bold mb-2">1 Month</h3>
+        <div class="text-4xl font-extrabold mb-6">£7</div>
+        <ul class="space-y-3 mb-8 flex-grow text-blue-100">
+          <li class="flex items-center gap-2">✓ All UK Channels</li>
+          <li class="flex items-center gap-2">✓ 4K / Full HD</li>
+          <li class="flex items-center gap-2">✓ Unlimited VOD</li>
+          <li class="flex items-center gap-2">✓ 24/7 Support</li>
+        </ul>
+        <a href="#contact" class="w-full block text-center bg-white/20 hover:bg-white/30 text-white font-bold py-3 rounded-xl transition-colors">Choose Plan</a>
+      </div>
+
+      <!-- 3 Months -->
+      <div class="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-8 flex flex-col hover:-translate-y-2 transition-transform duration-300 order-3 md:order-2">
+        <h3 class="text-2xl font-bold mb-2">3 Months</h3>
+        <div class="text-4xl font-extrabold mb-6">£17</div>
+        <ul class="space-y-3 mb-8 flex-grow text-blue-100">
+          <li class="flex items-center gap-2">✓ All UK Channels</li>
+          <li class="flex items-center gap-2">✓ 4K / Full HD</li>
+          <li class="flex items-center gap-2">✓ Unlimited VOD</li>
+          <li class="flex items-center gap-2">✓ 24/7 Support</li>
+        </ul>
+        <a href="#contact" class="w-full block text-center bg-white/20 hover:bg-white/30 text-white font-bold py-3 rounded-xl transition-colors">Choose Plan</a>
+      </div>
+
+      <!-- 6 Months (Popular) -->
+      <div class="bg-gradient-to-b from-primary/90 to-primary/60 backdrop-blur-lg border border-red-400/50 rounded-3xl p-8 flex flex-col transform md:-translate-y-4 hover:-translate-y-6 transition-transform duration-300 shadow-2xl shadow-primary/40 relative order-2 md:order-3">
+        <div class="absolute top-0 right-0 bg-yellow-400 text-secondary text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-3xl uppercase tracking-wider">Most Popular</div>
+        <h3 class="text-2xl font-bold mb-2">6 Months</h3>
+        <div class="text-4xl font-extrabold mb-6">£27</div>
+        <ul class="space-y-3 mb-8 flex-grow text-red-50">
+          <li class="flex items-center gap-2">✓ All UK Channels</li>
+          <li class="flex items-center gap-2">✓ 4K / Full HD</li>
+          <li class="flex items-center gap-2">✓ Unlimited VOD</li>
+          <li class="flex items-center gap-2">✓ 24/7 Support</li>
+        </ul>
+        <a href="#contact" class="w-full block text-center bg-white text-primary hover:bg-gray-100 font-bold py-3 rounded-xl transition-colors">Choose Plan</a>
+      </div>
+
+      <!-- 12 Months -->
+      <div class="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-8 flex flex-col hover:-translate-y-2 transition-transform duration-300 order-1 md:order-4">
+        <h3 class="text-2xl font-bold mb-2">12 Months</h3>
+        <div class="text-4xl font-extrabold mb-6">£47 <span class="text-lg font-normal text-blue-200 line-through ml-2">£84</span></div>
+        <ul class="space-y-3 mb-8 flex-grow text-blue-100">
+          <li class="flex items-center gap-2">✓ Best Value Deal</li>
+          <li class="flex items-center gap-2">✓ All UK Channels</li>
+          <li class="flex items-center gap-2">✓ 4K / Full HD</li>
+          <li class="flex items-center gap-2">✓ Unlimited VOD</li>
+          <li class="flex items-center gap-2 text-yellow-400 font-bold">✓ Free Premium Player</li>
+          <li class="flex items-center gap-2">✓ 24/7 Support</li>
+        </ul>
+        <a href="#contact" class="w-full block text-center bg-white/20 hover:bg-white/30 text-white font-bold py-3 rounded-xl transition-colors">Choose Plan</a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,58 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const title = "Privacy Policy | iptv uk";
+const description = "Learn how iptv uk collects, uses, and protects your personal data and privacy.";
+---
+
+<Layout title={title} description={description}>
+  <header class="bg-secondary text-white py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Privacy Policy</h1>
+      <p class="text-blue-200">Last updated: {new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })}</p>
+    </div>
+  </header>
+
+  <main class="py-16 bg-white">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 prose prose-lg prose-blue">
+      <h2>1. Data Collection</h2>
+      <p>At <strong>iptv uk</strong>, your privacy is our priority. We collect only the essential information required to provide you with our services. This includes:</p>
+      <ul>
+        <li><strong>Account Information:</strong> Your email address and name (if provided) used for sending subscription credentials and support updates.</li>
+        <li><strong>Payment Data:</strong> Processed securely via our third-party payment gateways. We do not store your credit card or financial information on our servers.</li>
+        <li><strong>Technical Data:</strong> IP addresses and device types used to connect to our servers, solely for the purpose of preventing account sharing, abuse, and ensuring security.</li>
+      </ul>
+
+      <h2>2. Use of Information</h2>
+      <p>The information we collect is used strictly for the following purposes:</p>
+      <ul>
+        <li>To process transactions and activate your IPTV subscription.</li>
+        <li>To provide technical support and customer service via email or WhatsApp.</li>
+        <li>To monitor server performance and prevent unauthorized access or abuse of our network.</li>
+      </ul>
+
+      <h2>3. Data Protection and Security</h2>
+      <p>We implement a variety of security measures to maintain the safety of your personal information. Our servers are secured with enterprise-grade encryption. We do not sell, trade, or otherwise transfer your personally identifiable information to outside parties.</p>
+
+      <h2>4. Cookies</h2>
+      <p>Our website may use "cookies" to enhance user experience. You can choose to set your web browser to refuse cookies, or to alert you when cookies are being sent. We use cookies primarily for tracking promotional popup visibility and analytics to improve our website.</p>
+
+      <h2>5. Third-Party Links</h2>
+      <p>Occasionally, at our discretion, we may include or offer third-party products or services on our website. These third-party sites have separate and independent privacy policies. We therefore have no responsibility or liability for the content and activities of these linked sites.</p>
+
+      <h2>6. Your Rights</h2>
+      <p>You have the right to request access to the personal data we hold about you, and to request that we correct or delete it. To exercise these rights, please contact our support team.</p>
+
+      <div class="mt-12 p-6 bg-gray-50 rounded-xl border border-gray-200 text-center">
+        <p class="mb-0">For any privacy-related concerns, please <a href="/#contact" class="text-primary font-bold hover:underline">contact us</a>.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-[#001440] text-blue-200 py-8 border-t border-blue-900 text-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-sm">
+      <a href="/" class="hover:text-white mb-4 inline-block font-bold">&larr; Back to Home</a>
+      <p>&copy; {new Date().getFullYear()} iptv uk. All rights reserved.</p>
+    </div>
+  </footer>
+</Layout>

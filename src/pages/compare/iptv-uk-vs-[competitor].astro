@@ -1,0 +1,103 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+export function getStaticPaths() {
+  const competitors = [
+    { slug: 'sky-glass', name: 'Sky Glass' },
+    { slug: 'bt-tv', name: 'BT TV' },
+    { slug: 'virgin-media', name: 'Virgin Media' }
+  ];
+  return competitors.map(comp => ({
+    params: { competitor: comp.slug },
+    props: { competitorName: comp.name },
+  }));
+}
+
+const { competitorName } = Astro.props;
+const brandName = "iptv uk";
+const title = `${brandName} vs ${competitorName} | Which is the Best UK TV Provider?`;
+const description = `An honest, factual comparison between ${brandName} and ${competitorName}. Discover which provider offers better value, more channels, and 4K streaming.`;
+
+const compareSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": `Comparing ${brandName} and ${competitorName}`,
+  "author": {
+    "@type": "Organization",
+    "name": brandName
+  }
+};
+---
+
+<Layout title={title} description={description}>
+  <script type="application/ld+json" set:html={JSON.stringify(compareSchema)} />
+
+  <!-- Sticky Header -->
+  <header class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex-shrink-0">
+        <a href="/" class="text-2xl font-bold text-secondary tracking-tight">{brandName}</a>
+      </div>
+      <div class="flex items-center">
+        <a href="/#pricing" class="bg-primary text-white px-5 py-2 rounded-full font-semibold hover:bg-red-700 transition-all">Get {brandName}</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow bg-gray-50">
+    <section class="bg-secondary text-white py-20 text-center">
+      <div class="max-w-4xl mx-auto px-4">
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-6">
+          <span class="text-primary">{brandName}</span> vs {competitorName}
+        </h1>
+        <p class="text-xl text-blue-200">
+          A side-by-side comparison to help you choose the best streaming provider for your household.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-20 max-w-5xl mx-auto px-4">
+      <div class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden">
+        <div class="grid grid-cols-3 border-b border-gray-200 bg-gray-50">
+          <div class="p-6 font-bold text-gray-500 uppercase tracking-wider text-sm">Feature</div>
+          <div class="p-6 font-bold text-secondary text-lg border-l border-gray-200">{brandName}</div>
+          <div class="p-6 font-bold text-gray-700 text-lg border-l border-gray-200">{competitorName}</div>
+        </div>
+        
+        <div class="grid grid-cols-3 border-b border-gray-100 hover:bg-gray-50 transition-colors">
+          <div class="p-6 font-medium text-gray-700">Monthly Cost</div>
+          <div class="p-6 text-green-600 font-bold border-l border-gray-100">From £7/month</div>
+          <div class="p-6 text-red-500 font-medium border-l border-gray-100">£30+ (Locked in Contract)</div>
+        </div>
+
+        <div class="grid grid-cols-3 border-b border-gray-100 hover:bg-gray-50 transition-colors">
+          <div class="p-6 font-medium text-gray-700">Channel Selection</div>
+          <div class="p-6 text-green-600 font-bold border-l border-gray-100">20,000+ Worldwide</div>
+          <div class="p-6 text-gray-600 font-medium border-l border-gray-100">Limited to Basic Packages</div>
+        </div>
+
+        <div class="grid grid-cols-3 border-b border-gray-100 hover:bg-gray-50 transition-colors">
+          <div class="p-6 font-medium text-gray-700">Hardware Required</div>
+          <div class="p-6 text-green-600 font-bold border-l border-gray-100">Any Smart Device (No Box)</div>
+          <div class="p-6 text-red-500 font-medium border-l border-gray-100">Proprietary Box/Dish Needed</div>
+        </div>
+
+        <div class="grid grid-cols-3 hover:bg-gray-50 transition-colors">
+          <div class="p-6 font-medium text-gray-700">PPV & Sports</div>
+          <div class="p-6 text-green-600 font-bold border-l border-gray-100">Included Free</div>
+          <div class="p-6 text-red-500 font-medium border-l border-gray-100">Extra PPV Fees Apply</div>
+        </div>
+      </div>
+
+      <div class="mt-16 text-center">
+        <h2 class="text-3xl font-bold text-secondary mb-6">The Verdict</h2>
+        <p class="text-gray-600 text-lg mb-8 max-w-3xl mx-auto">
+          While {competitorName} provides a recognizable brand, {brandName} delivers unmatched flexibility, superior 4K quality, and massive cost savings without locking you into a long-term contract.
+        </p>
+        <a href="/#pricing" class="inline-block bg-primary text-white text-lg font-bold py-4 px-10 rounded-full shadow-lg shadow-primary/30 hover:bg-red-700 transition-transform hover:scale-105">
+          Switch to {brandName} Today
+        </a>
+      </div>
+    </section>
+  </main>
+</Layout>
