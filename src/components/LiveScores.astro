@@ -1,0 +1,175 @@
+---
+import { Activity } from 'lucide-astro';
+---
+
+<section class="py-24 relative min-h-screen">
+  <div class="max-container relative z-10">
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-white/10 mb-6 animate-pulse-gentle">
+        <Activity class="w-4 h-4 text-red-500" />
+        <span class="text-xs font-bold uppercase tracking-widest text-red-400">Live API</span>
+      </div>
+      <h2 class="text-4xl md:text-5xl font-black mb-4 tracking-tighter">Live <span class="text-gradient">Sports</span></h2>
+      <p class="text-gray-400">Real-time scores and fixtures powered by ESPN.</p>
+    </div>
+
+    <!-- League Selector -->
+    <div class="flex flex-wrap justify-center gap-4 mb-12 max-w-4xl mx-auto">
+      <button class="league-btn active btn-primary px-6 py-2" data-url="https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard">Premier League</button>
+      <button class="league-btn glass px-6 py-2 hover:bg-white/5 transition-colors rounded-full font-bold text-sm" data-url="https://site.api.espn.com/apis/site/v2/sports/soccer/esp.1/scoreboard">La Liga</button>
+      <button class="league-btn glass px-6 py-2 hover:bg-white/5 transition-colors rounded-full font-bold text-sm" data-url="https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/scoreboard">Serie A</button>
+      <button class="league-btn glass px-6 py-2 hover:bg-white/5 transition-colors rounded-full font-bold text-sm" data-url="https://site.api.espn.com/apis/site/v2/sports/soccer/ger.1/scoreboard">Bundesliga</button>
+      <button class="league-btn glass px-6 py-2 hover:bg-white/5 transition-colors rounded-full font-bold text-sm" data-url="https://site.api.espn.com/apis/site/v2/sports/soccer/fra.1/scoreboard">Ligue 1</button>
+      <button class="league-btn glass px-6 py-2 hover:bg-white/5 transition-colors rounded-full font-bold text-sm" data-url="https://site.api.espn.com/apis/site/v2/sports/soccer/gre.1/scoreboard">Greek Super League</button>
+      <button class="league-btn glass px-6 py-2 hover:bg-white/5 transition-colors rounded-full font-bold text-sm" data-url="https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.champions/scoreboard">Champions League</button>
+      <button class="league-btn glass px-6 py-2 hover:bg-white/5 transition-colors rounded-full font-bold text-sm" data-url="https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard">NBA</button>
+      <button class="league-btn glass px-6 py-2 hover:bg-white/5 transition-colors rounded-full font-bold text-sm" data-url="https://site.api.espn.com/apis/site/v2/sports/basketball/euroleague/scoreboard">Euroleague</button>
+      <button class="league-btn glass px-6 py-2 hover:bg-white/5 transition-colors rounded-full font-bold text-sm text-red-400 border-red-500/20" data-url="https://site.api.espn.com/apis/site/v2/sports/mma/ufc/scoreboard" data-type="mma">UFC</button>
+    </div>
+
+    <!-- Loader -->
+    <div id="scores-loader" class="flex justify-center py-12">
+      <div class="w-12 h-12 border-4 border-primary/30 border-t-primary rounded-full animate-spin"></div>
+    </div>
+
+    <!-- Scores Grid -->
+    <div id="scores-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
+      <!-- Dynamic Content Will Be Injected Here -->
+    </div>
+  </div>
+</section>
+
+<script>
+  const loader = document.getElementById('scores-loader');
+  const grid = document.getElementById('scores-grid');
+  const buttons = document.querySelectorAll('.league-btn');
+
+  async function fetchScores(url: string, type: string) {
+    if (!loader || !grid) return;
+    
+    // Show loader
+    loader.classList.remove('hidden');
+    grid.classList.add('hidden');
+    grid.innerHTML = '';
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      
+      let events = data.events || [];
+      
+      // UFC endpoint returns events that contain multiple fights in 'competitions'
+      if (type === 'mma' && events.length > 0) {
+        // Flatten fights from all events into a single array
+        let fights: any[] = [];
+        events.forEach((e: any) => {
+           if (e.competitions) fights.push(...e.competitions);
+        });
+        events = fights;
+      }
+
+      if (events.length === 0) {
+        grid.innerHTML = `<div class="col-span-full text-center py-12 text-gray-400 glass rounded-3xl">No matches found for this league today.</div>`;
+      } else {
+        events.forEach((event: any) => {
+          // For MMA, 'event' is a competition. For others, 'event' is the match, and we use competitions[0]
+          const comp = type === 'mma' ? event : event.competitions[0];
+          
+          let home, away;
+          if (type === 'mma') {
+             // MMA uses athlete instead of team
+             home = comp.competitors[0];
+             away = comp.competitors[1];
+          } else {
+             home = comp.competitors.find((c: any) => c.homeAway === 'home');
+             away = comp.competitors.find((c: any) => c.homeAway === 'away');
+          }
+
+          if (!home || !away) return; // Skip if invalid
+
+          const homeName = type === 'mma' ? home.athlete.shortName : home.team.displayName;
+          const awayName = type === 'mma' ? away.athlete.shortName : away.team.displayName;
+          
+          const homeLogo = type === 'mma' ? (home.athlete.flag?.href || '') : (home.team.logo || '');
+          const awayLogo = type === 'mma' ? (away.athlete.flag?.href || '') : (away.team.logo || '');
+
+          const status = type === 'mma' ? comp.status.type : event.status.type;
+          const isLive = status.state === 'in';
+          
+          let statusHtml = `<span class="text-xs font-bold text-gray-400 bg-white/5 px-3 py-1 rounded-full text-center">${status.detail}</span>`;
+          if (isLive) {
+            statusHtml = `<span class="text-xs font-bold text-red-500 bg-red-500/10 px-3 py-1 rounded-full border border-red-500/20 animate-pulse text-center">${status.detail}</span>`;
+          }
+
+          const card = document.createElement('div');
+          card.className = 'glass p-6 rounded-3xl border border-glass-border hover:border-primary/50 transition-all';
+          
+          card.innerHTML = `
+            <div class="flex justify-between items-center mb-6">
+              <span class="text-xs text-gray-500 font-semibold tracking-wider uppercase">${new Date(event.date).toLocaleDateString()}</span>
+              ${statusHtml}
+            </div>
+            
+            <div class="flex justify-between items-center gap-4">
+              <!-- Home Team -->
+              <div class="flex flex-col items-center flex-1 text-center">
+                <img src="${homeLogo}" alt="${homeName}" class="w-16 h-16 object-contain mb-3 drop-shadow-lg bg-white/10 rounded-full p-2" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOTRDQTM4IiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+'" />
+                <span class="font-bold text-sm leading-tight">${homeName}</span>
+              </div>
+              
+              <!-- Score -->
+              <div class="flex flex-col items-center justify-center px-4">
+                <div class="text-3xl font-black tracking-tighter ${isLive ? 'text-white' : 'text-gray-300'}">
+                  ${type === 'mma' ? 'VS' : `${home.score !== undefined ? home.score : '-'} <span class="text-gray-600 mx-1">:</span> ${away.score !== undefined ? away.score : '-'}`}
+                </div>
+              </div>
+              
+              <!-- Away Team -->
+              <div class="flex flex-col items-center flex-1 text-center">
+                <img src="${awayLogo}" alt="${awayName}" class="w-16 h-16 object-contain mb-3 drop-shadow-lg bg-white/10 rounded-full p-2" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOTRDQTM4IiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+'" />
+                <span class="font-bold text-sm leading-tight">${awayName}</span>
+              </div>
+            </div>
+          `;
+          
+          grid.appendChild(card);
+        });
+      }
+    } catch (error) {
+      console.error('Error fetching scores:', error);
+      grid.innerHTML = `<div class="col-span-full text-center py-12 text-red-400 glass rounded-3xl border-red-500/20">Failed to load live scores. Please try again later.</div>`;
+    } finally {
+      loader.classList.add('hidden');
+      grid.classList.remove('hidden');
+    }
+  }
+
+  // Handle Button Clicks
+  buttons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const target = e.currentTarget as HTMLButtonElement;
+      
+      // Update UI
+      buttons.forEach(b => {
+        b.className = 'league-btn glass px-6 py-2 hover:bg-white/5 transition-colors rounded-full font-bold text-sm text-gray-300';
+        if (b.getAttribute('data-type') === 'mma') {
+           b.classList.add('text-red-400', 'border-red-500/20');
+        }
+      });
+      target.className = 'league-btn active btn-primary px-6 py-2 font-bold text-sm';
+      
+      // Fetch new url
+      const url = target.getAttribute('data-url');
+      const type = target.getAttribute('data-type') || 'team';
+      if (url) fetchScores(url, type);
+    });
+  });
+
+  // Initial Load (Default to first active button)
+  const defaultBtn = document.querySelector('.league-btn.active');
+  const defaultUrl = defaultBtn?.getAttribute('data-url');
+  const defaultType = defaultBtn?.getAttribute('data-type') || 'team';
+  if (defaultUrl) {
+    fetchScores(defaultUrl, defaultType);
+  }
+</script>
