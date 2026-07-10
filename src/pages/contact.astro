@@ -13,8 +13,19 @@ import Layout from '../layouts/Layout.astro';
   <main class="flex-grow bg-gray-50 py-20">
     <div class="max-w-3xl mx-auto px-4 text-center">
       <h1 class="text-4xl font-extrabold text-secondary mb-6">Contact Us</h1>
-      <p class="text-gray-600 text-lg mb-12">Need help setting up or have a question about our premium IPTV service? We're available 24/7.</p>
+      <p class="text-gray-600 text-lg mb-8">Need help setting up or have a question about our premium IPTV service? We're available 24/7.</p>
       
+      <div class="grid md:grid-cols-2 gap-4 mb-12">
+        <a href="https://whatsapp.com/channel/0029VayVaLpD8SE3bf8wMY3v" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center justify-center p-6 bg-white border border-gray-200 rounded-2xl hover:border-[#25D366] transition-colors shadow-sm group">
+          <span class="text-[#25D366] font-bold text-xl mb-1 group-hover:scale-105 transition-transform">WhatsApp Channel</span>
+          <span class="text-gray-500 text-sm">Join our community</span>
+        </a>
+        <a href="https://t.me/castvera_com" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center justify-center p-6 bg-white border border-gray-200 rounded-2xl hover:border-[#2AABEE] transition-colors shadow-sm group">
+          <span class="text-[#2AABEE] font-bold text-xl mb-1 group-hover:scale-105 transition-transform">Telegram Channel</span>
+          <span class="text-gray-500 text-sm">Join our community</span>
+        </a>
+      </div>
+
       <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
         <form class="space-y-6 text-left" onsubmit="event.preventDefault(); alert('Message sent!');">
           <div>
