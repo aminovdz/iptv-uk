@@ -4,9 +4,10 @@ import BaseHead from '../components/BaseHead.astro';
 interface Props {
 	title: string;
 	description: string;
+	keywords?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, keywords } = Astro.props;
 
 const schema = {
   "@context": "https://schema.org",
@@ -25,7 +26,7 @@ const schema = {
 <!doctype html>
 <html lang="en-GB">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead title={title} description={description} keywords={keywords} />
 		<script type="application/ld+json" set:html={JSON.stringify(schema)} />
 	</head>
 	<body class="bg-gray-50 text-gray-900 font-sans antialiased selection:bg-primary selection:text-white flex flex-col min-h-screen">
