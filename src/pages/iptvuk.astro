@@ -7,6 +7,8 @@ import Features from '../components/Features.astro';
 import Pricing from '../components/Pricing.astro';
 import Channels from '../components/Channels.astro';
 import Testimonials from '../components/Testimonials.astro';
+import ReferAFriend from '../components/ReferAFriend.astro';
+import Footer from '../components/Footer.astro';
 
 // SEO details
 const title = "IPTVUK | Discover the Best IPTV UK Service";
@@ -168,6 +170,9 @@ const faqSchema = {
 
     <!-- 2. Pricing Section (Requested to be under Features) -->
     <Pricing />
+    
+    <!-- 2.5 Refer a Friend Banner -->
+    <ReferAFriend />
 
     <!-- 3. Global Channels & VOD -->
     <Channels />
@@ -220,32 +225,7 @@ const faqSchema = {
       </div>
     </section>
 
-    <!-- 7. Refer a Friend Banner -->
-    <section class="py-24 bg-primary text-white overflow-hidden relative">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="lg:flex items-center justify-between">
-          <div class="lg:w-1/2">
-            <h2 class="text-3xl font-bold sm:text-5xl">Refer your friends and earn!</h2>
-            <p class="mt-6 text-xl text-red-100 leading-relaxed">
-              Share your <strong>iptv uk</strong> experience with friends. For every new subscriber you refer, you AND your friend receive <strong>1 FREE BONUS MONTH</strong>.
-            </p>
-            <div class="mt-8">
-              <p class="text-white mb-4 font-semibold italic">How it works: Simply have your friend enter your WhatsApp number during checkout.</p>
-              <a href="#pricing" class="inline-block rounded-xl bg-white px-8 py-4 text-lg font-bold text-primary hover:bg-gray-100 transition shadow-xl">
-                Get Your Link Now
-              </a>
-            </div>
-          </div>
-          <div class="mt-12 lg:mt-0 lg:w-1/3 text-center lg:text-right">
-            <div class="inline-block p-8 bg-white/20 backdrop-blur-xl rounded-3xl border border-white/30">
-              <span class="block text-6xl font-black text-white">+1 MONTH</span>
-              <span class="block mt-2 text-sm uppercase tracking-widest text-red-100">For you and your friend</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-red-900/30 blur-3xl rounded-full"></div>
-    </section>
+
 
     <!-- FAQ Section -->
     <section id="faq" class="py-24 bg-white">
@@ -297,45 +277,7 @@ const faqSchema = {
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-[#001440] text-blue-200 py-12 border-t border-blue-900">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
-      <div>
-        <h3 class="text-2xl font-bold text-white mb-4">iptv uk</h3>
-        <p class="text-sm">The leading premium IPTV provider in the United Kingdom. Bringing you the best entertainment seamlessly to your screens.</p>
-      </div>
-      <div>
-        <h4 class="text-lg font-bold text-white mb-4">Quick Links</h4>
-        <ul class="space-y-2 text-sm">
-          <li><a href="#features" class="hover:text-white transition-colors">Features</a></li>
-          <li><a href="#pricing" class="hover:text-white transition-colors">Pricing</a></li>
-          <li><a href="#how-it-works" class="hover:text-white transition-colors">How it Works</a></li>
-          <li><a href="/guides" class="hover:text-white transition-colors">Setup Guides</a></li>
-          <li><a href="/compare/iptv-uk-vs-sky-glass" class="hover:text-white transition-colors">Compare vs Sky</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="text-lg font-bold text-white mb-4">Locations</h4>
-        <ul class="space-y-2 text-sm">
-          <li><a href="/locations/london" class="hover:text-white transition-colors">London</a></li>
-          <li><a href="/locations/birmingham" class="hover:text-white transition-colors">Birmingham</a></li>
-          <li><a href="/locations/manchester" class="hover:text-white transition-colors">Manchester</a></li>
-          <li><a href="/locations/edinburgh" class="hover:text-white transition-colors">Edinburgh</a></li>
-          <li><a href="/locations/liverpool" class="hover:text-white transition-colors">Liverpool</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="text-lg font-bold text-white mb-4">Legal</h4>
-        <ul class="space-y-2 text-sm">
-          <li><a href="/terms" class="hover:text-white transition-colors">Terms of Service</a></li>
-          <li><a href="/privacy" class="hover:text-white transition-colors">Privacy Policy</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-blue-900/50 text-sm text-center text-blue-400">
-      &copy; {new Date().getFullYear()} iptv uk. All rights reserved.
-    </div>
-  </footer>
+  <Footer />
 
   <!-- Promotional / Exit-Intent Popup -->
   <div id="promo-popup" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-500">
