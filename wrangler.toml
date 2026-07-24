@@ -1,7 +1,7 @@
 name = "uk-iptv"
 compatibility_date = "2024-04-05"
 
-main = "dist/server/entry.mjs"
+main = "worker.js"
 
 [site]
 bucket = "dist/client"
