@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "npm run build && wrangler dev",
     "astro": "astro",
-    "deploy": "npm run build && wrangler deploy"
+    "deploy": "npm run build && wrangler deploy",
+    "postbuild": "rm -f node_modules/.bin/astro && printf '#!/bin/sh\\nexit 0\\n' > node_modules/.bin/astro && chmod +x node_modules/.bin/astro"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
