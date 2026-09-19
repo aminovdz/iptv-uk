@@ -1,0 +1,50 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const posts = await Astro.glob('./*.md');
+const sortedPosts = posts.sort((a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf());
+
+const title = "IPTV Blog & News | iptvuk";
+const description = "Stay updated with the latest news, guides, and tips about IPTV in the UK.";
+---
+
+<Layout title={title} description={description}>
+  <header class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex-shrink-0">
+        <a href="/" class="text-2xl font-bold text-secondary tracking-tight">iptvuk</a>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="/#pricing" class="bg-primary text-white px-5 py-2 rounded-full font-semibold hover:bg-red-700 transition-all">Get Started</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow bg-gray-50">
+    <section class="bg-[#001440] text-white py-16 text-center">
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-4">The iptvuk Blog</h1>
+      <p class="text-xl text-blue-200">Tips, tricks, and the latest news for streaming in the UK.</p>
+    </section>
+
+    <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {sortedPosts.map(post => (
+          <a href={post.url} class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md hover:border-primary transition-all group flex flex-col">
+            {post.frontmatter.image && (
+              <img src={post.frontmatter.image} alt={post.frontmatter.title} class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
+            )}
+            <div class="p-6 flex-grow flex flex-col">
+              <div class="text-xs text-primary font-bold mb-2 uppercase tracking-wider">{post.frontmatter.category}</div>
+              <h3 class="text-xl font-bold text-secondary group-hover:text-primary mb-3 leading-snug">{post.frontmatter.title}</h3>
+              <p class="text-gray-500 mb-4 flex-grow text-sm line-clamp-3">{post.frontmatter.description}</p>
+              <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
+                <span class="text-sm text-gray-400">{new Date(post.frontmatter.pubDate).toLocaleDateString('en-GB', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                <span class="text-primary font-semibold text-sm">Read Article &rarr;</span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  </main>
+</Layout>
