@@ -1,19 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { guides } from '../../data/guides.js';
 
 const title = "IPTV Guides & Tutorials | iptv uk";
 const description = "Learn everything about IPTV. From setting up Tivimate and Smarters to troubleshooting buffering issues. Your ultimate UK IPTV knowledge base.";
-
-const guides = [
-  { title: "How to setup IPTV on Firestick", slug: "setup-iptv-firestick" },
-  { title: "Best Settings for Tivimate Premium", slug: "tivimate-best-settings" },
-  { title: "How to fix IPTV buffering issues", slug: "fix-iptv-buffering" },
-  { title: "Top 5 IPTV Apps for Smart TVs (Samsung & LG)", slug: "best-iptv-apps-smart-tv" },
-  { title: "The Ultimate Guide to Catch-up TV and VOD", slug: "catchup-vod-guide" },
-  { title: "How to use a VPN with your IPTV Subscription", slug: "vpn-iptv-guide" },
-  { title: "What internet speed do you need for 4K IPTV?", slug: "internet-speed-4k-iptv" },
-  { title: "How to install Smarters Pro on Apple TV & iOS", slug: "install-smarters-ios-appletv" }
-];
 ---
 
 <Layout title={title} description={description}>
@@ -38,10 +28,13 @@ const guides = [
     <section class="py-20 max-w-5xl mx-auto px-4">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {guides.map(guide => (
-          <a href={`/guides/${guide.slug}`} class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md hover:border-primary transition-all group">
-            <h3 class="text-xl font-bold text-secondary group-hover:text-primary mb-3">{guide.title}</h3>
-            <p class="text-gray-500 mb-4">Read our comprehensive guide to get the most out of your premium streaming experience.</p>
-            <span class="text-primary font-semibold">Read More &rarr;</span>
+          <a href={`/guides/${guide.slug}`} class="bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md hover:border-primary transition-all group overflow-hidden flex flex-col">
+            <img src={guide.image} alt={guide.title} class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
+            <div class="p-6 flex-grow flex flex-col">
+              <h3 class="text-xl font-bold text-secondary group-hover:text-primary mb-3">{guide.title}</h3>
+              <p class="text-gray-500 mb-4 flex-grow">{guide.excerpt}</p>
+              <span class="text-primary font-semibold mt-auto">Read More &rarr;</span>
+            </div>
           </a>
         ))}
       </div>
