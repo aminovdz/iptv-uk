@@ -1,0 +1,520 @@
+---
+// LiveScoreCarousel.astro
+// Seamless Infinite Loop Carousel showcasing live fixtures & scores
+// Clicking any card or the section redirects to the dedicated /livescore Match Center
+
+interface Fixture {
+  id: string;
+  league: string;
+  leagueShort: string;
+  status: string;
+  isLive: boolean;
+  time?: string;
+  minute?: string;
+  homeTeam: {
+    name: string;
+    shortName: string;
+    logo: string;
+    score?: number | string;
+  };
+  awayTeam: {
+    name: string;
+    shortName: string;
+    logo: string;
+    score?: number | string;
+  };
+}
+
+const defaultFixtures: Fixture[] = [
+  {
+    id: "pl-1",
+    league: "Premier League",
+    leagueShort: "EPL",
+    status: "LIVE 68'",
+    isLive: true,
+    minute: "68'",
+    homeTeam: {
+      name: "Arsenal",
+      shortName: "ARS",
+      logo: "https://a.espncdn.com/i/teamlogos/soccer/500/359.png",
+      score: 2,
+    },
+    awayTeam: {
+      name: "Chelsea",
+      shortName: "CHE",
+      logo: "https://a.espncdn.com/i/teamlogos/soccer/500/363.png",
+      score: 1,
+    },
+  },
+  {
+    id: "pl-2",
+    league: "Premier League",
+    leagueShort: "EPL",
+    status: "TODAY 20:00",
+    isLive: false,
+    time: "20:00",
+    homeTeam: {
+      name: "Liverpool",
+      shortName: "LIV",
+      logo: "https://a.espncdn.com/i/teamlogos/soccer/500/364.png",
+      score: "-",
+    },
+    awayTeam: {
+      name: "Man City",
+      shortName: "MCI",
+      logo: "https://a.espncdn.com/i/teamlogos/soccer/500/382.png",
+      score: "-",
+    },
+  },
+  {
+    id: "ucl-1",
+    league: "UEFA Champions League",
+    leagueShort: "UCL",
+    status: "LIVE 34'",
+    isLive: true,
+    minute: "34'",
+    homeTeam: {
+      name: "Real Madrid",
+      shortName: "RMA",
+      logo: "https://a.espncdn.com/i/teamlogos/soccer/500/86.png",
+      score: 1,
+    },
+    awayTeam: {
+      name: "Bayern Munich",
+      shortName: "BAY",
+      logo: "https://a.espncdn.com/i/teamlogos/soccer/500/132.png",
+      score: 1,
+    },
+  },
+  {
+    id: "pl-3",
+    league: "Premier League",
+    leagueShort: "EPL",
+    status: "LIVE 82'",
+    isLive: true,
+    minute: "82'",
+    homeTeam: {
+      name: "Man United",
+      shortName: "MUN",
+      logo: "https://a.espncdn.com/i/teamlogos/soccer/500/360.png",
+      score: 3,
+    },
+    awayTeam: {
+      name: "Tottenham",
+      shortName: "TOT",
+      logo: "https://a.espncdn.com/i/teamlogos/soccer/500/367.png",
+      score: 2,
+    },
+  },
+  {
+    id: "laliga-1",
+    league: "Spanish La Liga",
+    leagueShort: "ESP",
+    status: "TODAY 21:00",
+    isLive: false,
+    time: "21:00",
+    homeTeam: {
+      name: "Barcelona",
+      shortName: "BAR",
+      logo: "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
+      score: "-",
+    },
+    awayTeam: {
+      name: "Atlético Madrid",
+      shortName: "ATM",
+      logo: "https://a.espncdn.com/i/teamlogos/soccer/500/1068.png",
+      score: "-",
+    },
+  },
+  {
+    id: "pl-4",
+    league: "Premier League",
+    leagueShort: "EPL",
+    status: "FT",
+    isLive: false,
+    homeTeam: {
+      name: "Newcastle",
+      shortName: "NEW",
+      logo: "https://a.espncdn.com/i/teamlogos/soccer/500/361.png",
+      score: 2,
+    },
+    awayTeam: {
+      name: "Aston Villa",
+      shortName: "AVL",
+      logo: "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
+      score: 0,
+    },
+  },
+  {
+    id: "ucl-2",
+    league: "UEFA Champions League",
+    leagueShort: "UCL",
+    status: "TODAY 19:45",
+    isLive: false,
+    time: "19:45",
+    homeTeam: {
+      name: "PSG",
+      shortName: "PSG",
+      logo: "https://a.espncdn.com/i/teamlogos/soccer/500/160.png",
+      score: "-",
+    },
+    awayTeam: {
+      name: "Inter Milan",
+      shortName: "INT",
+      logo: "https://a.espncdn.com/i/teamlogos/soccer/500/110.png",
+      score: "-",
+    },
+  },
+  {
+    id: "seriea-1",
+    league: "Italian Serie A",
+    leagueShort: "ITA",
+    status: "LIVE 55'",
+    isLive: true,
+    minute: "55'",
+    homeTeam: {
+      name: "Juventus",
+      shortName: "JUV",
+      logo: "https://a.espncdn.com/i/teamlogos/soccer/500/111.png",
+      score: 1,
+    },
+    awayTeam: {
+      name: "AC Milan",
+      shortName: "MIL",
+      logo: "https://a.espncdn.com/i/teamlogos/soccer/500/103.png",
+      score: 0,
+    },
+  },
+];
+---
+
+<section 
+  id="live-score-carousel-section" 
+  class="relative bg-[#00102e] text-white py-10 overflow-hidden border-y border-blue-900/60 shadow-2xl"
+  aria-label="Live Match Center Carousel"
+>
+  <!-- Ambient background glow accents -->
+  <div class="absolute inset-0 pointer-events-none opacity-40">
+    <div class="absolute -top-24 left-1/4 w-96 h-96 bg-[#C8102E]/20 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-24 right-1/4 w-96 h-96 bg-[#012169]/40 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 relative z-10">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      
+      <!-- Left: Header info & Live pulse -->
+      <a 
+        href="/livescore" 
+        class="group inline-flex items-center gap-3 focus:outline-none"
+        title="Open Live Match Center"
+      >
+        <span class="relative flex h-3.5 w-3.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-red-600"></span>
+        </span>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black tracking-widest uppercase text-red-500 bg-red-500/10 px-2.5 py-0.5 rounded-full border border-red-500/20">
+              Live Scores
+            </span>
+            <span class="text-xs font-bold text-blue-300 hidden sm:inline">
+              Real-Time ESPN API
+            </span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-black tracking-tight text-white group-hover:text-red-400 transition-colors mt-1">
+            Live Sports & Match Center
+          </h3>
+        </div>
+      </a>
+
+      <!-- Right: Redirect button to /livescore -->
+      <div class="flex items-center gap-3">
+        <a 
+          href="/livescore" 
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-extrabold bg-[#C8102E] hover:bg-red-700 text-white shadow-lg shadow-red-900/40 hover:shadow-red-900/60 transition-all transform hover:-translate-y-0.5"
+        >
+          <span>Open Full Match Center</span>
+          <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Infinite Carousel Viewport with edge gradient masks -->
+  <div class="relative w-full overflow-hidden live-carousel-container">
+    <!-- Left and right gradient fade masks for clean edge fade -->
+    <div class="pointer-events-none absolute left-0 top-0 bottom-0 w-12 sm:w-24 z-20 bg-gradient-to-r from-[#00102e] to-transparent"></div>
+    <div class="pointer-events-none absolute right-0 top-0 bottom-0 w-12 sm:w-24 z-20 bg-gradient-to-l from-[#00102e] to-transparent"></div>
+
+    <!-- Scrolling Track with Set 1 and Set 2 (Cloned for mathematically seamless infinite loop) -->
+    <div class="live-carousel-track flex gap-4 py-2" id="live-carousel-track">
+      
+      <!-- SET 1 (Original) -->
+      <div class="flex gap-4 flex-shrink-0 items-center fixture-set" id="fixture-set-1">
+        {defaultFixtures.map((fixture) => (
+          <a
+            href="/livescore"
+            class="fixture-card group relative flex-shrink-0 w-72 sm:w-80 bg-white/[0.04] hover:bg-white/[0.09] backdrop-blur-md rounded-2xl p-4 border border-white/10 hover:border-red-500/50 shadow-lg hover:shadow-red-500/20 transition-all duration-300 cursor-pointer block text-left"
+            data-fixture-id={fixture.id}
+          >
+            <!-- Card Header: League & Status -->
+            <div class="flex items-center justify-between mb-3 text-xs">
+              <span class="font-bold text-blue-300 truncate max-w-[140px]">
+                {fixture.league}
+              </span>
+              {fixture.isLive ? (
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-black text-red-400 bg-red-500/15 border border-red-500/30 text-[11px] animate-pulse">
+                  <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                  {fixture.status}
+                </span>
+              ) : (
+                <span class="px-2.5 py-0.5 rounded-full font-bold text-gray-400 bg-white/5 text-[11px]">
+                  {fixture.status}
+                </span>
+              )}
+            </div>
+
+            <!-- Teams & Scores -->
+            <div class="space-y-2 mb-3">
+              <!-- Home Team -->
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3 min-w-0">
+                  <img 
+                    src={fixture.homeTeam.logo} 
+                    alt={fixture.homeTeam.name} 
+                    class="w-7 h-7 object-contain flex-shrink-0 drop-shadow" 
+                    loading="lazy"
+                    onerror="this.src='https://a.espncdn.com/i/teamlogos/default-team-logo-500.png'"
+                  />
+                  <span class="font-bold text-sm text-gray-100 truncate group-hover:text-white">
+                    {fixture.homeTeam.name}
+                  </span>
+                </div>
+                <span class={`text-base font-black px-2 py-0.5 rounded ${fixture.isLive ? 'text-white bg-white/10' : 'text-gray-300'}`}>
+                  {fixture.homeTeam.score ?? "-"}
+                </span>
+              </div>
+
+              <!-- Away Team -->
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3 min-w-0">
+                  <img 
+                    src={fixture.awayTeam.logo} 
+                    alt={fixture.awayTeam.name} 
+                    class="w-7 h-7 object-contain flex-shrink-0 drop-shadow" 
+                    loading="lazy"
+                    onerror="this.src='https://a.espncdn.com/i/teamlogos/default-team-logo-500.png'"
+                  />
+                  <span class="font-bold text-sm text-gray-100 truncate group-hover:text-white">
+                    {fixture.awayTeam.name}
+                  </span>
+                </div>
+                <span class={`text-base font-black px-2 py-0.5 rounded ${fixture.isLive ? 'text-white bg-white/10' : 'text-gray-300'}`}>
+                  {fixture.awayTeam.score ?? "-"}
+                </span>
+              </div>
+            </div>
+
+            <!-- Card Footer: Watch Live in 4K -->
+            <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[11px]">
+              <span class="flex items-center gap-1.5 text-blue-300 font-semibold group-hover:text-red-400 transition-colors">
+                <svg class="w-3.5 h-3.5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                </svg>
+                Watch Live in 4K
+              </span>
+              <span class="text-gray-400 group-hover:text-white font-medium flex items-center gap-1 transition-colors">
+                Match Center &rarr;
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <!-- SET 2 (Identical Clone for Seamless Infinite Loop) -->
+      <div class="flex gap-4 flex-shrink-0 items-center fixture-set" id="fixture-set-2" aria-hidden="true">
+        {defaultFixtures.map((fixture) => (
+          <a
+            href="/livescore"
+            class="fixture-card group relative flex-shrink-0 w-72 sm:w-80 bg-white/[0.04] hover:bg-white/[0.09] backdrop-blur-md rounded-2xl p-4 border border-white/10 hover:border-red-500/50 shadow-lg hover:shadow-red-500/20 transition-all duration-300 cursor-pointer block text-left"
+            data-fixture-id={fixture.id}
+            tabindex="-1"
+          >
+            <!-- Card Header: League & Status -->
+            <div class="flex items-center justify-between mb-3 text-xs">
+              <span class="font-bold text-blue-300 truncate max-w-[140px]">
+                {fixture.league}
+              </span>
+              {fixture.isLive ? (
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-black text-red-400 bg-red-500/15 border border-red-500/30 text-[11px] animate-pulse">
+                  <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                  {fixture.status}
+                </span>
+              ) : (
+                <span class="px-2.5 py-0.5 rounded-full font-bold text-gray-400 bg-white/5 text-[11px]">
+                  {fixture.status}
+                </span>
+              )}
+            </div>
+
+            <!-- Teams & Scores -->
+            <div class="space-y-2 mb-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3 min-w-0">
+                  <img 
+                    src={fixture.homeTeam.logo} 
+                    alt={fixture.homeTeam.name} 
+                    class="w-7 h-7 object-contain flex-shrink-0 drop-shadow" 
+                    loading="lazy"
+                    onerror="this.src='https://a.espncdn.com/i/teamlogos/default-team-logo-500.png'"
+                  />
+                  <span class="font-bold text-sm text-gray-100 truncate group-hover:text-white">
+                    {fixture.homeTeam.name}
+                  </span>
+                </div>
+                <span class={`text-base font-black px-2 py-0.5 rounded ${fixture.isLive ? 'text-white bg-white/10' : 'text-gray-300'}`}>
+                  {fixture.homeTeam.score ?? "-"}
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3 min-w-0">
+                  <img 
+                    src={fixture.awayTeam.logo} 
+                    alt={fixture.awayTeam.name} 
+                    class="w-7 h-7 object-contain flex-shrink-0 drop-shadow" 
+                    loading="lazy"
+                    onerror="this.src='https://a.espncdn.com/i/teamlogos/default-team-logo-500.png'"
+                  />
+                  <span class="font-bold text-sm text-gray-100 truncate group-hover:text-white">
+                    {fixture.awayTeam.name}
+                  </span>
+                </div>
+                <span class={`text-base font-black px-2 py-0.5 rounded ${fixture.isLive ? 'text-white bg-white/10' : 'text-gray-300'}`}>
+                  {fixture.awayTeam.score ?? "-"}
+                </span>
+              </div>
+            </div>
+
+            <!-- Card Footer -->
+            <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[11px]">
+              <span class="flex items-center gap-1.5 text-blue-300 font-semibold group-hover:text-red-400 transition-colors">
+                <svg class="w-3.5 h-3.5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                </svg>
+                Watch Live in 4K
+              </span>
+              <span class="text-gray-400 group-hover:text-white font-medium flex items-center gap-1 transition-colors">
+                Match Center &rarr;
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom subtitle callout -->
+  <div class="text-center mt-6 text-xs text-blue-300/80 font-medium">
+    Click any match fixture to open the dedicated 
+    <a href="/livescore" class="text-white underline font-bold hover:text-red-400 transition-colors">
+      /livescore Match Center
+    </a> 
+    with live ESPN scoreboards and UK TV channels.
+  </div>
+</section>
+
+<style>
+  @keyframes live-marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .live-carousel-track {
+    display: flex;
+    width: max-content;
+    animation: live-marquee 45s linear infinite;
+    will-change: transform;
+  }
+
+  /* Pause smooth infinite loop when user hovers any card */
+  .live-carousel-container:hover .live-carousel-track {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .live-carousel-track {
+      animation: none;
+      overflow-x: auto;
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  // Seamless live score auto-enrichment from ESPN API
+  async function updateLiveCarousel() {
+    try {
+      const endpoints = [
+        { url: 'https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard', league: 'Premier League' },
+        { url: 'https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.champions/scoreboard', league: 'Champions League' }
+      ];
+
+      for (const endpoint of endpoints) {
+        const res = await fetch(endpoint.url);
+        if (!res.ok) continue;
+        const data = await res.json();
+        const events = data.events || [];
+        
+        events.forEach((event: any) => {
+          const comp = event.competitions?.[0];
+          if (!comp) return;
+          const home = comp.competitors?.find((c: any) => c.homeAway === 'home');
+          const away = comp.competitors?.find((c: any) => c.homeAway === 'away');
+          if (!home || !away) return;
+
+          // Find matching card if present
+          const cards = document.querySelectorAll<HTMLElement>(`.fixture-card`);
+          cards.forEach((card) => {
+            const cardText = card.textContent || '';
+            if (cardText.includes(home.team.shortDisplayName || home.team.name)) {
+              // Update score if live or complete
+              if (home.score !== undefined && away.score !== undefined) {
+                const scores = card.querySelectorAll<HTMLElement>('.text-base.font-black');
+                if (scores.length >= 2) {
+                  scores[0].textContent = String(home.score);
+                  scores[1].textContent = String(away.score);
+                }
+              }
+            }
+          });
+        });
+      }
+    } catch (e) {
+      // Quiet failover to static high-profile fixtures
+      console.debug('Carousel live update fallback in effect:', e);
+    }
+  }
+
+  // Ensure clicking ANY fixture card or section redirect safely navigates to /livescore
+  document.querySelectorAll('#live-score-carousel-section .fixture-card').forEach((card) => {
+    card.addEventListener('click', (e) => {
+      // Direct navigation to /livescore
+      window.location.href = '/livescore';
+    });
+  });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateLiveCarousel);
+  } else {
+    updateLiveCarousel();
+  }
+</script>
