@@ -14,8 +14,9 @@ import ReferralBanner from '../components/ReferralBanner.astro';
 import FAQSection from '../components/FAQSection.astro';
 import ContactForm from '../components/ContactForm.astro';
 import Footer from '../components/Footer.astro';
+import { currentYear } from '../utils/year';
 
-const title = "IPTV Subscription UK (2026) | Buy Premium 4K IPTV from £7/Mo";
+const title = `IPTV Subscription UK (${currentYear}) | Buy Premium 4K IPTV from £7/Mo`;
 const description = "Looking to buy the best IPTV subscription in the UK? 99.9% uptime, Anti-Freeze™ 9.0 stability, 4K sports & instant WhatsApp activation. Plans from £7 to £47.";
 const keywords = "iptv subscription uk, buy iptv uk, best iptv subscription, premium iptv uk, cheap iptv uk, uk iptv subscription 12 months";
 
@@ -30,7 +31,7 @@ const subFaqs = [
   },
   {
     question: "Can I pay for a 12-Month plan and get the Best Value rate?",
-    answer: "Yes, our 12-Month Plan is our most popular package at just £47 (equivalent to only £3.91/month). It comes with a strict 24-Hour Money-Back Guarantee."
+    answer: "Yes, our 12-Month Plan is our most popular package at just £47 (equivalent to only £3.91/month). It comes bundled with a FREE Premium Player license (TiviMate / IBO Player worth £25) and a strict 24-Hour Money-Back Guarantee."
   }
 ];
 ---
@@ -49,10 +50,10 @@ const subFaqs = [
     <LiveScores />
     <FeatureGrid />
     <Pricing />
+    <ReferralBanner />
     <ProcessSteps />
     <SupportedDevices />
     <UserReviewsSection />
-    <ReferralBanner />
     <FAQSection />
     <ContactForm />
   </main>

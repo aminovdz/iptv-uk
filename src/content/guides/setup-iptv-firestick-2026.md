@@ -1,6 +1,6 @@
 ---
-title: "How to Setup IPTV on Amazon Firestick in 2026 (Step-by-Step Guide)"
-description: "Complete 2026 beginner's tutorial: setup IPTV on any Amazon Firestick or Fire TV Cube in under 2 minutes using Downloader, TiviMate, or IPTV Smarters Pro."
+title: "How to Setup IPTV on Amazon Firestick (Step-by-Step Guide)"
+description: "Complete beginner's tutorial: setup IPTV on any Amazon Firestick or Fire TV Cube in under 2 minutes using Downloader, TiviMate, or IPTV Smarters Pro."
 pubDate: 2026-01-20
 modDate: 2026-03-22
 author: "British IPTV Technical Team"

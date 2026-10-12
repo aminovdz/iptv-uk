@@ -15,15 +15,20 @@ import CitiesList from '../components/CitiesList.astro';
 import FAQSection from '../components/FAQSection.astro';
 import ContactForm from '../components/ContactForm.astro';
 import Footer from '../components/Footer.astro';
+import { currentYear } from '../utils/year';
 
-const title = "British IPTV - #1 Best IPTV UK Provider 2026 | 4K UHD Streams";
-const description = "Experience the best IPTV UK subscription with 99.9% uptime, Anti-Freeze™ 9.0 technology, live Premier League sports, and instant WhatsApp activation. From £7/month.";
+const title = `British IPTV - #1 Best IPTV UK Provider ${currentYear} | 4K UHD Streams`;
+const description = `Experience the best IPTV UK subscription with 99.9% uptime, Anti-Freeze™ 9.0 technology, live Premier League sports, and instant WhatsApp activation. From £7/month.`;
 const keywords = "best iptv uk, iptv subscription uk, buy iptv uk, iptv provider uk, iptv firestick uk, 4k iptv stream uk, premier league iptv, british iptv";
 
 const homepageFaqs = [
   {
     question: "Is British IPTV compatible with my Amazon Firestick or Smart TV?",
     answer: "Yes, 100%. Our service works smoothly on all generations of the Amazon Fire TV Stick, Smart TVs running Samsung Tizen, LG webOS, or Android TV, as well as Apple TV, iPhone, iPad, Android mobile, and Windows/Mac PCs. You can use standard players like TiviMate, IPTV Smarters Pro, or IBO Player."
+  },
+  {
+    question: "Do I get a free premium media player with my subscription?",
+    answer: "Yes! Every 12-Month VIP Pass (£47) includes a complimentary premium player license (TiviMate Premium or IBO Player, worth £25) fully activated at zero additional cost."
   },
   {
     question: "Can I watch Saturday 3PM Premier League matches without blackouts?",
@@ -75,6 +80,9 @@ const homepageFaqs = [
     <!-- 5. Transparent Pricing Table (12-Month Plan £47 FIRST as Best Value) -->
     <Pricing />
 
+    <!-- Refer-a-Friend Rewards Banner (+1 Month Free) -->
+    <ReferralBanner />
+
     <!-- 6. 3-Step Instant Activation Workflow -->
     <ProcessSteps />
 
@@ -83,9 +91,6 @@ const homepageFaqs = [
 
     <!-- 8. Verified UK Customer Reviews & 4.9 Star Rating Social Proof -->
     <UserReviewsSection />
-
-    <!-- 9. Refer-a-Friend Rewards Banner (+1 Month Free) -->
-    <ReferralBanner />
 
     <!-- 10. Local UK Programmatic Geo-Coverage Grid (London, Manchester, etc.) -->
     <CitiesList />

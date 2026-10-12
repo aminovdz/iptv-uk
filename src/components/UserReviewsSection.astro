@@ -1,6 +1,7 @@
 ---
 // src/components/UserReviewsSection.astro
 // Verified customer reviews component matching ServerSchema AggregateRating (4.9 / 1,485 reviews)
+import { currentYear } from '../utils/year';
 
 interface Review {
   name: string;
@@ -20,7 +21,7 @@ const reviews: Review[] = [
     device: "Amazon Firestick 4K Max",
     plan: "12-Month 4K UHD Plan",
     rating: 5,
-    date: "18 January 2026",
+    date: `18 January ${currentYear}`,
     comment: "Crystal clear 4K football streams with zero lag during live weekend derbies. Setup took under 2 minutes on my Firestick with their step-by-step guide. Honestly night and day compared to other providers.",
     verified: true
   },
@@ -30,7 +31,7 @@ const reviews: Review[] = [
     device: "Samsung Smart TV",
     plan: "12-Month 4K UHD Plan",
     rating: 5,
-    date: "4 February 2026",
+    date: `4 February ${currentYear}`,
     comment: "Unbeatable stability. Customer support on WhatsApp answered my activation questions in less than 30 seconds on a busy Saturday. No buffering, no dropouts, and 60fps frame rates look flawless.",
     verified: true
   },
@@ -40,7 +41,7 @@ const reviews: Review[] = [
     device: "Apple TV 4K",
     plan: "12-Month 4K UHD Plan",
     rating: 5,
-    date: "12 February 2026",
+    date: `12 February ${currentYear}`,
     comment: "Finally an IPTV service that doesn't freeze at 3 PM on Saturdays. The Premier League coverage and F1 feeds are immaculate in true Ultra HD. Saved me over £900 compared to legacy cable bills.",
     verified: true
   },
@@ -50,7 +51,7 @@ const reviews: Review[] = [
     device: "Android TV Box",
     plan: "6-Month 4K UHD Plan",
     rating: 5,
-    date: "27 February 2026",
+    date: `27 February ${currentYear}`,
     comment: "Been using British IPTV for over 8 months now. Channel zapping takes under 0.5s, the full 7-day EPG TV guide is always synced, and zero buffering even during peak Champions League nights.",
     verified: true
   },
@@ -60,7 +61,7 @@ const reviews: Review[] = [
     device: "Firestick 4K",
     plan: "12-Month 4K UHD Plan",
     rating: 5,
-    date: "3 March 2026",
+    date: `3 March ${currentYear}`,
     comment: "Switched from expensive cable paying £85/month. Paying £47 for the entire year with better 4K quality and instant Anti-Freeze™ stability is a no-brainer. The WhatsApp team is top notch.",
     verified: true
   },
@@ -70,7 +71,7 @@ const reviews: Review[] = [
     device: "LG OLED Smart TV",
     plan: "12-Month 4K UHD Plan",
     rating: 5,
-    date: "15 March 2026",
+    date: `15 March ${currentYear}`,
     comment: "Activation was instantaneous after messaging their WhatsApp team. Picture quality on my 65-inch OLED is pin-sharp with Dolby Audio. Best streaming decision I have made this year.",
     verified: true
   }

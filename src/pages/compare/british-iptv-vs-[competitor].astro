@@ -10,6 +10,7 @@ import UserReviewsSection from '../../components/UserReviewsSection.astro';
 import FAQSection from '../../components/FAQSection.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import Footer from '../../components/Footer.astro';
+import { currentYear } from '../../utils/year';
 
 export function getStaticPaths() {
   const competitors = [
@@ -84,7 +85,7 @@ export function getStaticPaths() {
 const { comp } = Astro.props;
 const { name: competitorName, type: compType, price: compPrice, uptime: compUptime, support: compSupport, antiFreeze: compAntiFreeze, sports3pm: compSports3pm } = comp;
 
-const title = `British IPTV vs ${competitorName} (2026 Comparison) | Which is Best?`;
+const title = `British IPTV vs ${competitorName} (${currentYear} Comparison) | Which is Best?`;
 const description = `Unbiased comparison: British IPTV vs ${competitorName}. Compare pricing (£47/year vs ${compPrice}), 4K streaming stability, Anti-Freeze tech, and 3PM football coverage.`;
 const keywords = `british iptv vs ${competitorName.toLowerCase()}, ${competitorName.toLowerCase()} review, best alternative to ${competitorName.toLowerCase()}, iptv uk comparison`;
 
@@ -120,7 +121,7 @@ const compareFaqs = [
 
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
         <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-black uppercase tracking-widest mb-6">
-          <span>⚖️</span> Side-by-Side Comparison 2026
+          <span>⚖️</span> Side-by-Side Comparison {currentYear}
         </div>
 
         <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight max-w-5xl mx-auto leading-tight">

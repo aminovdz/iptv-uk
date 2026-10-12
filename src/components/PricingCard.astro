@@ -10,6 +10,7 @@ interface Props {
   perMonthEquivalent?: string;
   isBestValue?: boolean;
   isPopular?: boolean;
+  freePlayerBonus?: boolean;
   features: string[];
   ctaText?: string;
   whatsappMessage: string;
@@ -23,6 +24,7 @@ const {
   perMonthEquivalent,
   isBestValue = false,
   isPopular = false,
+  freePlayerBonus = false,
   features,
   ctaText = "Select Pass",
   whatsappMessage
@@ -76,6 +78,20 @@ const whatsappUrl = `https://wa.me/213550592200?text=${encodeURIComponent(whatsa
       )}
       <span class="text-[11px] text-gray-400 block mt-0.5">One-time payment &bull; Zero contracts</span>
     </div>
+
+    <!-- Free Premium Player Bonus Banner (12-Month Plan Feature) -->
+    {(isBestValue || freePlayerBonus) && (
+      <div class="mb-6 p-3 rounded-2xl bg-gradient-to-r from-amber-500/20 via-red-500/15 to-amber-500/20 border border-amber-400/50 flex items-center gap-3 shadow-lg">
+        <span class="text-2xl animate-pulse flex-shrink-0">🎁</span>
+        <div class="text-left min-w-0">
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <span class="text-[11px] font-black text-amber-300 uppercase tracking-wider">Free Premium Player</span>
+            <span class="bg-amber-400 text-black text-[9px] font-black px-1.5 py-0.2 rounded font-mono">£25 VALUE</span>
+          </div>
+          <p class="text-[11px] text-gray-200 mt-0.5 leading-snug">Includes free TiviMate / IBO Player license activation</p>
+        </div>
+      </div>
+    )}
 
     <!-- Features List -->
     <ul class="space-y-3 mb-8 text-xs sm:text-sm text-gray-300">

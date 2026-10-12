@@ -10,10 +10,11 @@ import UserReviewsSection from '../components/UserReviewsSection.astro';
 import FAQSection from '../components/FAQSection.astro';
 import ContactForm from '../components/ContactForm.astro';
 import Footer from '../components/Footer.astro';
+import { currentYear } from '../utils/year';
 
-const title = "Best IPTV Providers UK (2026 Ranked) | Verified Stability & 4K Uptime";
-const description = "Discover the top-rated British IPTV provider in 2026. Ranked #1 for 4K sports stability, 99.9% uptime, zero buffering, and instant WhatsApp support. From £7.";
-const keywords = "best iptv providers uk, best iptv uk, top iptv uk, reliable iptv uk, best iptv service uk 2026";
+const title = `Best IPTV Providers UK (${currentYear} Ranked) | Verified Stability & 4K Uptime`;
+const description = `Discover the top-rated British IPTV provider in ${currentYear}. Ranked #1 for 4K sports stability, 99.9% uptime, zero buffering, and instant WhatsApp support. From £7.`;
+const keywords = `best iptv providers uk, best iptv uk, top iptv uk, reliable iptv uk, best iptv service uk ${currentYear}`;
 
 const providerFaqs = [
   {
@@ -21,7 +22,7 @@ const providerFaqs = [
     answer: "We evaluate providers based on 5 strict technical metrics: 1. Server uptime (must exceed 99.5%), 2. Anti-Freeze technology during peak Premier League derbies, 3. True 60fps 4K video bitrates, 4. Customer support responsiveness (<60s on WhatsApp), and 5. Fair pricing with money-back guarantees."
   },
   {
-    question: "Why is British IPTV ranked #1 in 2026?",
+    question: `Why is British IPTV ranked #1 in ${currentYear}?`,
     answer: "British IPTV ranks #1 because of our dedicated UK edge infrastructure, zero buffering guarantee, comprehensive Saturday 3PM match access, transparent £47/year pricing, and a 4.9/5 satisfaction rating across 1,485+ verified subscribers."
   }
 ];
@@ -46,7 +47,7 @@ const providerFaqs = [
 
         <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight max-w-5xl mx-auto leading-tight">
           The <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-300 to-blue-400">Best IPTV Provider in the UK</span> <br class="hidden sm:inline" />
-          Verified for 2026.
+          Verified for {currentYear}.
         </h1>
 
         <p class="mt-6 text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">

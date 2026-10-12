@@ -11,8 +11,9 @@ import UserReviewsSection from '../components/UserReviewsSection.astro';
 import FAQSection from '../components/FAQSection.astro';
 import ContactForm from '../components/ContactForm.astro';
 import Footer from '../components/Footer.astro';
+import { currentYear } from '../utils/year';
 
-const title = "Watch Premier League Live on IPTV UK (2026) | 4K & No Blackouts";
+const title = `Watch Premier League Live on IPTV UK (${currentYear}) | 4K & No Blackouts`;
 const description = "Stream every Premier League match in 4K UHD. 100% Saturday 3PM blackout bypass, 60fps high bitrate, English commentary, and zero buffer lag from £7.";
 const keywords = "watch premier league iptv uk, premier league live stream 4k, saturday 3pm blackout iptv, epl live stream firestick, watch football live uk iptv";
 
@@ -69,6 +70,19 @@ const premierFaqs = [
           >
             Test 24H Matchday Trial on WhatsApp
           </a>
+        </div>
+
+        <!-- Premier League 4K Match Live Preview -->
+        <div class="mt-12 max-w-4xl mx-auto rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-red-950/50 relative group">
+          <img 
+            src="/images/premier-league-4k-stream.jpg" 
+            alt="Live Premier League football match broadcast in 4K Ultra HD on OLED TV with Saturday 3PM blackout free streams"
+            width="1280"
+            height="720"
+            loading="eager"
+            decoding="async"
+            class="w-full h-auto object-cover rounded-3xl transform transition-transform duration-500 group-hover:scale-[1.01]"
+          />
         </div>
       </div>
     </section>

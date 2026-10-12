@@ -1,6 +1,6 @@
 ---
 title: "How to Watch Every Premier League Match Live in 4K UK (No 3PM Blackouts)"
-description: "Stream all 380 Premier League games in 4K UHD 60FPS without Saturday 3PM blackout restrictions. Complete 2026 UK football streaming guide."
+description: "Stream all 380 Premier League games in 4K UHD 60FPS without Saturday 3PM blackout restrictions. Complete UK football streaming guide."
 pubDate: 2026-02-01
 modDate: 2026-03-24
 author: "British IPTV Sports Desk"

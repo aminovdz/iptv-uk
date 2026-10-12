@@ -11,6 +11,7 @@ import FAQSection from '../../components/FAQSection.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import Footer from '../../components/Footer.astro';
 import { guides as staticGuides } from '../../data/guides.js';
+import { currentYear } from '../../utils/year';
 
 export async function getStaticPaths() {
   const contentGuides = await getCollection('guides');
@@ -47,24 +48,40 @@ let ContentComponent: any = null;
 if (isContent && entry) {
   const rendered = await render(entry);
   ContentComponent = rendered.Content;
-  title = entry.data.title;
-  description = entry.data.description;
+  title = entry.data.title.replace(/2026/g, String(currentYear));
+  description = entry.data.description.replace(/2026/g, String(currentYear));
   pubDate = entry.data.pubDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
   author = entry.data.author || "British IPTV Editorial Team";
   readingTime = entry.data.readingTime || "7 min read";
-  quickSummary = entry.data.quickSummary || "";
-  toc = entry.data.toc || [];
-  faqs = entry.data.faqs || [];
+  quickSummary = (entry.data.quickSummary || "").replace(/2026/g, String(currentYear));
+  toc = (entry.data.toc || []).map(t => ({ title: t.title.replace(/2026/g, String(currentYear)), anchor: t.anchor }));
+  faqs = (entry.data.faqs || []).map(f => ({ 
+    question: f.question.replace(/2026/g, String(currentYear)), 
+    answer: f.answer.replace(/2026/g, String(currentYear)) 
+  }));
 } else if (guide) {
-  title = guide.title;
-  description = guide.excerpt || guide.title;
+  title = guide.title.replace(/2026/g, String(currentYear));
+  description = (guide.excerpt || guide.title).replace(/2026/g, String(currentYear));
   pubDate = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+const slug = (isContent && entry ? entry.id : guide?.slug || '').toLowerCase();
+let featuredImage = "/images/hero-4k-streaming.jpg";
+if (slug.includes('firestick')) {
+  featuredImage = "/images/firestick-iptv-setup.jpg";
+} else if (slug.includes('premier') || slug.includes('football') || slug.includes('sports')) {
+  featuredImage = "/images/premier-league-4k-stream.jpg";
+} else if (slug.includes('device') || slug.includes('tivimate') || slug.includes('player')) {
+  featuredImage = "/images/tivimate-premium-player.jpg";
+} else if (slug.includes('channel') || slug.includes('service')) {
+  featuredImage = "/images/iptv-channels-vod.jpg";
 }
 ---
 
 <Layout 
   title={`${title} | British IPTV Knowledge Base`} 
   description={description}
+  image={featuredImage}
   type="article"
   faqs={faqs}
   authorName={author}
@@ -87,9 +104,22 @@ if (isContent && entry) {
           <span>•</span>
           <span>Updated: {pubDate}</span>
           <span>•</span>
-          <span class="text-emerald-400 font-semibold">Verified for 2026</span>
+          <span class="text-emerald-400 font-semibold">Verified for {currentYear}</span>
         </div>
       </header>
+
+      <!-- Featured Guide Visual Asset with Descriptive Alt Text -->
+      <div class="mb-10 rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative group">
+        <img 
+          src={featuredImage} 
+          alt={`${title} - Step-by-Step UK Streaming Tutorial Guide by British IPTV`}
+          width="1280"
+          height="720"
+          loading="eager"
+          decoding="async"
+          class="w-full h-auto object-cover rounded-3xl transform transition-transform duration-500 group-hover:scale-[1.01]"
+        />
+      </div>
 
       <!-- Quick Summary Featured Snippet Box (Position 0 Target) -->
       {quickSummary && (

@@ -8,10 +8,11 @@ import UserReviewsSection from '../../components/UserReviewsSection.astro';
 import FAQSection from '../../components/FAQSection.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import Footer from '../../components/Footer.astro';
+import { currentYear } from '../../utils/year';
 
-const title = "IPTV Comparisons & Provider Reviews (2026) | British IPTV vs Competitors";
+const title = `IPTV Comparisons & Provider Reviews (${currentYear}) | British IPTV vs Competitors`;
 const description = "Side-by-side comparison of British IPTV against top UK providers and legacy cable. Compare stream stability, 4K picture quality, pricing, and 3PM football access.";
-const keywords = "iptv uk comparison, best iptv providers uk, compare iptv services, british iptv vs sky, iptv alternatives uk 2026";
+const keywords = `iptv uk comparison, best iptv providers uk, compare iptv services, british iptv vs sky, iptv alternatives uk ${currentYear}`;
 
 const comparisons = [
   {
@@ -102,6 +103,19 @@ const compareHubFaqs = [
       <p class="mt-4 text-base sm:text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
         See how our 4K picture quality, Anti-Freeze™ 9.0 edge caching, 24-hour refund protection, and £47/year pricing compare directly to alternative providers and legacy TV packages.
       </p>
+
+      <!-- Player & Stream Quality Benchmark Preview -->
+      <div class="mt-8 max-w-4xl mx-auto rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-blue-950/60 relative group">
+        <img 
+          src="/images/tivimate-premium-player.jpg" 
+          alt="British IPTV premium player interface and electronic programme guide running on 4K Smart TV display"
+          width="1280"
+          height="720"
+          loading="eager"
+          decoding="async"
+          class="w-full h-auto object-cover rounded-3xl transform transition-transform duration-500 group-hover:scale-[1.01]"
+        />
+      </div>
     </section>
 
     <!-- Comparison Cards Grid -->

@@ -10,8 +10,9 @@ import UserReviewsSection from '../components/UserReviewsSection.astro';
 import FAQSection from '../components/FAQSection.astro';
 import ContactForm from '../components/ContactForm.astro';
 import Footer from '../components/Footer.astro';
+import { currentYear } from '../utils/year';
 
-const title = "IPTV Firestick UK (2026 Guide & Subscription) | 4K Setup";
+const title = `IPTV Firestick UK (${currentYear} Guide & Subscription) | 4K Setup`;
 const description = "Best IPTV for Amazon Firestick in the UK. Instant setup on Fire TV Stick 4K & Max with TiviMate & Smarters. Stream buffer-free sports from £7/mo.";
 const keywords = "iptv firestick uk, best iptv for firestick uk, setup iptv firestick, tivimate firestick uk, fire tv stick iptv subscription";
 
@@ -68,6 +69,19 @@ const firestickPageFaqs = [
           >
             Get Instant Firestick Codes on WhatsApp
           </a>
+        </div>
+
+        <!-- Firestick Setup Visual Preview -->
+        <div class="mt-12 max-w-4xl mx-auto rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-amber-950/40 relative group">
+          <img 
+            src="/images/firestick-iptv-setup.jpg" 
+            alt="Amazon Fire TV Stick connected to smart TV displaying British IPTV guide with live sports and TiviMate interface"
+            width="1280"
+            height="720"
+            loading="eager"
+            decoding="async"
+            class="w-full h-auto object-cover rounded-3xl transform transition-transform duration-500 group-hover:scale-[1.01]"
+          />
         </div>
       </div>
     </section>

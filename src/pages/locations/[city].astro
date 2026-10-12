@@ -15,6 +15,7 @@ import ReferralBanner from '../../components/ReferralBanner.astro';
 import FAQSection from '../../components/FAQSection.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import Footer from '../../components/Footer.astro';
+import { currentYear } from '../../utils/year';
 
 export function getStaticPaths() {
   const cities = [
@@ -64,7 +65,7 @@ export function getStaticPaths() {
 const { cityInfo } = Astro.props;
 const { name: cityName, county, clubs, broadband } = cityInfo;
 
-const title = `Best IPTV in ${cityName} (2026) | #1 4K UK Streaming Provider`;
+const title = `Best IPTV in ${cityName} (${currentYear}) | #1 4K UK Streaming Provider`;
 const description = `Looking for the most reliable IPTV in ${cityName}? Stream 4K live sports, 3PM football & movies with zero buffering. Dedicated local UK servers from £7/mo.`;
 const keywords = `best iptv ${cityName.toLowerCase()}, iptv subscription ${cityName.toLowerCase()}, buy iptv in ${cityName.toLowerCase()}, iptv provider ${cityName.toLowerCase()}, firestick iptv ${cityName.toLowerCase()}`;
 
@@ -158,6 +159,19 @@ const localFaqs = [
             <span class="text-xs text-gray-400">Zero Throttling</span>
           </div>
         </div>
+
+        <!-- Local Regional Streaming Visual -->
+        <div class="mt-12 max-w-4xl mx-auto rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-blue-950/60 relative group">
+          <img 
+            src="/images/uk-cities-network.jpg" 
+            alt={`British IPTV dedicated 4K streaming edge server coverage for ${cityName} and ${county}`}
+            width="1280"
+            height="720"
+            loading="eager"
+            decoding="async"
+            class="w-full h-auto object-cover rounded-3xl transform transition-transform duration-500 group-hover:scale-[1.01]"
+          />
+        </div>
       </div>
     </section>
 
@@ -187,6 +201,9 @@ const localFaqs = [
     <!-- Pricing Table (12-Month Plan FIRST £47) -->
     <Pricing />
 
+    <!-- Referral Hook -->
+    <ReferralBanner />
+
     <!-- 3-Step Setup -->
     <ProcessSteps />
 
@@ -195,9 +212,6 @@ const localFaqs = [
 
     <!-- Verified UK Customer Reviews -->
     <UserReviewsSection />
-
-    <!-- Referral Hook -->
-    <ReferralBanner />
 
     <!-- Local FAQs -->
     <FAQSection />

@@ -8,8 +8,9 @@ import Pricing from '../../components/Pricing.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import Footer from '../../components/Footer.astro';
 import { guides as staticGuides } from '../../data/guides.js';
+import { currentYear } from '../../utils/year';
 
-const title = "IPTV Guides & Tutorials (2026) | British IPTV Knowledge Base";
+const title = `IPTV Guides & Tutorials (${currentYear}) | British IPTV Knowledge Base`;
 const description = "Master your IPTV streaming setup. Step-by-step tutorials for Firestick, TiviMate, Smart TVs, buffering fixes, and Premier League streaming tips.";
 
 const contentGuides = await getCollection('guides');
@@ -33,7 +34,7 @@ const formattedStaticGuides = staticGuides
     excerpt: g.excerpt,
     category: "Streaming Tutorial",
     readingTime: "5 min read",
-    pubDate: "2026"
+    pubDate: String(currentYear)
   }));
 
 const allGuides = [...formattedContentGuides, ...formattedStaticGuides];
@@ -65,6 +66,23 @@ const allGuides = [...formattedContentGuides, ...formattedStaticGuides];
             class="group p-6 rounded-3xl bg-[#090E1D] border border-white/10 hover:border-blue-500/40 transition-all flex flex-col justify-between shadow-xl hover:-translate-y-1 duration-300"
           >
             <div>
+              <!-- Guide Thumbnail with Alt Text -->
+              <div class="mb-4 rounded-2xl overflow-hidden aspect-video bg-white/5 border border-white/5">
+                <img 
+                  src={
+                    g.slug.includes('firestick') ? '/images/firestick-iptv-setup.jpg' :
+                    g.slug.includes('premier') || g.slug.includes('football') ? '/images/premier-league-4k-stream.jpg' :
+                    g.slug.includes('device') || g.slug.includes('tivimate') ? '/images/tivimate-premium-player.jpg' :
+                    '/images/hero-4k-streaming.jpg'
+                  } 
+                  alt={`${g.title} - British IPTV Setup Guide`}
+                  width="480"
+                  height="270"
+                  loading="lazy"
+                  decoding="async"
+                  class="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
               <div class="flex items-center justify-between text-xs text-gray-500 mb-3">
                 <span class="text-blue-400 font-bold uppercase tracking-wider">{g.category}</span>
                 <span>{g.readingTime}</span>

@@ -1,3 +1,5 @@
+const currentYear = new Date().getFullYear();
+
 export const guides = [
   { 
     slug: "setup-iptv-firestick", 
@@ -57,10 +59,10 @@ export const guides = [
   },
   {
     slug: "best-iptv-service-uk-2026",
-    title: "Best IPTV Service UK 2026: Comprehensive Guide",
+    title: `Best IPTV Service UK ${currentYear}: Comprehensive Guide`,
     image: "https://images.unsplash.com/photo-1584697964190-7cb8842c335e?auto=format&fit=crop&w=800&q=80",
-    excerpt: "Discover the top IPTV services in the UK for 2026. Compare channel lists, 4K quality, and reliability for the ultimate streaming experience.",
-    content: "<h2>Why Choose IPTV in the UK in 2026?</h2><p>With traditional TV packages becoming increasingly expensive, IPTV offers an incredible alternative. The best IPTV services provide access to thousands of live channels, including premium sports and movies, at a fraction of the cost.</p><h3>What Makes a Great IPTV Provider?</h3><p>When searching for the <strong>best IPTV UK</strong> provider, look for features like 4K streaming, Catch-up TV, EPG (Electronic Program Guide), and anti-freeze technology. IPTVUK provides all these features, ensuring a buffer-free viewing experience.</p>"
+    excerpt: `Discover the top IPTV services in the UK for ${currentYear}. Compare channel lists, 4K quality, and reliability for the ultimate streaming experience.`,
+    content: `<h2>Why Choose IPTV in the UK in ${currentYear}?</h2><p>With traditional TV packages becoming increasingly expensive, IPTV offers an incredible alternative. The best IPTV services provide access to thousands of live channels, including premium sports and movies, at a fraction of the cost.</p><h3>What Makes a Great IPTV Provider?</h3><p>When searching for the <strong>best IPTV UK</strong> provider, look for features like 4K streaming, Catch-up TV, EPG (Electronic Program Guide), and anti-freeze technology. IPTVUK provides all these features, ensuring a buffer-free viewing experience.</p>`
   },
   {
     slug: "watch-premier-league-iptv",
@@ -85,7 +87,7 @@ export const guides = [
   },
   {
     slug: "top-iptv-devices-2026",
-    title: "Top 3 IPTV Devices to Buy in 2026",
+    title: `Top 3 IPTV Devices to Buy in ${currentYear}`,
     image: "https://images.unsplash.com/photo-1526313134812-70659695655a?auto=format&fit=crop&w=800&q=80",
     excerpt: "Upgrade your streaming setup with the best hardware. We review the Amazon Firestick 4K Max, Formuler Z11, and NVIDIA Shield TV.",
     content: "<h2>Hardware Matters</h2><p>Your IPTV experience is only as good as the device you run it on. While Smart TVs are convenient, a dedicated streaming box offers better performance, speed, and app support.</p><h3>1. NVIDIA Shield TV Pro</h3><p>The undisputed king of streaming boxes. Its AI upscaling makes HD channels look like 4K.</p><h3>2. Formuler Z11 Pro Max</h3><p>Built specifically for IPTV. The exclusive MYTVOnline3 app offers the most TV-like experience available.</p><h3>3. Amazon Firestick 4K Max</h3><p>The best budget option. It's affordable, supports Wi-Fi 6, and easily runs Tivimate or Smarters Pro.</p>"

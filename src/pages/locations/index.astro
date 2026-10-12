@@ -9,8 +9,9 @@ import UserReviewsSection from '../../components/UserReviewsSection.astro';
 import FAQSection from '../../components/FAQSection.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import Footer from '../../components/Footer.astro';
+import { currentYear } from '../../utils/year';
 
-const title = "UK Locations & Regional Coverage (2026) | British IPTV Edge Network";
+const title = `UK Locations & Regional Coverage (${currentYear}) | British IPTV Edge Network`;
 const description = "Discover British IPTV's dedicated edge server coverage across the United Kingdom. Ultra-low latency 4K streaming in London, Birmingham, Manchester, Edinburgh, Liverpool.";
 const keywords = "iptv uk locations, best iptv london, iptv manchester, iptv birmingham, iptv edinburgh, iptv liverpool, uk iptv edge servers";
 
@@ -101,6 +102,19 @@ const locationsFaqs = [
       <p class="mt-4 text-base sm:text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
         Ultra-low latency, zero ISP throttling, and pristine 4K live sports delivered to your city through our UK CDN infrastructure.
       </p>
+
+      <!-- UK Regional Network Visual Preview -->
+      <div class="mt-8 max-w-4xl mx-auto rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-blue-950/60 relative group">
+        <img 
+          src="/images/uk-cities-network.jpg" 
+          alt="British IPTV UK regional edge servers and ultra-fast broadband streaming network across London, Manchester and Edinburgh"
+          width="1280"
+          height="720"
+          loading="eager"
+          decoding="async"
+          class="w-full h-auto object-cover rounded-3xl transform transition-transform duration-500 group-hover:scale-[1.01]"
+        />
+      </div>
     </section>
 
     <!-- Real-Time Sports Live Ticker -->

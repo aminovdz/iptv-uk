@@ -1,6 +1,8 @@
 ---
 // src/components/seo/ServerSchema.astro
 // Executed 100% on the server during build/SSR before HTML is sent to the client.
+import { currentYear, nextYear } from '../../utils/year';
+
 interface Props {
   type?: 'home' | 'product' | 'article' | 'city';
   title?: string;
@@ -16,7 +18,7 @@ interface Props {
 
 const {
   type = 'home',
-  title = 'British IPTV - Best IPTV UK Subscription 2026',
+  title = `British IPTV - Best IPTV UK Subscription ${currentYear}`,
   description = 'Experience the best British IPTV service. Premium 4K/FHD streaming, 99.9% uptime, zero buffering, and all UK sports channels live.',
   url = Astro.url.href,
   image = 'https://britishiptv.pro/icon.png',
@@ -80,7 +82,7 @@ const productSchema = {
     "@type": "Brand",
     "name": "British IPTV"
   },
-  "sku": "BIPTV-UK-2026",
+  "sku": `BIPTV-UK-${currentYear}`,
   "mpn": "BIPTV-PREM-4K",
   "aggregateRating": {
     "@type": "AggregateRating",
@@ -96,7 +98,7 @@ const productSchema = {
         "@type": "Person",
         "name": "Marcus V."
       },
-      "datePublished": "2026-01-18",
+      "datePublished": `${currentYear}-01-18`,
       "reviewBody": "Crystal clear 4K football streams with zero lag during live derbies and Saturday 3PM kickoffs. Setup took under 2 minutes on my Firestick.",
       "reviewRating": {
         "@type": "Rating",
@@ -111,7 +113,7 @@ const productSchema = {
         "@type": "Person",
         "name": "David K."
       },
-      "datePublished": "2026-02-04",
+      "datePublished": `${currentYear}-02-04`,
       "reviewBody": "Unbeatable stability across Premier League matches. Customer support on WhatsApp answered my activation questions in less than 30 seconds.",
       "reviewRating": {
         "@type": "Rating",
@@ -127,7 +129,7 @@ const productSchema = {
     "lowPrice": "7.00",
     "highPrice": "47.00",
     "offerCount": "4",
-    "priceValidUntil": "2027-12-31",
+    "priceValidUntil": `${nextYear}-12-31`,
     "availability": "https://schema.org/InStock",
     "url": url,
     "seller": {
