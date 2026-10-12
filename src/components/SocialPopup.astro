@@ -1,0 +1,114 @@
+---
+// src/components/SocialPopup.astro
+// Live social proof toast notifications appearing periodically in bottom-left corner
+---
+
+<div 
+  id="social-toast" 
+  class="fixed bottom-6 left-6 z-[85] max-w-sm rounded-2xl bg-[#090D1A]/95 border border-white/10 p-3.5 shadow-2xl backdrop-blur-md transition-all duration-500 transform -translate-x-full opacity-0 pointer-events-none select-none flex items-center gap-3"
+  aria-live="polite"
+>
+  <!-- Avatar / Icon -->
+  <div class="relative w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-bold flex items-center justify-center flex-shrink-0 text-xs shadow-md">
+    <span id="toast-initials">LM</span>
+    <span class="absolute -bottom-1 -right-1 w-3 h-3 rounded-full bg-emerald-500 border-2 border-[#090D1A]"></span>
+  </div>
+
+  <!-- Content -->
+  <div class="flex-1 min-w-0 pr-4">
+    <div class="flex items-center gap-1.5 text-[11px] text-gray-400">
+      <span id="toast-name" class="font-bold text-white truncate">Liam M.</span>
+      <span>•</span>
+      <span id="toast-city" class="text-gray-400 truncate">London, UK</span>
+    </div>
+    <p id="toast-action" class="text-xs text-blue-300 font-semibold truncate">
+      Subscribed to 12-Month 4K UHD Plan
+    </p>
+    <div class="flex items-center gap-2 mt-0.5 text-[10px] text-gray-500 font-medium">
+      <span class="text-emerald-400 font-bold">✓ Verified Subscriber</span>
+      <span>•</span>
+      <span id="toast-time">2 mins ago</span>
+    </div>
+  </div>
+
+  <!-- Close button -->
+  <button 
+    id="toast-close" 
+    type="button" 
+    class="text-gray-500 hover:text-white p-1 rounded-lg pointer-events-auto transition-colors"
+    aria-label="Dismiss notifications"
+  >
+    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+    </svg>
+  </button>
+</div>
+
+<script>
+  function initSocialProof() {
+    const toast = document.getElementById('social-toast');
+    const closeBtn = document.getElementById('toast-close');
+    const nameEl = document.getElementById('toast-name');
+    const cityEl = document.getElementById('toast-city');
+    const actionEl = document.getElementById('toast-action');
+    const timeEl = document.getElementById('toast-time');
+    const initialsEl = document.getElementById('toast-initials');
+
+    if (!toast) return;
+
+    const purchases = [
+      { name: "Liam M.", city: "London", action: "Subscribed to 12-Month 4K Plan (£47)", time: "2 mins ago", initials: "LM" },
+      { name: "Oliver B.", city: "Manchester", action: "Activated 24-Hour 4K Free Trial", time: "4 mins ago", initials: "OB" },
+      { name: "George W.", city: "Birmingham", action: "Renewed 12-Month 4K Plan (£47)", time: "7 mins ago", initials: "GW" },
+      { name: "Harry D.", city: "Liverpool", action: "Subscribed to 6-Month Plan (£27)", time: "9 mins ago", initials: "HD" },
+      { name: "Jack T.", city: "Edinburgh", action: "Activated Firestick 4K Setup", time: "12 mins ago", initials: "JT" },
+      { name: "Charlie S.", city: "Bristol", action: "Subscribed to 12-Month 4K Plan (£47)", time: "15 mins ago", initials: "CS" },
+      { name: "Noah H.", city: "Leeds", action: "Activated Samsung Smart TV Setup", time: "18 mins ago", initials: "NH" }
+    ];
+
+    let currentIndex = 0;
+    let isDismissed = sessionStorage.getItem('social_toast_dismissed') === 'true';
+
+    if (isDismissed) return;
+
+    function showNextToast() {
+      if (isDismissed) return;
+
+      const p = purchases[currentIndex];
+      if (nameEl) nameEl.textContent = p.name;
+      if (cityEl) cityEl.textContent = `${p.city}, UK`;
+      if (actionEl) actionEl.textContent = p.action;
+      if (timeEl) timeEl.textContent = p.time;
+      if (initialsEl) initialsEl.textContent = p.initials;
+
+      toast.classList.remove('-translate-x-full', 'opacity-0');
+      toast.classList.add('translate-x-0', 'opacity-100');
+
+      // Hide after 5 seconds
+      setTimeout(() => {
+        toast.classList.remove('translate-x-0', 'opacity-100');
+        toast.classList.add('-translate-x-full', 'opacity-0');
+      }, 5000);
+
+      currentIndex = (currentIndex + 1) % purchases.length;
+    }
+
+    // First toast after 7s, then every 20s
+    setTimeout(showNextToast, 7000);
+    const interval = setInterval(showNextToast, 20000);
+
+    closeBtn?.addEventListener('click', () => {
+      isDismissed = true;
+      sessionStorage.setItem('social_toast_dismissed', 'true');
+      clearInterval(interval);
+      toast.classList.remove('translate-x-0', 'opacity-100');
+      toast.classList.add('-translate-x-full', 'opacity-0');
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSocialProof);
+  } else {
+    initSocialProof();
+  }
+</script>

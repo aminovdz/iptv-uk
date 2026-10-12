@@ -1,175 +1,371 @@
 ---
-import { Activity } from 'lucide-astro';
+// src/components/LiveScores.astro
+// Real live sports scores infinite loop carousel
+// Clicking any card redirects to the dedicated /livescore Match Center
+
+interface Match {
+  id: string;
+  league: string;
+  status: string;
+  isLive: boolean;
+  minute?: string;
+  homeTeam: {
+    name: string;
+    logo: string;
+    score: string;
+  };
+  awayTeam: {
+    name: string;
+    logo: string;
+    score: string;
+  };
+}
+
+const defaultMatches: Match[] = [
+  {
+    id: "m-1",
+    league: "Premier League",
+    status: "68'",
+    isLive: true,
+    minute: "68'",
+    homeTeam: { name: "Arsenal", logo: "https://a.espncdn.com/i/teamlogos/soccer/500/359.png", score: "2" },
+    awayTeam: { name: "Chelsea", logo: "https://a.espncdn.com/i/teamlogos/soccer/500/363.png", score: "1" }
+  },
+  {
+    id: "m-2",
+    league: "Premier League",
+    status: "TODAY 20:00",
+    isLive: false,
+    minute: "20:00",
+    homeTeam: { name: "Liverpool", logo: "https://a.espncdn.com/i/teamlogos/soccer/500/364.png", score: "-" },
+    awayTeam: { name: "Man City", logo: "https://a.espncdn.com/i/teamlogos/soccer/500/382.png", score: "-" }
+  },
+  {
+    id: "m-3",
+    league: "Champions League",
+    status: "34'",
+    isLive: true,
+    minute: "34'",
+    homeTeam: { name: "Real Madrid", logo: "https://a.espncdn.com/i/teamlogos/soccer/500/86.png", score: "1" },
+    awayTeam: { name: "Bayern Munich", logo: "https://a.espncdn.com/i/teamlogos/soccer/500/132.png", score: "1" }
+  },
+  {
+    id: "m-4",
+    league: "Premier League",
+    status: "FT",
+    isLive: false,
+    minute: "FT",
+    homeTeam: { name: "Man United", logo: "https://a.espncdn.com/i/teamlogos/soccer/500/360.png", score: "3" },
+    awayTeam: { name: "Tottenham", logo: "https://a.espncdn.com/i/teamlogos/soccer/500/367.png", score: "2" }
+  },
+  {
+    id: "m-5",
+    league: "Premier League",
+    status: "LIVE 81'",
+    isLive: true,
+    minute: "81'",
+    homeTeam: { name: "Newcastle", logo: "https://a.espncdn.com/i/teamlogos/soccer/500/361.png", score: "2" },
+    awayTeam: { name: "Aston Villa", logo: "https://a.espncdn.com/i/teamlogos/soccer/500/362.png", score: "0" }
+  },
+  {
+    id: "m-6",
+    league: "Champions League",
+    status: "TODAY 19:45",
+    isLive: false,
+    minute: "19:45",
+    homeTeam: { name: "PSG", logo: "https://a.espncdn.com/i/teamlogos/soccer/500/160.png", score: "-" },
+    awayTeam: { name: "Inter Milan", logo: "https://a.espncdn.com/i/teamlogos/soccer/500/110.png", score: "-" }
+  }
+];
 ---
 
-<section class="py-24 relative min-h-screen">
-  <div class="max-container relative z-10">
-    <div class="text-center mb-16">
-      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-white/10 mb-6 animate-pulse-gentle">
-        <Activity class="w-4 h-4 text-red-500" />
-        <span class="text-xs font-bold uppercase tracking-widest text-red-400">Live API</span>
+<section 
+  id="live-scores-ticker" 
+  class="relative bg-[#00102e] text-white py-10 overflow-hidden border-y border-blue-900/60 shadow-2xl"
+  aria-label="Live Match Center Carousel"
+>
+  <!-- Ambient background glow accents -->
+  <div class="absolute inset-0 pointer-events-none opacity-40">
+    <div class="absolute -top-24 left-1/4 w-96 h-96 bg-[#C8102E]/20 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-24 right-1/4 w-96 h-96 bg-[#012169]/40 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 relative z-10">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      
+      <!-- Section Heading -->
+      <a href="/livescore" class="group flex items-center gap-3 focus:outline-none" title="Open Full Match Center">
+        <span class="relative flex h-3 w-3">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+        </span>
+        <div>
+          <h3 class="text-lg sm:text-xl font-black text-white group-hover:text-red-400 transition-colors flex items-center gap-2">
+            <span>🔴 Live &amp; Upcoming Matches &mdash; Watch in 4K</span>
+          </h3>
+          <p class="text-xs text-blue-200/80 font-medium">
+            Click any match to open the dedicated /livescore Match Center
+          </p>
+        </div>
+      </a>
+
+      <!-- Direct Match Center CTA -->
+      <a 
+        href="/livescore" 
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-black bg-[#C8102E] hover:bg-red-700 text-white shadow-lg shadow-red-900/40 hover:scale-105 transition-all self-start sm:self-auto"
+      >
+        <span>Open Match Center &rarr;</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- Infinite Loop Carousel Viewport with Edge Fade Masks -->
+  <div class="relative w-full overflow-hidden live-scores-container">
+    <!-- Gradient Fade Masks -->
+    <div class="pointer-events-none absolute left-0 top-0 bottom-0 w-12 sm:w-24 z-20 bg-gradient-to-r from-[#00102e] to-transparent"></div>
+    <div class="pointer-events-none absolute right-0 top-0 bottom-0 w-12 sm:w-24 z-20 bg-gradient-to-l from-[#00102e] to-transparent"></div>
+
+    <!-- Scrolling Track with Doubled List for Mathematically Seamless Infinite Loop -->
+    <div class="live-scores-track flex gap-4 py-2" id="live-scores-track">
+      
+      <!-- TRACK SET A (Original) -->
+      <div class="flex gap-4 flex-shrink-0 items-center track-set" id="track-set-a">
+        {defaultMatches.map((m) => (
+          <div class="match-card group relative flex-shrink-0 w-72 sm:w-80 backdrop-blur-md bg-neutral-900/80 border border-neutral-800 rounded-2xl p-4 shadow-lg hover:border-red-500/50 transition-all duration-300">
+            
+            <!-- Click-to-Redirect Rule: Entire Card Links to /livescore -->
+            <a href="/livescore" class="absolute inset-0 z-10" aria-label={`Open match center for ${m.homeTeam.name} vs ${m.awayTeam.name}`}></a>
+
+            <!-- Card Header: League & Live Indicator -->
+            <div class="flex items-center justify-between mb-3 text-xs">
+              <span class="font-bold text-blue-300 truncate max-w-[140px]">{m.league}</span>
+              {m.isLive ? (
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-black text-emerald-400 bg-emerald-500/15 border border-emerald-500/30">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                  {m.status}
+                </span>
+              ) : (
+                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold text-gray-400 bg-white/5">
+                  {m.status}
+                </span>
+              )}
+            </div>
+
+            <!-- Teams and Scores -->
+            <div class="space-y-2 mb-3">
+              <!-- Home -->
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2.5 min-w-0">
+                  <img 
+                    src={m.homeTeam.logo} 
+                    alt={m.homeTeam.name} 
+                    class="w-7 h-7 object-contain flex-shrink-0 drop-shadow" 
+                    loading="lazy"
+                    onerror="this.src='https://a.espncdn.com/i/teamlogos/default-team-logo-500.png'"
+                  />
+                  <span class="font-bold text-sm text-gray-100 truncate group-hover:text-white">
+                    {m.homeTeam.name}
+                  </span>
+                </div>
+                <span class={`text-base font-black px-2 py-0.5 rounded ${m.isLive ? 'text-white bg-white/10' : 'text-gray-400'}`}>
+                  {m.homeTeam.score}
+                </span>
+              </div>
+
+              <!-- Away -->
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2.5 min-w-0">
+                  <img 
+                    src={m.awayTeam.logo} 
+                    alt={m.awayTeam.name} 
+                    class="w-7 h-7 object-contain flex-shrink-0 drop-shadow" 
+                    loading="lazy"
+                    onerror="this.src='https://a.espncdn.com/i/teamlogos/default-team-logo-500.png'"
+                  />
+                  <span class="font-bold text-sm text-gray-100 truncate group-hover:text-white">
+                    {m.awayTeam.name}
+                  </span>
+                </div>
+                <span class={`text-base font-black px-2 py-0.5 rounded ${m.isLive ? 'text-white bg-white/10' : 'text-gray-400'}`}>
+                  {m.awayTeam.score}
+                </span>
+              </div>
+            </div>
+
+            <!-- Card Bottom Bar & Hover Tooltip -->
+            <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[11px]">
+              <span class="text-blue-300 font-semibold group-hover:text-red-400 transition-colors">
+                Watch in 4K UHD
+              </span>
+              <span class="text-gray-400 group-hover:text-white transition-colors">
+                Match Center &rarr;
+              </span>
+            </div>
+
+            <!-- Hover Tooltip Overlay for Direct WhatsApp Stream Request -->
+            <div class="absolute inset-x-2 -bottom-2 translate-y-full opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-200 z-20 pb-2">
+              <a 
+                href={`https://wa.me/213550592200?text=${encodeURIComponent(`Hello! I want to watch ${m.homeTeam.name} vs ${m.awayTeam.name} live in 4K.`)}`}
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="block w-full py-2 px-3 text-center bg-[#25D366] text-black text-xs font-black rounded-xl shadow-2xl hover:bg-[#1fb355] transition-colors"
+              >
+                Watch Live in 4K ▶ (WhatsApp)
+              </a>
+            </div>
+
+          </div>
+        ))}
       </div>
-      <h2 class="text-4xl md:text-5xl font-black mb-4 tracking-tighter">Live <span class="text-gradient">Sports</span></h2>
-      <p class="text-gray-400">Real-time scores and fixtures powered by ESPN.</p>
-    </div>
 
-    <!-- League Selector -->
-    <div class="flex flex-wrap justify-center gap-4 mb-12 max-w-4xl mx-auto">
-      <button class="league-btn active btn-primary px-6 py-2" data-url="https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard">English Top-Flight</button>
-      <button class="league-btn glass px-6 py-2 hover:bg-white/5 transition-colors rounded-full font-bold text-sm" data-url="https://site.api.espn.com/apis/site/v2/sports/soccer/esp.1/scoreboard">Spanish Top Division</button>
-      <button class="league-btn glass px-6 py-2 hover:bg-white/5 transition-colors rounded-full font-bold text-sm" data-url="https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/scoreboard">Italian Football</button>
-      <button class="league-btn glass px-6 py-2 hover:bg-white/5 transition-colors rounded-full font-bold text-sm" data-url="https://site.api.espn.com/apis/site/v2/sports/soccer/ger.1/scoreboard">Bundesliga</button>
-      <button class="league-btn glass px-6 py-2 hover:bg-white/5 transition-colors rounded-full font-bold text-sm" data-url="https://site.api.espn.com/apis/site/v2/sports/soccer/fra.1/scoreboard">Ligue 1</button>
-      <button class="league-btn glass px-6 py-2 hover:bg-white/5 transition-colors rounded-full font-bold text-sm" data-url="https://site.api.espn.com/apis/site/v2/sports/soccer/gre.1/scoreboard">Greek Super League</button>
-      <button class="league-btn glass px-6 py-2 hover:bg-white/5 transition-colors rounded-full font-bold text-sm" data-url="https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.champions/scoreboard">European Cup</button>
-      <button class="league-btn glass px-6 py-2 hover:bg-white/5 transition-colors rounded-full font-bold text-sm" data-url="https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard">NBA</button>
-      <button class="league-btn glass px-6 py-2 hover:bg-white/5 transition-colors rounded-full font-bold text-sm" data-url="https://site.api.espn.com/apis/site/v2/sports/basketball/euroleague/scoreboard">Euroleague</button>
-      <button class="league-btn glass px-6 py-2 hover:bg-white/5 transition-colors rounded-full font-bold text-sm text-red-400 border-red-500/20" data-url="https://site.api.espn.com/apis/site/v2/sports/mma/ufc/scoreboard" data-type="mma">UFC</button>
-    </div>
+      <!-- TRACK SET B (Identical Clone for Seamless Infinite Loop) -->
+      <div class="flex gap-4 flex-shrink-0 items-center track-set" id="track-set-b" aria-hidden="true">
+        {defaultMatches.map((m) => (
+          <div class="match-card group relative flex-shrink-0 w-72 sm:w-80 backdrop-blur-md bg-neutral-900/80 border border-neutral-800 rounded-2xl p-4 shadow-lg hover:border-red-500/50 transition-all duration-300">
+            
+            <a href="/livescore" class="absolute inset-0 z-10" tabindex="-1"></a>
 
-    <!-- Loader -->
-    <div id="scores-loader" class="flex justify-center py-12">
-      <div class="w-12 h-12 border-4 border-primary/30 border-t-primary rounded-full animate-spin"></div>
-    </div>
+            <div class="flex items-center justify-between mb-3 text-xs">
+              <span class="font-bold text-blue-300 truncate max-w-[140px]">{m.league}</span>
+              {m.isLive ? (
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-black text-emerald-400 bg-emerald-500/15 border border-emerald-500/30">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                  {m.status}
+                </span>
+              ) : (
+                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold text-gray-400 bg-white/5">
+                  {m.status}
+                </span>
+              )}
+            </div>
 
-    <!-- Scores Grid -->
-    <div id="scores-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
-      <!-- Dynamic Content Will Be Injected Here -->
+            <div class="space-y-2 mb-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2.5 min-w-0">
+                  <img 
+                    src={m.homeTeam.logo} 
+                    alt={m.homeTeam.name} 
+                    class="w-7 h-7 object-contain flex-shrink-0 drop-shadow" 
+                    loading="lazy"
+                    onerror="this.src='https://a.espncdn.com/i/teamlogos/default-team-logo-500.png'"
+                  />
+                  <span class="font-bold text-sm text-gray-100 truncate group-hover:text-white">
+                    {m.homeTeam.name}
+                  </span>
+                </div>
+                <span class={`text-base font-black px-2 py-0.5 rounded ${m.isLive ? 'text-white bg-white/10' : 'text-gray-400'}`}>
+                  {m.homeTeam.score}
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2.5 min-w-0">
+                  <img 
+                    src={m.awayTeam.logo} 
+                    alt={m.awayTeam.name} 
+                    class="w-7 h-7 object-contain flex-shrink-0 drop-shadow" 
+                    loading="lazy"
+                    onerror="this.src='https://a.espncdn.com/i/teamlogos/default-team-logo-500.png'"
+                  />
+                  <span class="font-bold text-sm text-gray-100 truncate group-hover:text-white">
+                    {m.awayTeam.name}
+                  </span>
+                </div>
+                <span class={`text-base font-black px-2 py-0.5 rounded ${m.isLive ? 'text-white bg-white/10' : 'text-gray-400'}`}>
+                  {m.awayTeam.score}
+                </span>
+              </div>
+            </div>
+
+            <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[11px]">
+              <span class="text-blue-300 font-semibold group-hover:text-red-400 transition-colors">
+                Watch in 4K UHD
+              </span>
+              <span class="text-gray-400 group-hover:text-white transition-colors">
+                Match Center &rarr;
+              </span>
+            </div>
+
+            <div class="absolute inset-x-2 -bottom-2 translate-y-full opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-200 z-20 pb-2">
+              <a 
+                href={`https://wa.me/213550592200?text=${encodeURIComponent(`Hello! I want to watch ${m.homeTeam.name} vs ${m.awayTeam.name} live in 4K.`)}`}
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="block w-full py-2 px-3 text-center bg-[#25D366] text-black text-xs font-black rounded-xl shadow-2xl hover:bg-[#1fb355] transition-colors"
+              >
+                Watch Live in 4K ▶ (WhatsApp)
+              </a>
+            </div>
+
+          </div>
+        ))}
+      </div>
+
     </div>
   </div>
 </section>
 
-<script>
-  const loader = document.getElementById('scores-loader');
-  const grid = document.getElementById('scores-grid');
-  const buttons = document.querySelectorAll('.league-btn');
-
-  async function fetchScores(url: string, type: string) {
-    if (!loader || !grid) return;
-    
-    // Show loader
-    loader.classList.remove('hidden');
-    grid.classList.add('hidden');
-    grid.innerHTML = '';
-
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      
-      let events = data.events || [];
-      
-      // UFC endpoint returns events that contain multiple fights in 'competitions'
-      if (type === 'mma' && events.length > 0) {
-        // Flatten fights from all events into a single array
-        let fights: any[] = [];
-        events.forEach((e: any) => {
-           if (e.competitions) fights.push(...e.competitions);
-        });
-        events = fights;
-      }
-
-      if (events.length === 0) {
-        grid.innerHTML = `<div class="col-span-full text-center py-12 text-gray-400 glass rounded-3xl">No matches found for this league today.</div>`;
-      } else {
-        events.forEach((event: any) => {
-          // For MMA, 'event' is a competition. For others, 'event' is the match, and we use competitions[0]
-          const comp = type === 'mma' ? event : event.competitions[0];
-          
-          let home, away;
-          if (type === 'mma') {
-             // MMA uses athlete instead of team
-             home = comp.competitors[0];
-             away = comp.competitors[1];
-          } else {
-             home = comp.competitors.find((c: any) => c.homeAway === 'home');
-             away = comp.competitors.find((c: any) => c.homeAway === 'away');
-          }
-
-          if (!home || !away) return; // Skip if invalid
-
-          const homeName = type === 'mma' ? home.athlete.shortName : home.team.displayName;
-          const awayName = type === 'mma' ? away.athlete.shortName : away.team.displayName;
-          
-          const homeLogo = type === 'mma' ? (home.athlete.flag?.href || '') : (home.team.logo || '');
-          const awayLogo = type === 'mma' ? (away.athlete.flag?.href || '') : (away.team.logo || '');
-
-          const status = type === 'mma' ? comp.status.type : event.status.type;
-          const isLive = status.state === 'in';
-          
-          let statusHtml = `<span class="text-xs font-bold text-gray-400 bg-white/5 px-3 py-1 rounded-full text-center">${status.detail}</span>`;
-          if (isLive) {
-            statusHtml = `<span class="text-xs font-bold text-red-500 bg-red-500/10 px-3 py-1 rounded-full border border-red-500/20 animate-pulse text-center">${status.detail}</span>`;
-          }
-
-          const card = document.createElement('div');
-          card.className = 'glass p-6 rounded-3xl border border-glass-border hover:border-primary/50 transition-all';
-          
-          card.innerHTML = `
-            <div class="flex justify-between items-center mb-6">
-              <span class="text-xs text-gray-500 font-semibold tracking-wider uppercase">${new Date(event.date).toLocaleDateString()}</span>
-              ${statusHtml}
-            </div>
-            
-            <div class="flex justify-between items-center gap-4">
-              <!-- Home Team -->
-              <div class="flex flex-col items-center flex-1 text-center">
-                <img src="${homeLogo}" alt="${homeName}" class="w-16 h-16 object-contain mb-3 drop-shadow-lg bg-white/10 rounded-full p-2" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOTRDQTM4IiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+'" />
-                <span class="font-bold text-sm leading-tight">${homeName}</span>
-              </div>
-              
-              <!-- Score -->
-              <div class="flex flex-col items-center justify-center px-4">
-                <div class="text-3xl font-black tracking-tighter ${isLive ? 'text-white' : 'text-gray-300'}">
-                  ${type === 'mma' ? 'VS' : `${home.score !== undefined ? home.score : '-'} <span class="text-gray-600 mx-1">:</span> ${away.score !== undefined ? away.score : '-'}`}
-                </div>
-              </div>
-              
-              <!-- Away Team -->
-              <div class="flex flex-col items-center flex-1 text-center">
-                <img src="${awayLogo}" alt="${awayName}" class="w-16 h-16 object-contain mb-3 drop-shadow-lg bg-white/10 rounded-full p-2" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOTRDQTM4IiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+'" />
-                <span class="font-bold text-sm leading-tight">${awayName}</span>
-              </div>
-            </div>
-          `;
-          
-          grid.appendChild(card);
-        });
-      }
-    } catch (error) {
-      console.error('Error fetching scores:', error);
-      grid.innerHTML = `<div class="col-span-full text-center py-12 text-red-400 glass rounded-3xl border-red-500/20">Failed to load live scores. Please try again later.</div>`;
-    } finally {
-      loader.classList.add('hidden');
-      grid.classList.remove('hidden');
+<style>
+  @keyframes scroll-x {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
     }
   }
 
-  // Handle Button Clicks
-  buttons.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const target = e.currentTarget as HTMLButtonElement;
-      
-      // Update UI
-      buttons.forEach(b => {
-        b.className = 'league-btn glass px-6 py-2 hover:bg-white/5 transition-colors rounded-full font-bold text-sm text-gray-300';
-        if (b.getAttribute('data-type') === 'mma') {
-           b.classList.add('text-red-400', 'border-red-500/20');
-        }
-      });
-      target.className = 'league-btn active btn-primary px-6 py-2 font-bold text-sm';
-      
-      // Fetch new url
-      const url = target.getAttribute('data-url');
-      const type = target.getAttribute('data-type') || 'team';
-      if (url) fetchScores(url, type);
-    });
-  });
-
-  // Initial Load (Default to first active button)
-  const defaultBtn = document.querySelector('.league-btn.active');
-  const defaultUrl = defaultBtn?.getAttribute('data-url');
-  const defaultType = defaultBtn?.getAttribute('data-type') || 'team';
-  if (defaultUrl) {
-    fetchScores(defaultUrl, defaultType);
+  .live-scores-track {
+    display: flex;
+    width: max-content;
+    animation: scroll-x 45s linear infinite;
+    will-change: transform;
   }
+
+  /* Smooth pause on hover */
+  .live-scores-container:hover .live-scores-track {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .live-scores-track {
+      animation: none;
+      overflow-x: auto;
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  // Periodic 60s client-side auto-refresh from /api/live-scores.json
+  async function refreshScores() {
+    try {
+      const res = await fetch('/api/live-scores.json');
+      if (!res.ok) return;
+      const data = await res.json();
+      if (!data.matches || data.matches.length === 0) return;
+
+      const track = document.getElementById('live-scores-track');
+      if (!track) return;
+
+      // Update in-place scores on matching team cards
+      data.matches.forEach((m: any) => {
+        document.querySelectorAll('.match-card').forEach((card) => {
+          const text = card.textContent || '';
+          if (text.includes(m.homeTeam.name) && text.includes(m.awayTeam.name)) {
+            const scores = card.querySelectorAll('.text-base.font-black');
+            if (scores.length >= 2) {
+              scores[0].textContent = String(m.homeTeam.score);
+              scores[1].textContent = String(m.awayTeam.score);
+            }
+          }
+        });
+      });
+    } catch (e) {
+      console.debug('Background score refresh check:', e);
+    }
+  }
+
+  setInterval(refreshScores, 60000);
 </script>

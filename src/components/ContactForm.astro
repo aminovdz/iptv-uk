@@ -1,0 +1,266 @@
+---
+// src/components/ContactForm.astro
+// Contact section with instant WhatsApp serialization and dual email contact display
+---
+
+<section id="contact-form-section" class="py-20 bg-[#060914] relative overflow-hidden">
+  <!-- Ambient background glow -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-blue-600/5 blur-[160px] pointer-events-none rounded-full"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center max-w-3xl mx-auto mb-14">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black uppercase tracking-wider mb-4">
+        <span>⚡</span> 24/7 UK Customer Support
+      </div>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
+        Need Help or Custom Setup? <br />
+        <span class="bg-gradient-to-r from-blue-400 via-sky-300 to-emerald-400 bg-clip-text text-transparent">We Are Here For You 24/7</span>
+      </h2>
+      <p class="mt-4 text-gray-400 text-base sm:text-lg">
+        Whether you need a quick trial, remote Firestick setup assistance, or plan renewal advice, our dedicated UK technical team is online.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <!-- Left Column: Contact Cards & Info -->
+      <div class="lg:col-span-5 space-y-4">
+        <!-- WhatsApp Direct Card (Recommended) -->
+        <a 
+          href="https://wa.me/213550592200?text=Hello%20British%20IPTV!%20I%20need%20quick%20support%20with%20my%20service." 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="p-6 rounded-2xl bg-[#0C1222] border border-emerald-500/40 hover:border-emerald-400 transition-all block group shadow-lg"
+        >
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-xl bg-[#25D366]/20 text-[#25D366] flex items-center justify-center font-bold">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.94 3.659 1.437 5.63 1.438h.004c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-base font-bold text-white group-hover:text-emerald-400 transition-colors">WhatsApp Live Chat</h4>
+                <p class="text-xs text-emerald-400 font-semibold">Fastest Response (&lt;60s)</p>
+              </div>
+            </div>
+            <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Online</span>
+          </div>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Direct priority connection to senior UK streaming engineers. Available 24 hours a day, 7 days a week.
+          </p>
+        </a>
+
+        <!-- Dual Support Emails Card -->
+        <div class="p-6 rounded-2xl bg-[#0C1222] border border-white/10 space-y-3">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <div>
+              <h4 class="text-base font-bold text-white">Email Inquiries</h4>
+              <p class="text-xs text-gray-400">Response within 2 hours</p>
+            </div>
+          </div>
+
+          <div class="space-y-1.5 text-xs">
+            <div class="flex items-center justify-between p-2.5 rounded-xl bg-white/[0.02] border border-white/5">
+              <span class="text-gray-400">General:</span>
+              <a href="mailto:contact@britishiptv.pro" class="font-mono text-blue-400 hover:underline">contact@britishiptv.pro</a>
+            </div>
+            <div class="flex items-center justify-between p-2.5 rounded-xl bg-white/[0.02] border border-white/5">
+              <span class="text-gray-400">Technical Support:</span>
+              <a href="mailto:support@castvera.com" class="font-mono text-blue-400 hover:underline">support@castvera.com</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social Channels & Address Card -->
+        <div class="p-6 rounded-2xl bg-[#0C1222] border border-white/10 space-y-3 text-xs text-gray-400">
+          <div class="flex items-center justify-between">
+            <span class="text-gray-300 font-semibold">Telegram Channel:</span>
+            <a href="https://t.me/castvera_com" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:underline">@castvera_com</a>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-gray-300 font-semibold">WhatsApp Channel:</span>
+            <a href="https://whatsapp.com/channel/0029VayVaLpD8SE3bf8wMY3v" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">Official Broadcast</a>
+          </div>
+          <div class="pt-3 border-t border-white/5 flex items-start gap-2">
+            <svg class="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+            <span>123 Westminster Bridge Rd, London, SE1 7HR, United Kingdom</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive Form that Serializes to WhatsApp or Email -->
+      <div class="lg:col-span-7">
+        <form 
+          id="support-contact-form" 
+          class="p-6 sm:p-8 rounded-3xl bg-[#0C1222] border border-white/10 shadow-2xl space-y-5"
+        >
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="form-name" class="block text-xs font-bold text-gray-300 mb-1.5 uppercase tracking-wider">
+                Full Name *
+              </label>
+              <input 
+                type="text" 
+                id="form-name" 
+                name="name" 
+                required 
+                placeholder="e.g. John Smith" 
+                class="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 text-sm transition-colors"
+              />
+            </div>
+            <div>
+              <label for="form-email" class="block text-xs font-bold text-gray-300 mb-1.5 uppercase tracking-wider">
+                Email Address *
+              </label>
+              <input 
+                type="email" 
+                id="form-email" 
+                name="email" 
+                required 
+                placeholder="john@example.co.uk" 
+                class="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 text-sm transition-colors"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="form-device" class="block text-xs font-bold text-gray-300 mb-1.5 uppercase tracking-wider">
+                Device Type *
+              </label>
+              <select 
+                id="form-device" 
+                name="device" 
+                required
+                class="w-full px-4 py-3 rounded-xl bg-[#111827] border border-white/10 text-white focus:outline-none focus:border-blue-500 text-sm transition-colors"
+              >
+                <option value="Amazon Firestick 4K / Max">Amazon Firestick 4K / Max</option>
+                <option value="Samsung / LG Smart TV">Samsung / LG Smart TV</option>
+                <option value="Android TV Box / Formuler">Android TV Box / Formuler</option>
+                <option value="Apple TV 4K / iOS">Apple TV 4K / iOS</option>
+                <option value="Windows PC / Mac">Windows PC / Mac</option>
+                <option value="MAG Box / Enigma2">MAG Box / Enigma2</option>
+                <option value="Other / Multiple Devices">Other / Multiple Devices</option>
+              </select>
+            </div>
+            <div>
+              <label for="form-inquiry" class="block text-xs font-bold text-gray-300 mb-1.5 uppercase tracking-wider">
+                Inquiry Type *
+              </label>
+              <select 
+                id="form-inquiry" 
+                name="inquiry" 
+                required
+                class="w-full px-4 py-3 rounded-xl bg-[#111827] border border-white/10 text-white focus:outline-none focus:border-blue-500 text-sm transition-colors"
+              >
+                <option value="New Subscription (12 Months £47)">New Subscription (12 Months £47)</option>
+                <option value="Request 24-Hour Trial">Request 24-Hour Free Trial</option>
+                <option value="Technical Setup Assistance">Technical Setup Assistance</option>
+                <option value="Referral Code Claim (+1 Month)">Referral Code Claim (+1 Month)</option>
+                <option value="Billing or Renewal">Billing or Renewal</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="form-message" class="block text-xs font-bold text-gray-300 mb-1.5 uppercase tracking-wider">
+              Your Message or Questions (Optional)
+            </label>
+            <textarea 
+              id="form-message" 
+              name="message" 
+              rows="3" 
+              placeholder="Tell us if you have any preferred app (e.g., TiviMate, Smarters) or special requests..." 
+              class="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 text-sm transition-colors resize-none"
+            ></textarea>
+          </div>
+
+          <!-- Action buttons -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+            <button 
+              type="button" 
+              id="send-via-whatsapp-btn"
+              class="flex items-center justify-center gap-2 py-3.5 px-5 rounded-xl bg-[#25D366] text-black font-black text-sm hover:bg-[#1fb355] transition-all shadow-lg hover:shadow-emerald-500/20"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.94 3.659 1.437 5.63 1.438h.004c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              Send via WhatsApp (&lt;60s)
+            </button>
+
+            <button 
+              type="submit" 
+              class="flex items-center justify-center gap-2 py-3.5 px-5 rounded-xl bg-white/[0.08] hover:bg-white/[0.12] text-white font-bold text-sm transition-all border border-white/10"
+            >
+              <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              Send via Email
+            </button>
+          </div>
+          <p class="text-[11px] text-gray-500 text-center">
+            🔒 Your contact information is 100% confidential and never shared with third parties.
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initContactForm() {
+    const form = document.getElementById('support-contact-form') as HTMLFormElement | null;
+    const waBtn = document.getElementById('send-via-whatsapp-btn');
+    if (!form) return;
+
+    function getFormData() {
+      const name = (document.getElementById('form-name') as HTMLInputElement)?.value || '';
+      const email = (document.getElementById('form-email') as HTMLInputElement)?.value || '';
+      const device = (document.getElementById('form-device') as HTMLSelectElement)?.value || '';
+      const inquiry = (document.getElementById('form-inquiry') as HTMLSelectElement)?.value || '';
+      const message = (document.getElementById('form-message') as HTMLTextAreaElement)?.value || '';
+      return { name, email, device, inquiry, message };
+    }
+
+    // Send via WhatsApp
+    waBtn?.addEventListener('click', () => {
+      const { name, email, device, inquiry, message } = getFormData();
+      const text = `Hello British IPTV! My name is ${name || 'A Customer'}.\n` +
+                   `Email: ${email || 'Not provided'}\n` +
+                   `Device: ${device}\n` +
+                   `Inquiry: ${inquiry}\n` +
+                   (message ? `Message: ${message}` : '');
+      const waUrl = `https://wa.me/213550592200?text=${encodeURIComponent(text)}`;
+      window.open(waUrl, '_blank');
+    });
+
+    // Send via Email fallback
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const { name, email, device, inquiry, message } = getFormData();
+      const subject = encodeURIComponent(`British IPTV Inquiry: ${inquiry} - ${name}`);
+      const body = encodeURIComponent(
+        `Name: ${name}\n` +
+        `Email: ${email}\n` +
+        `Device: ${device}\n` +
+        `Inquiry: ${inquiry}\n\n` +
+        `Message:\n${message}\n`
+      );
+      window.location.href = `mailto:contact@britishiptv.pro?cc=support@castvera.com&subject=${subject}&body=${body}`;
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initContactForm);
+  } else {
+    initContactForm();
+  }
+</script>
