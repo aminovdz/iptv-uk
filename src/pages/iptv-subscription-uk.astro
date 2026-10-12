@@ -1,0 +1,61 @@
+---
+// src/pages/iptv-subscription-uk.astro
+// High-intent transactional SEO page for "iptv subscription uk"
+import Layout from '../layouts/Layout.astro';
+import StickyHeader from '../components/StickyHeader.astro';
+import Hero from '../components/Hero.astro';
+import LiveScores from '../components/LiveScores.astro';
+import FeatureGrid from '../components/FeatureGrid.astro';
+import Pricing from '../components/Pricing.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import SupportedDevices from '../components/SupportedDevices.astro';
+import UserReviewsSection from '../components/UserReviewsSection.astro';
+import ReferralBanner from '../components/ReferralBanner.astro';
+import FAQSection from '../components/FAQSection.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Footer from '../components/Footer.astro';
+
+const title = "IPTV Subscription UK (2026) | Buy Premium 4K IPTV from £7/Mo";
+const description = "Looking to buy the best IPTV subscription in the UK? 99.9% uptime, Anti-Freeze™ 9.0 stability, 4K sports & instant WhatsApp activation. Plans from £7 to £47.";
+const keywords = "iptv subscription uk, buy iptv uk, best iptv subscription, premium iptv uk, cheap iptv uk, uk iptv subscription 12 months";
+
+const subFaqs = [
+  {
+    question: "What is included with a British IPTV subscription?",
+    answer: "Every subscription includes access to full 4K and FHD live sports feeds, 60fps frame rates, Saturday 3PM fixtures, complete UK entertainment networks, cinema releases, a full 7-day EPG electronic TV guide, and 24/7 WhatsApp priority support."
+  },
+  {
+    question: "How long does activation take after I buy an IPTV subscription?",
+    answer: "Activation is virtually instantaneous. Within 60 to 90 seconds of payment confirmation, your M3U playlist URL and Xtream Codes API credentials are sent directly to your WhatsApp and email."
+  },
+  {
+    question: "Can I pay for a 12-Month plan and get the Best Value rate?",
+    answer: "Yes, our 12-Month Plan is our most popular package at just £47 (equivalent to only £3.91/month). It comes with a strict 24-Hour Money-Back Guarantee."
+  }
+];
+---
+
+<Layout 
+  title={title} 
+  description={description} 
+  keywords={keywords}
+  type="product"
+  faqs={subFaqs}
+>
+  <StickyHeader />
+
+  <main class="flex-grow">
+    <Hero />
+    <LiveScores />
+    <FeatureGrid />
+    <Pricing />
+    <ProcessSteps />
+    <SupportedDevices />
+    <UserReviewsSection />
+    <ReferralBanner />
+    <FAQSection />
+    <ContactForm />
+  </main>
+
+  <Footer />
+</Layout>

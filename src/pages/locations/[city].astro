@@ -1,106 +1,210 @@
 ---
+// src/pages/locations/[city].astro
+// Programmatic Local SEO landing page for top UK cities
 export const prerender = true;
+
 import Layout from '../../layouts/Layout.astro';
-import Features from '../../components/Features.astro';
+import StickyHeader from '../../components/StickyHeader.astro';
+import LiveScores from '../../components/LiveScores.astro';
+import FeatureGrid from '../../components/FeatureGrid.astro';
 import Pricing from '../../components/Pricing.astro';
-import Testimonials from '../../components/Testimonials.astro';
-import Channels from '../../components/Channels.astro';
-import { Image } from 'astro:assets';
+import ProcessSteps from '../../components/ProcessSteps.astro';
+import SupportedDevices from '../../components/SupportedDevices.astro';
+import UserReviewsSection from '../../components/UserReviewsSection.astro';
+import ReferralBanner from '../../components/ReferralBanner.astro';
+import FAQSection from '../../components/FAQSection.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import Footer from '../../components/Footer.astro';
 
 export function getStaticPaths() {
-  const cities = ['London', 'Birmingham', 'Manchester', 'Edinburgh', 'Liverpool'];
-  return cities.map(city => ({
-    params: { city: city.toLowerCase() },
-    props: { cityName: city },
+  const cities = [
+    { 
+      slug: 'london', 
+      name: 'London', 
+      county: 'Greater London',
+      clubs: 'Arsenal, Chelsea, Tottenham & West Ham',
+      broadband: 'Hyperoptic, BT Full Fibre & Community Fibre'
+    },
+    { 
+      slug: 'birmingham', 
+      name: 'Birmingham', 
+      county: 'West Midlands',
+      clubs: 'Aston Villa & Birmingham City',
+      broadband: 'Virgin Media Gig1 & Openreach Fibre'
+    },
+    { 
+      slug: 'manchester', 
+      name: 'Manchester', 
+      county: 'Greater Manchester',
+      clubs: 'Manchester City & Manchester United',
+      broadband: 'CityFibre, Virgin Media & BT FTTP'
+    },
+    { 
+      slug: 'edinburgh', 
+      name: 'Edinburgh', 
+      county: 'Midlothian (Scotland)',
+      clubs: 'Hearts & Hibernian',
+      broadband: 'CityFibre & Virgin Media M500'
+    },
+    { 
+      slug: 'liverpool', 
+      name: 'Liverpool', 
+      county: 'Merseyside',
+      clubs: 'Liverpool FC & Everton',
+      broadband: 'Virgin Media & BT Ultrafast Fibre'
+    }
+  ];
+
+  return cities.map(c => ({
+    params: { city: c.slug },
+    props: { cityInfo: c }
   }));
 }
 
-const { cityName } = Astro.props;
-const title = `Best IPTV in ${cityName} | Premium UK IPTV Provider`;
-const description = `Looking for the best IPTV service in ${cityName}? Experience 4K UK live TV, sports, and movies with zero buffering. Join iptv uk today.`;
+const { cityInfo } = Astro.props;
+const { name: cityName, county, clubs, broadband } = cityInfo;
 
-const localSchema = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": `iptv uk ${cityName}`,
-  "image": `${Astro.site || Astro.url.origin}/logo.png`,
-  "areaServed": {
-    "@type": "City",
-    "name": cityName
+const title = `Best IPTV in ${cityName} (2026) | #1 4K UK Streaming Provider`;
+const description = `Looking for the most reliable IPTV in ${cityName}? Stream 4K live sports, 3PM football & movies with zero buffering. Dedicated local UK servers from £7/mo.`;
+const keywords = `best iptv ${cityName.toLowerCase()}, iptv subscription ${cityName.toLowerCase()}, buy iptv in ${cityName.toLowerCase()}, iptv provider ${cityName.toLowerCase()}, firestick iptv ${cityName.toLowerCase()}`;
+
+const localFaqs = [
+  {
+    question: `Why is British IPTV the top choice for viewers in ${cityName}?`,
+    answer: `Our edge server caching nodes are interconnected directly with major UK Internet Exchange points, providing ultra-low ping (<15ms) across ${cityName}. This completely eliminates buffering during peak weekend football matches.`
   },
-  "priceRange": "£7 - £47",
-  "description": `Premium IPTV provider serving ${cityName}, offering 4K UHD streaming with no buffering.`,
-  "telephone": "Online Support",
-  "url": Astro.url.href
-};
+  {
+    question: `Does your service work with local broadband providers in ${cityName}?`,
+    answer: `Yes, our Anti-Freeze™ 9.0 protocol is fully optimized for all broadband networks operating in ${cityName}, including ${broadband}. Streams run smoothly without speed throttling.`
+  },
+  {
+    question: `Can I watch all live ${cityName} matchdays and derbies?`,
+    answer: `Absolutely. Whether you support ${clubs}, you get full 4K and 60FPS coverage of every league match, domestic cup, European tournament, and Saturday 3PM fixtures.`
+  },
+  {
+    question: `How fast is activation for new subscribers in ${cityName}?`,
+    answer: `Activation is instant. After confirming your plan on WhatsApp, your credentials (M3U playlist and Xtream Codes) are delivered within 60 to 90 seconds.`
+  }
+];
 ---
 
-<Layout title={title} description={description}>
-  <script type="application/ld+json" set:html={JSON.stringify(localSchema)} />
-
-  <!-- Sticky Header -->
-  <header class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <div class="flex-shrink-0">
-        <a href="/" class="text-2xl font-bold text-secondary tracking-tight">iptv uk</a>
-      </div>
-      <nav class="hidden md:flex gap-8">
-        <a href="/#features" class="text-gray-700 hover:text-primary font-medium transition-colors">Features</a>
-        <a href="/#pricing" class="text-gray-700 hover:text-primary font-medium transition-colors">Pricing</a>
-      </nav>
-      <div class="flex items-center">
-        <a href="/#pricing" class="bg-primary text-white px-5 py-2 rounded-full font-semibold hover:bg-red-700 transition-all">Get Started</a>
-      </div>
-    </div>
-  </header>
+<Layout 
+  title={title} 
+  description={description} 
+  keywords={keywords}
+  type="city"
+  cityName={cityName}
+  faqs={localFaqs}
+>
+  <StickyHeader />
 
   <main class="flex-grow">
     <!-- Localized Hero Section -->
-    <section class="relative bg-gradient-to-b from-secondary to-[#001440] text-white pt-24 pb-32 overflow-hidden">
-      <div class="absolute inset-0 z-0">
-        <Image src={import('../../assets/uk_skyline.jpg')} alt={`IPTV services in ${cityName}`} class="h-full w-full object-cover opacity-20" format="webp" />
-      </div>
+    <section class="relative pt-32 pb-20 bg-gradient-to-b from-[#0B0F19] via-[#050814] to-[#050814] text-white overflow-hidden border-b border-blue-900/40">
+      <!-- Ambient light effect -->
+      <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-red-600/15 blur-[160px] pointer-events-none rounded-full"></div>
+
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-        <span class="inline-block py-1 px-3 rounded-full bg-white/10 border border-white/20 text-sm font-semibold mb-6">Serving {cityName} and Surrounding Areas</span>
-        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
-          The <span class="text-primary">Best IPTV in {cityName}</span>
+        <!-- Location Pill -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-black uppercase tracking-widest mb-6">
+          <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+          Dedicated Edge Servers in {cityName} ({county})
+        </div>
+
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight max-w-5xl mx-auto leading-tight">
+          The <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-300 to-blue-400">#1 Best IPTV in {cityName}</span> <br class="hidden sm:inline" />
+          Ultra HD 4K &amp; Zero Buffering.
         </h1>
-        <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto">
-          Stream thousands of UK live channels, sports, and movies in 4K UHD. Dedicated servers ensuring zero buffering for all {cityName} residents.
+
+        <p class="mt-6 text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          Join thousands of streamers across {cityName}. Enjoy crystal-clear 4K sports, Saturday 3PM kickoffs, movies, and TV shows with <strong>99.9% uptime</strong> on Amazon Firestick, Smart TVs, and mobile.
         </p>
-        <a href="/#pricing" class="bg-primary hover:bg-red-700 text-white text-lg font-bold py-4 px-8 rounded-full transition-transform transform hover:scale-105 shadow-xl shadow-primary/40">
-          View Subscription Plans
-        </a>
+
+        <!-- CTA Buttons -->
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a 
+            href="#pricing" 
+            class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-red-600 to-blue-600 text-white font-black text-base hover:from-red-500 hover:to-blue-500 transition-all shadow-xl shadow-red-500/25 flex items-center justify-center gap-2"
+          >
+            <span>View {cityName} Plans (£47/Year)</span>
+            <span>&rarr;</span>
+          </a>
+          <a 
+            href={`https://wa.me/213550592200?text=${encodeURIComponent(`Hello British IPTV! I live in ${cityName} and want to test your 4K IPTV service.`)}`}
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="w-full sm:w-auto px-7 py-4 rounded-xl bg-[#25D366] text-black font-black text-base hover:bg-[#1fb355] transition-all shadow-lg flex items-center justify-center gap-2"
+          >
+            <span>Claim Free 24H Trial in {cityName}</span>
+          </a>
+        </div>
+
+        <!-- Localized Spec Cards -->
+        <div class="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto text-left">
+          <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5">
+            <span class="text-blue-400 font-bold block text-sm">📍 Local Coverage</span>
+            <span class="text-xs text-gray-400">{cityName} &amp; {county}</span>
+          </div>
+          <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5">
+            <span class="text-blue-400 font-bold block text-sm">⚡ Latency</span>
+            <span class="text-xs text-gray-400">&lt;15ms to UK Edge Nodes</span>
+          </div>
+          <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5">
+            <span class="text-blue-400 font-bold block text-sm">⚽ Matchdays</span>
+            <span class="text-xs text-gray-400">{clubs}</span>
+          </div>
+          <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5">
+            <span class="text-emerald-400 font-bold block text-sm">🛡️ Broadband Tested</span>
+            <span class="text-xs text-gray-400">Zero Throttling</span>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Localized SEO Text Section -->
-    <section class="py-24 bg-white">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl font-bold text-secondary mb-6">Why {cityName} Chooses iptv uk</h2>
-        <p class="text-gray-600 text-lg mb-6">
-          Residents across {cityName} demand high-quality, uninterrupted streaming, especially during major live sporting events. At iptv uk, our robust network infrastructure guarantees that you get the fastest load times and maximum uptime, making us the top iptv provider in the region.
-        </p>
-        <p class="text-gray-600 text-lg">
-          Forget about expensive cable contracts. With our competitive pricing starting at just £7/month, you have access to a world of entertainment directly from your living room in {cityName}.
-        </p>
+    <!-- Real-Time Live Sports Match Center -->
+    <LiveScores />
+
+    <!-- Localized Context Section -->
+    <section class="py-16 bg-[#070B17] border-b border-white/5">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left">
+        <h2 class="text-2xl sm:text-3xl font-black text-white mb-4">
+          Why Streamers Across {cityName} Are Cancelling Expensive Cable
+        </h2>
+        <div class="space-y-4 text-sm sm:text-base text-gray-300 leading-relaxed">
+          <p>
+            Cable and satellite packages in {cityName} now exceed £80 to £100 per month once you add sports subscriptions and multiple TV boxes. British IPTV delivers identical high-bitrate 4K picture quality at a fraction of the cost—starting at only £7/month or £47 for a full 12-month pass.
+          </p>
+          <p>
+            Whether you connect via {broadband}, our proprietary Anti-Freeze™ caching bypasses regional ISP congestion so you experience zero buffering during crucial derby matches and Saturday 3PM kickoffs.
+          </p>
+        </div>
       </div>
     </section>
 
-    <!-- Injected Global Components for Long-Form SEO -->
-    <Features />
-    
+    <!-- Core Features Grid -->
+    <FeatureGrid />
+
+    <!-- Pricing Table (12-Month Plan FIRST £47) -->
     <Pricing />
 
-    <Channels />
-    
-    <Testimonials />
+    <!-- 3-Step Setup -->
+    <ProcessSteps />
 
+    <!-- Supported Devices -->
+    <SupportedDevices />
+
+    <!-- Verified UK Customer Reviews -->
+    <UserReviewsSection />
+
+    <!-- Referral Hook -->
+    <ReferralBanner />
+
+    <!-- Local FAQs -->
+    <FAQSection />
+
+    <!-- 24/7 UK Support Contact Form -->
+    <ContactForm />
   </main>
 
-  <footer class="bg-[#001440] text-blue-200 py-8 border-t border-blue-900 text-center">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-sm">
-      &copy; {new Date().getFullYear()} iptv uk. Proudly serving {cityName}.
-    </div>
-  </footer>
+  <Footer />
 </Layout>

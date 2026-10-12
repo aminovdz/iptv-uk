@@ -1,0 +1,84 @@
+---
+// src/pages/iptv-firestick-uk.astro
+// Transactional landing page targeting "iptv firestick uk"
+import Layout from '../layouts/Layout.astro';
+import StickyHeader from '../components/StickyHeader.astro';
+import Pricing from '../components/Pricing.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import SupportedDevices from '../components/SupportedDevices.astro';
+import UserReviewsSection from '../components/UserReviewsSection.astro';
+import FAQSection from '../components/FAQSection.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Footer from '../components/Footer.astro';
+
+const title = "IPTV Firestick UK (2026 Guide & Subscription) | 4K Setup";
+const description = "Best IPTV for Amazon Firestick in the UK. Instant setup on Fire TV Stick 4K & Max with TiviMate & Smarters. Stream buffer-free sports from £7/mo.";
+const keywords = "iptv firestick uk, best iptv for firestick uk, setup iptv firestick, tivimate firestick uk, fire tv stick iptv subscription";
+
+const firestickPageFaqs = [
+  {
+    question: "Can British IPTV be installed on any Amazon Fire TV Stick?",
+    answer: "Yes, our service is 100% compatible with Fire TV Stick Lite, HD, 4K, 4K Max, and Fire TV Cube. Setup takes less than 2 minutes via Downloader."
+  },
+  {
+    question: "Which app works best with British IPTV on Firestick?",
+    answer: "We highly recommend TiviMate Premium or IPTV Smarters Pro. Both offer fast remote zapping, a full TV guide (EPG), and seamless 4K video playback."
+  }
+];
+---
+
+<Layout 
+  title={title} 
+  description={description} 
+  keywords={keywords}
+  type="product"
+  faqs={firestickPageFaqs}
+>
+  <StickyHeader />
+
+  <main class="flex-grow">
+    <!-- Firestick Hero -->
+    <section class="relative pt-32 pb-20 bg-gradient-to-b from-[#0B0F19] via-[#050814] to-[#050814] text-white overflow-hidden border-b border-blue-900/40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-black uppercase tracking-widest mb-6">
+          <span>🔥</span> Optimised for Amazon Fire TV Stick 4K &amp; Max
+        </div>
+
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight max-w-5xl mx-auto leading-tight">
+          The <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-rose-300 to-red-500">Best IPTV for Firestick in the UK</span> <br class="hidden sm:inline" />
+          Ultra HD 4K &amp; 2-Minute Setup.
+        </h1>
+
+        <p class="mt-6 text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          Transform your Amazon Fire TV into the ultimate 4K streaming device. Anti-Freeze™ 9.0 stability, full electronic TV guide (EPG), live Premier League, and instant WhatsApp support.
+        </p>
+
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a 
+            href="#pricing" 
+            class="px-8 py-4 rounded-xl bg-gradient-to-r from-red-600 to-blue-600 text-white font-black text-base hover:from-red-500 hover:to-blue-500 transition-all shadow-xl shadow-red-500/25"
+          >
+            Get Firestick Pass (£47/Year) &rarr;
+          </a>
+          <a 
+            href="https://wa.me/213550592200?text=Hello%20British%20IPTV!%20I%20have%20a%20Firestick%20and%20need%20the%20setup%20codes." 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="px-7 py-4 rounded-xl bg-[#25D366] text-black font-black text-base hover:bg-[#1fb355] transition-all shadow-lg"
+          >
+            Get Instant Firestick Codes on WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <ProcessSteps />
+    <Pricing />
+    <SupportedDevices />
+    <UserReviewsSection />
+    <FAQSection />
+    <ContactForm />
+  </main>
+
+  <Footer />
+</Layout>

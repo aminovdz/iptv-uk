@@ -1,0 +1,90 @@
+---
+// src/pages/watch-premier-league-iptv-uk.astro
+// Sports-focused SEO landing page targeting "watch premier league iptv uk"
+import Layout from '../layouts/Layout.astro';
+import StickyHeader from '../components/StickyHeader.astro';
+import LiveScores from '../components/LiveScores.astro';
+import Pricing from '../components/Pricing.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import SupportedDevices from '../components/SupportedDevices.astro';
+import UserReviewsSection from '../components/UserReviewsSection.astro';
+import FAQSection from '../components/FAQSection.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Footer from '../components/Footer.astro';
+
+const title = "Watch Premier League Live on IPTV UK (2026) | 4K & No Blackouts";
+const description = "Stream every Premier League match in 4K UHD. 100% Saturday 3PM blackout bypass, 60fps high bitrate, English commentary, and zero buffer lag from £7.";
+const keywords = "watch premier league iptv uk, premier league live stream 4k, saturday 3pm blackout iptv, epl live stream firestick, watch football live uk iptv";
+
+const premierFaqs = [
+  {
+    question: "How does British IPTV bypass the Saturday 3PM blackout rule?",
+    answer: "The UK 3PM blackout rule (Article 48) only restricts domestic UK broadcast transmitters. Our infrastructure relays direct international 4K stadium feeds from authorized overseas broadcast networks with full English commentary, giving you access to all 380 games of the Premier League season."
+  },
+  {
+    question: "Will streams freeze during major Manchester or London derbies?",
+    answer: "No. Our Anti-Freeze™ 9.0 architecture distributes traffic across multi-CDN UK edge nodes with automatic failover, guaranteeing 99.9% uptime and zero buffering during high-demand matches."
+  }
+];
+---
+
+<Layout 
+  title={title} 
+  description={description} 
+  keywords={keywords}
+  type="product"
+  faqs={premierFaqs}
+>
+  <StickyHeader />
+
+  <main class="flex-grow">
+    <!-- Premier League Hero -->
+    <section class="relative pt-32 pb-20 bg-gradient-to-b from-[#00102E] via-[#050814] to-[#050814] text-white overflow-hidden border-b border-blue-900/40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-black uppercase tracking-widest mb-6">
+          <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+          All 380 Premier League Matches • 100% 3PM Blackout-Free
+        </div>
+
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight max-w-5xl mx-auto leading-tight">
+          Watch Every <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-300 to-blue-400">Premier League</span> Match Live in 4K UHD.
+        </h1>
+
+        <p class="mt-6 text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          Stop missing Saturday 3PM kickoffs. Enjoy pristine 60FPS Ultra HD feeds, stadium commentary, Champions League, and FA Cup with zero buffering.
+        </p>
+
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a 
+            href="#pricing" 
+            class="px-8 py-4 rounded-xl bg-gradient-to-r from-red-600 to-blue-600 text-white font-black text-base hover:from-red-500 hover:to-blue-500 transition-all shadow-xl shadow-red-500/25"
+          >
+            Get Premier League Pass (£47/Year) &rarr;
+          </a>
+          <a 
+            href="https://wa.me/213550592200?text=Hello%20British%20IPTV!%20I%20want%20to%20watch%20this%20weekend's%20Premier%20League%20matches%20in%204K." 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="px-7 py-4 rounded-xl bg-[#25D366] text-black font-black text-base hover:bg-[#1fb355] transition-all shadow-lg"
+          >
+            Test 24H Matchday Trial on WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Match Center Infinite Carousel -->
+    <LiveScores />
+
+    <!-- Pricing Table -->
+    <Pricing />
+
+    <ProcessSteps />
+    <SupportedDevices />
+    <UserReviewsSection />
+    <FAQSection />
+    <ContactForm />
+  </main>
+
+  <Footer />
+</Layout>
