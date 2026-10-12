@@ -31,8 +31,6 @@ faqs:
     answer: "Xtream Codes API is the most reliable way to log into IPTV apps. Instead of typing long playlist URLs, you enter three simple fields: Server URL, Username, and Password."
 ---
 
-# How to Setup IPTV on Amazon Firestick in 2026 (Step-by-Step Guide)
-
 > **Quick Summary (Position 0 Snippet):**  
 > Setting up IPTV on an Amazon Fire TV Stick takes under 2 minutes:  
 > 1. Install **Downloader** from the Amazon Appstore.  
