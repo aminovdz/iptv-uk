@@ -1,0 +1,91 @@
+---
+// src/components/FAQSection.astro
+import { HelpCircle, ChevronDown, MessageCircle } from 'lucide-astro';
+
+const faqs = [
+  {
+    question: "Is British IPTV compatible with my Amazon Firestick or Smart TV?",
+    answer: "Yes, 100%. Our service works smoothly on all generations of the Amazon Fire TV Stick, Smart TVs running Samsung Tizen, LG webOS, or Android TV, as well as Apple TV, iPhone, iPad, Android mobile, and Windows/Mac PCs. You can use standard players like TiviMate, IPTV Smarters Pro, or IBO Player."
+  },
+  {
+    question: "Can I watch Saturday 3PM Premier League matches without blackouts?",
+    answer: "Yes. In the UK, the 3PM blackout rule (Article 48) prevents domestic channels from broadcasting Saturday afternoon games. Our international high-definition stadium feeds broadcast every single Saturday 3PM kickoff live in crystal-clear Full HD and 4K with English commentary."
+  },
+  {
+    question: "What internet speed do I need for buffer-free 4K streaming?",
+    answer: "We recommend a stable broadband connection of at least 15 Mbps for HD streams and 30 Mbps+ for raw 4K UHD 60FPS sports. Connecting your streaming device via an Ethernet cable or 5GHz Wi-Fi ensures optimal performance."
+  },
+  {
+    question: "Do I need a VPN to use British IPTV in the UK?",
+    answer: "In most cases, no. Our custom Anti-Freeze™ 9.0 server infrastructure uses dynamic IP rotation to bypass standard UK ISP throttling (BT, Virgin Media, Sky, EE). However, if you already own a VPN like Surfshark or NordVPN, you are welcome to use it."
+  },
+  {
+    question: "How quickly will I receive my login credentials after ordering?",
+    answer: "Instant delivery. Once your order is submitted, our automated provisioning system generates your unique M3U playlist URL and Xtream Codes API credentials, sending them to your WhatsApp and email address within 90 seconds."
+  },
+  {
+    question: "Can I test the service before committing to a paid pass?",
+    answer: "Yes! We offer a completely free 24-hour test stream with full access to live sports, UK entertainment channels, and our on-demand library so you can verify our speed and 4K picture quality before purchasing."
+  },
+  {
+    question: "What is your refund policy if I experience technical issues?",
+    answer: "We provide a strict 24-Hour Money-Back Guarantee. If our technical support team is unable to resolve your connection issues within 24 hours of your initial activation, you will receive a full refund."
+  }
+];
+---
+
+<section id="faq" class="py-24 bg-[#00102e] text-white relative overflow-hidden border-b border-blue-900/40">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-500/10 border border-red-500/25 text-red-400 text-xs font-black uppercase tracking-widest mb-4">
+        <HelpCircle class="w-3.5 h-3.5" />
+        Got Questions? We Have Answers
+      </div>
+      <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4">
+        Frequently Asked <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-blue-400">Questions</span>
+      </h2>
+      <p class="text-base sm:text-lg text-blue-200/80 font-medium">
+        Everything you need to know about setup, sports coverage, broadband speeds, and compatibility.
+      </p>
+    </div>
+
+    <!-- Accordion Items -->
+    <div class="space-y-4">
+      {faqs.map((faq, index) => (
+        <details class="group bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md rounded-2xl border border-white/10 transition-colors overflow-hidden">
+          <summary class="cursor-pointer p-6 flex items-center justify-between gap-4 font-bold text-base sm:text-lg text-white list-none select-none">
+            <span class="text-left group-hover:text-red-400 transition-colors">
+              {faq.question}
+            </span>
+            <div class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 group-open:rotate-180 transition-transform duration-300">
+              <ChevronDown class="w-4 h-4 text-blue-300" />
+            </div>
+          </summary>
+          <div class="px-6 pb-6 pt-1 text-sm sm:text-base text-gray-300 leading-relaxed border-t border-white/5">
+            {faq.answer}
+          </div>
+        </details>
+      ))}
+    </div>
+
+    <!-- Bottom WhatsApp Question Prompt -->
+    <div class="mt-12 text-center p-6 rounded-2xl bg-white/[0.02] border border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="text-center sm:text-left">
+        <span class="font-bold text-sm text-white block">Have a specific question not listed here?</span>
+        <span class="text-xs text-gray-400">Our UK team is available 24/7 on WhatsApp for instant assistance.</span>
+      </div>
+      <a 
+        href="https://wa.me/213550592200?text=Hello+I+have+a+question+about+British+IPTV" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-extrabold bg-[#25D366] text-white hover:bg-[#1fb355] transition-all whitespace-nowrap shadow-md"
+      >
+        <MessageCircle class="w-4 h-4" />
+        <span>Ask on WhatsApp</span>
+      </a>
+    </div>
+
+  </div>
+</section>

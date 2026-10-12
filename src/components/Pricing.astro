@@ -1,71 +1,147 @@
 ---
-// Pricing.astro
+// src/components/Pricing.astro
+import PricingCard from './PricingCard.astro';
+import { ShieldCheck, MessageCircle, Star, Sparkles, CheckCircle2 } from 'lucide-astro';
+
+const tiers = [
+  {
+    name: "12-Month VIP Pass",
+    duration: "1 Year Full Access",
+    price: "47",
+    originalPrice: "84",
+    perMonthEquivalent: "3.91",
+    isBestValue: true,
+    isPopular: true,
+    ctaText: "Get 12-Month Best Value",
+    whatsappMessage: "Hello! I would like to order the 12-Month VIP Pass (£47). Please send my M3U and Xtream credentials.",
+    features: [
+      "Ultra 4K & FHD 60FPS Streams",
+      "All Premier League & 3PM Football",
+      "Anti-Freeze™ Technology 9.0 Enabled",
+      "7-Day Catch-Up TV & Integrated EPG",
+      "Complete Cinema & VOD Box Sets",
+      "Universal Multi-Device Support",
+      "VIP Priority WhatsApp Tech Support",
+      "24-Hour Money-Back Guarantee"
+    ]
+  },
+  {
+    name: "6-Month Pass",
+    duration: "Half-Year Access",
+    price: "27",
+    originalPrice: "42",
+    perMonthEquivalent: "4.50",
+    isBestValue: false,
+    isPopular: false,
+    ctaText: "Get 6-Month Pass",
+    whatsappMessage: "Hello! I would like to order the 6-Month Pass (£27). Please send my activation details.",
+    features: [
+      "Ultra 4K & FHD 60FPS Streams",
+      "All Premier League & Sports Feeds",
+      "Anti-Freeze™ Technology 9.0",
+      "7-Day Catch-Up TV & EPG",
+      "Complete VOD Cinema Library",
+      "Firestick, Smart TV & Android Box",
+      "Standard WhatsApp Support",
+      "24-Hour Money-Back Guarantee"
+    ]
+  },
+  {
+    name: "3-Month Pass",
+    duration: "Quarterly Access",
+    price: "17",
+    originalPrice: "21",
+    perMonthEquivalent: "5.66",
+    isBestValue: false,
+    isPopular: false,
+    ctaText: "Get 3-Month Pass",
+    whatsappMessage: "Hello! I would like to order the 3-Month Pass (£17). Please send my login details.",
+    features: [
+      "Full HD & 4K Streaming Feeds",
+      "Live Premier League Matches",
+      "Anti-Freeze™ Server Routing",
+      "Catch-Up TV & EPG Guide",
+      "Curated VOD Movies & Series",
+      "Multi-Device Compatibility",
+      "24/7 Technical Support",
+      "24-Hour Money-Back Guarantee"
+    ]
+  },
+  {
+    name: "1-Month Pass",
+    duration: "Monthly Trial Pass",
+    price: "7",
+    isBestValue: false,
+    isPopular: false,
+    ctaText: "Get 1-Month Pass",
+    whatsappMessage: "Hello! I would like to test the service with the 1-Month Pass (£7). Please send my credentials.",
+    features: [
+      "Full HD & 4K Streaming Feeds",
+      "Live UK Sports & Football",
+      "Anti-Freeze™ Server Routing",
+      "Catch-Up TV & EPG Guide",
+      "VOD Movie Library",
+      "Firestick & Smart TV Ready",
+      "Standard Support",
+      "Instant Activation in 90s"
+    ]
+  }
+];
 ---
-<section id="pricing" class="py-24 bg-secondary relative overflow-hidden text-white">
-  <div class="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-primary rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
-  <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
-  
+
+<section id="pricing" class="py-24 bg-[#00102e] text-white relative overflow-hidden border-b border-blue-900/40">
+  <!-- Subtle ambient background glow -->
+  <div class="absolute inset-0 pointer-events-none opacity-30">
+    <div class="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-[#C8102E]/30 rounded-full blur-[140px]"></div>
+    <div class="absolute top-1/2 right-1/4 -translate-y-1/2 w-96 h-96 bg-[#012169]/50 rounded-full blur-[140px]"></div>
+  </div>
+
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    
+    <!-- Section Header -->
     <div class="text-center max-w-3xl mx-auto mb-16">
-      <h2 class="text-3xl md:text-5xl font-bold mb-4">Simple, Transparent Pricing</h2>
-      <p class="text-lg text-blue-200">Choose the perfect plan for your premium entertainment needs.</p>
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-black uppercase tracking-widest mb-4">
+        <Sparkles class="w-3.5 h-3.5" />
+        Transparent British Pricing &bull; Zero Contracts
+      </div>
+      <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4">
+        Choose Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-blue-400">UK Streaming Pass</span>
+      </h2>
+      <p class="text-base sm:text-lg text-blue-200/80 font-medium">
+        All plans include our 100% Anti-Freeze&trade; UK proxy cluster and instant automated credential delivery.
+      </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <!-- 1 Month -->
-      <div class="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-8 flex flex-col hover:-translate-y-2 transition-transform duration-300 order-4 md:order-1">
-        <h3 class="text-2xl font-bold mb-2">1 Month</h3>
-        <div class="text-4xl font-extrabold mb-6">£7</div>
-        <ul class="space-y-3 mb-8 flex-grow text-blue-100">
-          <li class="flex items-center gap-2">✓ All UK Channels</li>
-          <li class="flex items-center gap-2">✓ 4K / Full HD</li>
-          <li class="flex items-center gap-2">✓ Unlimited VOD</li>
-          <li class="flex items-center gap-2">✓ 24/7 Support</li>
-        </ul>
-        <a href="#contact" class="w-full block text-center bg-white/20 hover:bg-white/30 text-white font-bold py-3 rounded-xl transition-colors">Choose Plan</a>
-      </div>
-
-      <!-- 3 Months -->
-      <div class="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-8 flex flex-col hover:-translate-y-2 transition-transform duration-300 order-3 md:order-2">
-        <h3 class="text-2xl font-bold mb-2">3 Months</h3>
-        <div class="text-4xl font-extrabold mb-6">£17</div>
-        <ul class="space-y-3 mb-8 flex-grow text-blue-100">
-          <li class="flex items-center gap-2">✓ All UK Channels</li>
-          <li class="flex items-center gap-2">✓ 4K / Full HD</li>
-          <li class="flex items-center gap-2">✓ Unlimited VOD</li>
-          <li class="flex items-center gap-2">✓ 24/7 Support</li>
-        </ul>
-        <a href="#contact" class="w-full block text-center bg-white/20 hover:bg-white/30 text-white font-bold py-3 rounded-xl transition-colors">Choose Plan</a>
-      </div>
-
-      <!-- 6 Months (Popular) -->
-      <div class="bg-gradient-to-b from-primary/90 to-primary/60 backdrop-blur-lg border border-red-400/50 rounded-3xl p-8 flex flex-col transform md:-translate-y-4 hover:-translate-y-6 transition-transform duration-300 shadow-2xl shadow-primary/40 relative order-2 md:order-3">
-        <div class="absolute top-0 right-0 bg-yellow-400 text-secondary text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-3xl uppercase tracking-wider">Most Popular</div>
-        <h3 class="text-2xl font-bold mb-2">6 Months</h3>
-        <div class="text-4xl font-extrabold mb-6">£27</div>
-        <ul class="space-y-3 mb-8 flex-grow text-red-50">
-          <li class="flex items-center gap-2">✓ All UK Channels</li>
-          <li class="flex items-center gap-2">✓ 4K / Full HD</li>
-          <li class="flex items-center gap-2">✓ Unlimited VOD</li>
-          <li class="flex items-center gap-2">✓ 24/7 Support</li>
-        </ul>
-        <a href="#contact" class="w-full block text-center bg-white text-primary hover:bg-gray-100 font-bold py-3 rounded-xl transition-colors">Choose Plan</a>
-      </div>
-
-      <!-- 12 Months -->
-      <div class="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-8 flex flex-col hover:-translate-y-2 transition-transform duration-300 order-1 md:order-4">
-        <h3 class="text-2xl font-bold mb-2">12 Months</h3>
-        <div class="text-4xl font-extrabold mb-6">£47 <span class="text-lg font-normal text-blue-200 line-through ml-2">£84</span></div>
-        <ul class="space-y-3 mb-8 flex-grow text-blue-100">
-          <li class="flex items-center gap-2">✓ Best Value Deal</li>
-          <li class="flex items-center gap-2">✓ All UK Channels</li>
-          <li class="flex items-center gap-2">✓ 4K / Full HD</li>
-          <li class="flex items-center gap-2">✓ Unlimited VOD</li>
-          <li class="flex items-center gap-2 text-yellow-400 font-bold">✓ Free Premium Player</li>
-          <li class="flex items-center gap-2">✓ 24/7 Support</li>
-        </ul>
-        <a href="#contact" class="w-full block text-center bg-white/20 hover:bg-white/30 text-white font-bold py-3 rounded-xl transition-colors">Choose Plan</a>
-      </div>
+    <!-- 4-Column Pricing Cards Grid (12-Month Plan Prominently FIRST) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch mb-16">
+      {tiers.map((tier) => (
+        <PricingCard {...tier} />
+      ))}
     </div>
+
+    <!-- 24-Hour Free Trial Callout Banner -->
+    <div class="max-w-4xl mx-auto rounded-3xl bg-white/[0.04] backdrop-blur-md border border-white/10 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+      <div class="flex items-center gap-4 text-center sm:text-left">
+        <div class="w-12 h-12 rounded-2xl bg-[#25D366]/15 text-[#25D366] border border-[#25D366]/30 flex items-center justify-center flex-shrink-0">
+          <MessageCircle class="w-6 h-6" />
+        </div>
+        <div>
+          <h4 class="text-lg font-black text-white">Want to Test Picture Quality First?</h4>
+          <p class="text-xs sm:text-sm text-gray-300">
+            Request a completely free 24-hour test stream on WhatsApp. No credit card commitment required.
+          </p>
+        </div>
+      </div>
+
+      <a 
+        href="https://wa.me/213550592200?text=Hello+I+would+like+a+free+24h+test+stream" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="flex-shrink-0 px-6 py-3 rounded-full text-xs sm:text-sm font-extrabold bg-[#25D366] hover:bg-[#1fb355] text-white shadow-lg shadow-emerald-900/40 hover:scale-105 transition-all whitespace-nowrap"
+      >
+        Request Free 24H Trial &rarr;
+      </a>
+    </div>
+
   </div>
 </section>

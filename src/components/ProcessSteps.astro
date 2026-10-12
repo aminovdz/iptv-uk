@@ -1,0 +1,100 @@
+---
+// src/components/ProcessSteps.astro
+import { ShoppingBag, KeyRound, PlayCircle, ArrowRight, Zap, CheckCircle2 } from 'lucide-astro';
+
+const steps = [
+  {
+    step: "01",
+    icon: ShoppingBag,
+    title: "Select Your Pass",
+    description: "Choose your preferred subscription duration—from our £7 monthly trial to our £47 Best Value 12-Month Pass with zero contracts.",
+    badge: "Step 1"
+  },
+  {
+    step: "02",
+    icon: KeyRound,
+    title: "Instant 90s Setup",
+    description: "Our automated dispatch system sends your M3U URL and Xtream Codes API login credentials directly to your WhatsApp or email in seconds.",
+    badge: "Step 2"
+  },
+  {
+    step: "03",
+    icon: PlayCircle,
+    title: "Start Streaming in 4K",
+    description: "Input your details into TiviMate, IPTV Smarters, or your Smart TV and enjoy live Premier League, cinema, and catch-up TV with zero buffering.",
+    badge: "Step 3"
+  }
+];
+---
+
+<section id="how-it-works" class="py-24 bg-[#050814] relative overflow-hidden border-b border-blue-900/40">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/25 text-blue-300 text-xs font-black uppercase tracking-widest mb-4">
+        <Zap class="w-3.5 h-3.5 text-amber-400" />
+        Zero Technical Knowledge Required
+      </div>
+      <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4">
+        Up &amp; Running in <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-blue-400">3 Easy Steps</span>
+      </h2>
+      <p class="text-base sm:text-lg text-blue-200/80 font-medium">
+        Getting started is as simple as turning on your television. Follow our 90-second onboarding process.
+      </p>
+    </div>
+
+    <!-- 3-Column Process Cards Grid with Visual Connectors -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+      {steps.map((item, index) => {
+        const IconComponent = item.icon;
+        return (
+          <div class="relative rounded-3xl bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md border border-white/10 hover:border-red-500/40 p-8 transition-all duration-300 group shadow-xl flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-6">
+                <span class="text-4xl font-black text-white/20 group-hover:text-red-500/60 transition-colors font-mono">
+                  {item.step}
+                </span>
+                <span class="text-xs font-black uppercase tracking-wider px-3 py-1 rounded-full bg-red-500/15 border border-red-500/30 text-red-400">
+                  {item.badge}
+                </span>
+              </div>
+
+              <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+                <IconComponent class="w-7 h-7 text-blue-300 group-hover:text-red-400 transition-colors" />
+              </div>
+
+              <h3 class="text-xl font-black text-white mb-3 group-hover:text-red-400 transition-colors">
+                {item.title}
+              </h3>
+              
+              <p class="text-sm text-gray-300 leading-relaxed font-normal">
+                {item.description}
+              </p>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-white/5 flex items-center text-xs font-bold text-emerald-400">
+              <CheckCircle2 class="w-4 h-4 mr-1.5" />
+              <span>Assisted by UK Support team</span>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+
+    <!-- Bottom Help Callout -->
+    <div class="mt-14 text-center">
+      <p class="text-xs sm:text-sm text-gray-400 mb-4">
+        Need assistance with installation on your specific TV or device?
+      </p>
+      <a 
+        href="/guides" 
+        class="inline-flex items-center gap-2 text-xs sm:text-sm font-extrabold text-blue-300 hover:text-white underline underline-offset-4 transition-colors"
+      >
+        <span>Browse Complete Setup Guides (Firestick, Smart TV, TiviMate, iOS)</span>
+        <ArrowRight class="w-4 h-4" />
+      </a>
+    </div>
+
+  </div>
+</section>
