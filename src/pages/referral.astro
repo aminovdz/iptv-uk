@@ -1,0 +1,106 @@
+---
+// src/pages/referral.astro
+import Layout from '../layouts/Layout.astro';
+import StickyHeader from '../components/StickyHeader.astro';
+import ReferralBanner from '../components/ReferralBanner.astro';
+import FAQSection from '../components/FAQSection.astro';
+import Footer from '../components/Footer.astro';
+
+const title = "Refer a Friend | British IPTV - Earn 1 Free Month For Every Referral";
+const description = "Share British IPTV with friends and family in the UK. For every friend who activates, you both receive +1 free month of 4K streaming. No limit!";
+
+const referralFaqs = [
+  {
+    question: "How does the British IPTV referral program work?",
+    answer: "It's simple: share your registered WhatsApp number or unique customer ID with friends. When your friend activates any subscription (1, 3, 6, or 12 months), they mention your number. Our team immediately adds +30 free bonus days to both your account and their account."
+  },
+  {
+    question: "Is there a limit on how many friends I can refer?",
+    answer: "No! There is absolutely no limit. If you refer 12 friends throughout the year, you receive 12 free bonus months—essentially giving you a completely free IPTV subscription indefinitely."
+  },
+  {
+    question: "When are the bonus days added to my account?",
+    answer: "The bonus +30 days are credited instantly within 5 minutes of your friend confirming their subscription activation with our WhatsApp support team."
+  },
+  {
+    question: "Can I refer friends living outside the United Kingdom?",
+    answer: "Yes, our high-speed global servers work anywhere in the world. As long as your friend subscribes to any British IPTV package, both of you receive the +1 month bonus."
+  }
+];
+---
+
+<Layout title={title} description={description} type="article" faqs={referralFaqs}>
+  <StickyHeader />
+
+  <main class="flex-grow pt-24 bg-[#050814]">
+    <!-- Hero / Program Details -->
+    <ReferralBanner />
+
+    <!-- Detailed Program Terms Section -->
+    <section class="py-16 bg-[#070B17] border-t border-b border-white/5">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl sm:text-3xl font-black text-white text-center mb-10 tracking-tight">
+          Referral Rules &amp; Guidelines
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="p-6 rounded-2xl bg-[#0C1222] border border-white/10 space-y-3">
+            <div class="flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">✓</span>
+              <h3 class="text-base font-bold text-white">Eligible Subscriptions</h3>
+            </div>
+            <p class="text-xs text-gray-400 leading-relaxed">
+              Referral bonuses apply to all new customers ordering our 1-Month (£7), 3-Month (£17), 6-Month (£27), or 12-Month (£47) packages.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-[#0C1222] border border-white/10 space-y-3">
+            <div class="flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">✓</span>
+              <h3 class="text-base font-bold text-white">Stackable Free Months</h3>
+            </div>
+            <p class="text-xs text-gray-400 leading-relaxed">
+              Every bonus month stacks directly on top of your current expiry date. You never lose existing days or active channel configurations.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-[#0C1222] border border-white/10 space-y-3">
+            <div class="flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">✓</span>
+              <h3 class="text-base font-bold text-white">Instant WhatsApp Validation</h3>
+            </div>
+            <p class="text-xs text-gray-400 leading-relaxed">
+              No complicated tracking cookies or broken affiliate dashboards. Simply tell your friend to drop your WhatsApp number to our team.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-[#0C1222] border border-white/10 space-y-3">
+            <div class="flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">✓</span>
+              <h3 class="text-base font-bold text-white">Multi-Device Bonus</h3>
+            </div>
+            <p class="text-xs text-gray-400 leading-relaxed">
+              Your free bonus month includes full 4K Ultra HD access, all sports feeds, 60fps frame rates, and complete EPG guide features.
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-12 text-center">
+          <a 
+            href="https://wa.me/213550592200?text=Hello%20British%20IPTV!%20I%20want%20to%20register%20as%20a%20referrer%20and%20get%20my%20bonus%20code." 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2.5 px-8 py-4 rounded-xl bg-[#25D366] text-black font-black text-base hover:bg-[#1fb355] transition-all shadow-xl hover:shadow-emerald-500/20"
+          >
+            Claim Your Referral Code on WhatsApp &rarr;
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQs -->
+    <FAQSection />
+  </main>
+
+  <Footer />
+</Layout>

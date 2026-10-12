@@ -1,0 +1,117 @@
+---
+// src/pages/refund.astro
+import Layout from '../layouts/Layout.astro';
+import StickyHeader from '../components/StickyHeader.astro';
+import Footer from '../components/Footer.astro';
+
+const title = "Refund Policy | British IPTV - Strict 24-Hour Money-Back Guarantee";
+const description = "Read British IPTV's official 24-Hour Money-Back Guarantee and refund guidelines. 100% risk-free activation with fast support.";
+---
+
+<Layout title={title} description={description} type="article">
+  <StickyHeader />
+
+  <main class="flex-grow pt-28 pb-20 bg-[#050814] text-gray-200">
+    <!-- Header -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-4">
+        🛡️ 100% Risk-Free Guarantee
+      </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
+        24-Hour Refund Policy
+      </h1>
+      <p class="mt-4 text-sm sm:text-base text-gray-400 max-w-2xl mx-auto">
+        We stand behind the quality and stability of British IPTV. If you experience technical incompatibility within 24 hours of purchase, we offer a 100% money-back guarantee.
+      </p>
+    </section>
+
+    <!-- Content Box -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="p-8 sm:p-12 rounded-3xl bg-[#090E1D] border border-white/10 shadow-2xl space-y-8 text-sm sm:text-base text-gray-300 leading-relaxed">
+        
+        <div>
+          <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2">
+            <span class="text-emerald-400">1.</span> Eligibility for a Full Refund
+          </h2>
+          <p class="mb-3">
+            You are fully eligible for a 100% refund under the following conditions:
+          </p>
+          <ul class="list-disc pl-5 space-y-2 text-gray-300">
+            <li>Your refund request is submitted within <strong>24 hours</strong> of the initial subscription purchase timestamp.</li>
+            <li>The service is technically non-functional on your verified compatible device (e.g. Firestick, Smart TV, Android Box, Apple TV) and our 24/7 technical support team cannot resolve the configuration issue.</li>
+            <li>You have tested the troubleshooting steps provided by our technicians (such as DNS adjustments or cache reset).</li>
+          </ul>
+        </div>
+
+        <div class="pt-6 border-t border-white/5">
+          <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2">
+            <span class="text-emerald-400">2.</span> Non-Refundable Situations
+          </h2>
+          <p class="mb-3">
+            Because IPTV subscriptions involve instant digital server provisioning costs, refunds cannot be granted in the following scenarios:
+          </p>
+          <ul class="list-disc pl-5 space-y-2 text-gray-300">
+            <li>Requests submitted <strong>after 24 hours</strong> from the time of account creation.</li>
+            <li>Accounts suspended due to a violation of our Fair Usage Policy (e.g., unauthorized restreaming or simultaneous multi-device logins beyond plan limits).</li>
+            <li>Incompatibility resulting solely from insufficient subscriber internet speed (we recommend a minimum of 30 Mbps for 4K streams).</li>
+            <li>Change of mind after extensive viewing of pay-per-view sporting events.</li>
+          </ul>
+        </div>
+
+        <div class="pt-6 border-t border-white/5">
+          <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2">
+            <span class="text-emerald-400">3.</span> How to Request Your Refund
+          </h2>
+          <p class="mb-4">
+            Requesting a refund is simple, fast, and does not involve endless automated phone queues:
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="p-5 rounded-2xl bg-white/[0.03] border border-white/10">
+              <span class="text-emerald-400 font-bold block mb-1">Option A: Via WhatsApp (Fastest)</span>
+              <p class="text-xs text-gray-400 mb-3">Send your Order ID and email address to our 24/7 team for instant review.</p>
+              <a 
+                href="https://wa.me/213550592200?text=Hello%20British%20IPTV!%20I%20would%20like%20to%20request%20a%20refund%20within%20my%2024-hour%20window." 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 text-xs font-bold text-[#25D366] hover:underline"
+              >
+                Chat on WhatsApp &rarr;
+              </a>
+            </div>
+            <div class="p-5 rounded-2xl bg-white/[0.03] border border-white/10">
+              <span class="text-blue-400 font-bold block mb-1">Option B: Via Email</span>
+              <p class="text-xs text-gray-400 mb-3">Email your receipt to our billing desk. We process incoming requests within 2 hours.</p>
+              <a 
+                href="mailto:support@castvera.com?subject=Refund%20Request%20-%20British%20IPTV" 
+                class="inline-flex items-center gap-1.5 text-xs font-bold text-blue-400 hover:underline"
+              >
+                support@castvera.com &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-6 border-t border-white/5">
+          <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2">
+            <span class="text-emerald-400">4.</span> Processing Time &amp; Reversals
+          </h2>
+          <p>
+            Once approved, your refund is executed immediately on our payment processor. Depending on your bank or credit card issuer, the funds typically reappear in your statement within <strong>1 to 3 business days</strong>.
+          </p>
+        </div>
+
+        <div class="pt-6 border-t border-white/5 bg-white/[0.02] p-6 rounded-2xl border border-white/5">
+          <h3 class="text-lg font-bold text-white mb-2">Billing Inquiries</h3>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            <strong>British IPTV Billing Department</strong><br />
+            123 Westminster Bridge Rd, London, SE1 7HR, United Kingdom<br />
+            Primary: <a href="mailto:contact@britishiptv.pro" class="text-blue-400">contact@britishiptv.pro</a> | Escalate: <a href="mailto:support@castvera.com" class="text-blue-400">support@castvera.com</a>
+          </p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

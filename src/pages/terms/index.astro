@@ -1,55 +1,110 @@
 ---
+// src/pages/terms/index.astro
 import Layout from '../../layouts/Layout.astro';
+import StickyHeader from '../../components/StickyHeader.astro';
+import Footer from '../../components/Footer.astro';
 
-const title = "Terms of Service | iptv uk";
-const description = "Read the Terms of Service and conditions for using iptv uk's premium IPTV streaming services.";
+const title = "Terms of Service | British IPTV - Subscription Rules & Conditions";
+const description = "Review the official Terms of Service for British IPTV subscriptions. Fair usage policy, 24-hour refund terms, and device compatibility conditions.";
 ---
 
-<Layout title={title} description={description}>
-  <header class="bg-secondary text-white py-16">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="text-4xl md:text-5xl font-bold mb-4">Terms of Service</h1>
-      <p class="text-blue-200">Last updated: {new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })}</p>
-    </div>
-  </header>
+<Layout title={title} description={description} type="article">
+  <StickyHeader />
 
-  <main class="py-16 bg-white">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 prose prose-lg prose-blue">
-      <h2>1. Introduction</h2>
-      <p>Welcome to <strong>iptv uk</strong>. By accessing our website and using our IPTV services, you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you may not use our service.</p>
-
-      <h2>2. Service Usage</h2>
-      <p>Our service is provided on an "as is" and "as available" basis. We strive to provide 99.9% uptime, but we do not guarantee that the service will be uninterrupted or error-free. The quality of the stream may vary depending on your internet connection speed and device capabilities. A minimum internet speed of 15 Mbps is recommended for HD and 30 Mbps for 4K streaming.</p>
-
-      <h2>3. Account Responsibilities</h2>
-      <ul>
-        <li>You must be at least 18 years old to purchase a subscription.</li>
-        <li>Your subscription is for personal, non-commercial use only.</li>
-        <li>Account sharing (using the same subscription on multiple devices simultaneously beyond your plan's allowance) is strictly prohibited and will result in immediate account termination without a refund.</li>
-      </ul>
-
-      <h2>4. Payments and Refunds</h2>
-      <p>All payments are processed securely. We offer a <strong>7-day money-back guarantee</strong> for new subscribers who are not satisfied with the service. After 7 days, all sales are final and no refunds will be issued. Free trials are provided to ensure the service meets your expectations before purchasing.</p>
-
-      <h2>5. Content Availability</h2>
-      <p>The channel lineup and VOD catalog are subject to change without prior notice. We do not host any of the content ourselves; we act solely as a conduit for accessing publicly available streams on the internet. We cannot guarantee the permanent availability of any specific channel or event.</p>
-
-      <h2>6. Intellectual Property</h2>
-      <p>iptv uk respects intellectual property rights. We do not own, host, or distribute any copyrighted material. Our service merely provides links to third-party content. If you are a copyright owner and believe your content is being infringed, please contact us for immediate removal from our indexing.</p>
-
-      <h2>7. Changes to Terms</h2>
-      <p>We reserve the right to modify these terms at any time. Your continued use of the service following any changes indicates your acceptance of the new terms.</p>
-
-      <div class="mt-12 p-6 bg-gray-50 rounded-xl border border-gray-200 text-center">
-        <p class="mb-0">If you have any questions about these Terms, please <a href="/#contact" class="text-primary font-bold hover:underline">contact our support team</a>.</p>
+  <main class="flex-grow pt-28 pb-20 bg-[#050814] text-gray-200">
+    <!-- Header -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-wider mb-4">
+        📜 Service Agreement
       </div>
-    </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
+        Terms of Service
+      </h1>
+      <p class="mt-4 text-sm sm:text-base text-gray-400 max-w-2xl mx-auto">
+        Effective date: {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}. Please read these terms carefully before subscribing.
+      </p>
+    </section>
+
+    <!-- Content -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="p-8 sm:p-12 rounded-3xl bg-[#090E1D] border border-white/10 shadow-2xl space-y-8 text-sm sm:text-base text-gray-300 leading-relaxed">
+        
+        <div>
+          <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2">
+            <span class="text-blue-400">1.</span> Acceptance of Terms
+          </h2>
+          <p>
+            By accessing the website, ordering a subscription, or activating M3U / Xtream credentials from <strong>British IPTV</strong>, you confirm that you have read, understood, and agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.
+          </p>
+        </div>
+
+        <div class="pt-6 border-t border-white/5">
+          <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2">
+            <span class="text-blue-400">2.</span> Service Delivery &amp; Instant Activation
+          </h2>
+          <p class="mb-3">
+            British IPTV subscriptions are delivered digitally via email and/or WhatsApp. In 99% of cases, credentials are sent within 60 seconds to 10 minutes following confirmed payment. If you do not receive your activation details, please immediately contact our WhatsApp line at <a href="https://wa.me/213550592200" class="text-emerald-400 font-bold">+213 550 592 200</a>.
+          </p>
+        </div>
+
+        <div class="pt-6 border-t border-white/5">
+          <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2">
+            <span class="text-blue-400">3.</span> Strict 24-Hour Refund Policy
+          </h2>
+          <p class="mb-3">
+            To prevent abuse and fraudulent account scalping, we enforce a transparent, strict <strong>24-Hour Refund Policy</strong>.
+          </p>
+          <ul class="list-disc pl-5 space-y-2 text-gray-300">
+            <li>If our service fails to operate on your compatible device within 24 hours of purchase, and our 24/7 technical team is unable to resolve the issue, you are entitled to a full 100% refund.</li>
+            <li>Refund requests submitted after the initial 24-hour window from account creation are non-refundable.</li>
+            <li>For full conditions and dispute processes, please review our dedicated <a href="/refund" class="text-blue-400 font-bold underline">Refund Policy</a>.</li>
+          </ul>
+        </div>
+
+        <div class="pt-6 border-t border-white/5">
+          <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2">
+            <span class="text-blue-400">4.</span> Fair Usage &amp; Single-Device Rules
+          </h2>
+          <p class="mb-3">
+            Each standard subscription is provisioned for single-device active streaming at any given time unless a multi-room package was explicitly purchased.
+          </p>
+          <ul class="list-disc pl-5 space-y-2 text-gray-300">
+            <li>You may install your credentials on multiple devices (e.g., your living room TV and your phone), but only <strong>one stream may be active at the same time</strong>.</li>
+            <li>Simultaneous streaming on multiple devices from different IP addresses triggers automatic server locking. Repeated abuse will result in subscription termination without refund.</li>
+            <li>Reselling, restreaming, or commercial broadcasting of our feeds is strictly prohibited.</li>
+          </ul>
+        </div>
+
+        <div class="pt-6 border-t border-white/5">
+          <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2">
+            <span class="text-blue-400">5.</span> Bandwidth &amp; Device Compatibility
+          </h2>
+          <p>
+            While our Anti-Freeze™ engine optimizes video delivery, smooth 4K Ultra HD and 60fps streaming requires a reliable internet connection of at least 30 Mbps (and 15 Mbps for FHD). We are not responsible for streaming interruptions caused by local ISP throttling or weak home Wi-Fi signal.
+          </p>
+        </div>
+
+        <div class="pt-6 border-t border-white/5">
+          <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2">
+            <span class="text-blue-400">6.</span> Content &amp; Transmission Disclaimer
+          </h2>
+          <p>
+            British IPTV does not operate or own transmission facilities. Feeds and media indexes are sourced from global content relays. Channel lineups and on-demand titles are updated continuously for optimal performance.
+          </p>
+        </div>
+
+        <div class="pt-6 border-t border-white/5 bg-white/[0.02] p-6 rounded-2xl border border-white/5">
+          <h3 class="text-lg font-bold text-white mb-2">Governing Law &amp; Legal Notices</h3>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            These Terms are governed by the laws of England and Wales. For any contract or subscription inquiries:<br />
+            <strong>British IPTV Headquarters</strong>, 123 Westminster Bridge Rd, London, SE1 7HR, United Kingdom.<br />
+            Emails: <a href="mailto:contact@britishiptv.pro" class="text-blue-400">contact@britishiptv.pro</a> | <a href="mailto:support@castvera.com" class="text-blue-400">support@castvera.com</a>
+          </p>
+        </div>
+
+      </div>
+    </section>
   </main>
 
-  <footer class="bg-[#001440] text-blue-200 py-8 border-t border-blue-900 text-center">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-sm">
-      <a href="/" class="hover:text-white mb-4 inline-block font-bold">&larr; Back to Home</a>
-      <p>&copy; {new Date().getFullYear()} iptv uk. All rights reserved.</p>
-    </div>
-  </footer>
+  <Footer />
 </Layout>

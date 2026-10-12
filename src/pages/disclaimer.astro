@@ -1,0 +1,87 @@
+---
+// src/pages/disclaimer.astro
+import Layout from '../layouts/Layout.astro';
+import StickyHeader from '../components/StickyHeader.astro';
+import Footer from '../components/Footer.astro';
+
+const title = "Legal Disclaimer | British IPTV - Service Limitations & Transparency";
+const description = "Official legal disclaimer for British IPTV. Service availability, hardware compatibility, ISP throttling, and educational media indexing.";
+---
+
+<Layout title={title} description={description} type="article">
+  <StickyHeader />
+
+  <main class="flex-grow pt-28 pb-20 bg-[#050814] text-gray-200">
+    <!-- Header -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-bold uppercase tracking-wider mb-4">
+        ⚠️ Transparency &amp; Disclosure
+      </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
+        Legal Disclaimer
+      </h1>
+      <p class="mt-4 text-sm sm:text-base text-gray-400 max-w-2xl mx-auto">
+        Important disclosures regarding service availability, third-party streams, local broadband performance, and device requirements.
+      </p>
+    </section>
+
+    <!-- Content Box -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="p-8 sm:p-12 rounded-3xl bg-[#090E1D] border border-white/10 shadow-2xl space-y-8 text-sm sm:text-base text-gray-300 leading-relaxed">
+        
+        <div>
+          <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2">
+            <span class="text-amber-400">1.</span> Nature of Service
+          </h2>
+          <p>
+            <strong>British IPTV</strong> provides digital protocol access and technical indexing middleware. We do not own, create, host, or broadcast video content or television signals. All stream streams, feeds, and electronic program guides (EPG) are gathered from globally accessible public networks and external servers.
+          </p>
+        </div>
+
+        <div class="pt-6 border-t border-white/5">
+          <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2">
+            <span class="text-amber-400">2.</span> Streaming Quality &amp; ISP Throttling
+          </h2>
+          <p class="mb-3">
+            While our proprietary Anti-Freeze™ caching infrastructure delivers 99.9% uptime, video playback quality is inherently dependent on your local internet service provider (ISP), home Wi-Fi setup, and routing.
+          </p>
+          <ul class="list-disc pl-5 space-y-2 text-gray-300">
+            <li>In the UK, certain major broadband providers activate automated traffic management or content filtering during peak sporting hours.</li>
+            <li>We strongly recommend using a high-quality, zero-log VPN to bypass ISP throttling and maintain stable 4K bitrate.</li>
+            <li>A minimum stable download speed of 15 Mbps for FHD and 30 Mbps for 4K UHD is required for optimal viewing.</li>
+          </ul>
+        </div>
+
+        <div class="pt-6 border-t border-white/5">
+          <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2">
+            <span class="text-amber-400">3.</span> Device Compatibility &amp; Third-Party Applications
+          </h2>
+          <p>
+            British IPTV provides standard M3U playlists and Xtream Codes API parameters compatible with popular media player applications (e.g. TiviMate, IPTV Smarters Pro, IBO Player, XCIPTV). We do not develop, own, or license these third-party applications and are not responsible for software updates or application bugs originating from external app developers.
+          </p>
+        </div>
+
+        <div class="pt-6 border-t border-white/5">
+          <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2">
+            <span class="text-amber-400">4.</span> Legal Compliance &amp; Subscriber Responsibility
+          </h2>
+          <p>
+            Subscribers are solely responsible for ensuring that their access to streaming media complies with all applicable local laws, regulations, and copyright guidelines in their respective jurisdiction. British IPTV assumes no liability for individual subscriber usage.
+          </p>
+        </div>
+
+        <div class="pt-6 border-t border-white/5 bg-white/[0.02] p-6 rounded-2xl border border-white/5">
+          <h3 class="text-lg font-bold text-white mb-2">Legal Support Contact</h3>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            <strong>British IPTV Compliance Desk</strong><br />
+            123 Westminster Bridge Rd, London, SE1 7HR, United Kingdom<br />
+            Email: <a href="mailto:contact@britishiptv.pro" class="text-blue-400">contact@britishiptv.pro</a> | Support: <a href="mailto:support@castvera.com" class="text-blue-400">support@castvera.com</a>
+          </p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
