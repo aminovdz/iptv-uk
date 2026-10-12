@@ -1,0 +1,76 @@
+---
+// src/components/CTASection.astro
+import { MessageCircle, ArrowRight, ShieldCheck, Zap, RotateCcw } from 'lucide-astro';
+---
+
+<section class="py-20 bg-[#000d26] relative overflow-hidden border-b border-blue-900/50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#C8102E] via-[#8c081c] to-[#012169] p-8 sm:p-14 lg:p-16 text-center shadow-2xl border border-white/10">
+      
+      <!-- Decorative background effects -->
+      <div class="absolute -top-24 -left-24 w-96 h-96 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-black/30 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 max-w-3xl mx-auto">
+        <!-- Value Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md text-white text-xs font-black uppercase tracking-widest mb-6 border border-white/20">
+          <span>🇬🇧 The Smart Alternative to Cable</span>
+        </div>
+
+        <!-- Headline -->
+        <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-[1.1] mb-6">
+          Ready to Cut the Cable &amp; Save Over &pound;1,000 Every Year?
+        </h2>
+
+        <!-- Cost comparison callout -->
+        <div class="bg-black/30 backdrop-blur-md rounded-2xl p-4 sm:p-6 mb-8 border border-white/15 max-w-2xl mx-auto text-sm sm:text-base text-blue-100">
+          <p class="font-medium">
+            Traditional UK Satellite + Sports Add-on = <span class="line-through text-red-300 font-bold">&pound;1,140/year</span>. 
+            <br class="hidden sm:inline" />
+            British IPTV Complete 12-Month Plan = <span class="text-amber-300 font-black text-lg sm:text-xl">&pound;47/year</span>. 
+            <br />
+            <strong class="text-white font-extrabold">You keep over &pound;1,090 in your pocket.</strong>
+          </p>
+        </div>
+
+        <!-- Action CTAs -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-xl mx-auto mb-10">
+          <a 
+            href="https://wa.me/213550592200?text=Hello+I+want+to+order+the+12-month+best+value+subscription" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full text-base font-black bg-white hover:bg-gray-100 text-gray-900 shadow-2xl hover:scale-105 transition-all duration-300"
+          >
+            <MessageCircle class="w-5 h-5 text-[#25D366]" />
+            <span>Order on WhatsApp (Instant)</span>
+            <ArrowRight class="w-5 h-5" />
+          </a>
+
+          <a 
+            href="#pricing" 
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-extrabold bg-black/30 hover:bg-black/50 text-white border border-white/25 transition-all"
+          >
+            <span>Compare All Plans</span>
+          </a>
+        </div>
+
+        <!-- Trust Points -->
+        <div class="flex flex-wrap items-center justify-center gap-6 text-xs sm:text-sm font-bold text-white/90">
+          <span class="flex items-center gap-1.5">
+            <Zap class="w-4 h-4 text-amber-300" />
+            Automated Setup in 90 Seconds
+          </span>
+          <span class="flex items-center gap-1.5">
+            <RotateCcw class="w-4 h-4 text-emerald-300" />
+            24-Hour Refund Guarantee
+          </span>
+          <span class="flex items-center gap-1.5">
+            <ShieldCheck class="w-4 h-4 text-sky-300" />
+            Zero Contracts or Commitments
+          </span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

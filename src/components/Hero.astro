@@ -1,0 +1,95 @@
+---
+// src/components/Hero.astro
+import { Star, ShieldCheck, Zap, Tv, ArrowRight, CheckCircle2, MessageCircle } from 'lucide-astro';
+---
+
+<section class="relative pt-16 pb-20 sm:pt-24 sm:pb-28 overflow-hidden bg-gradient-to-b from-[#00102e] via-[#050814] to-[#050814] border-b border-blue-900/40">
+  <!-- Subtle ambient radial gradients -->
+  <div class="absolute inset-0 pointer-events-none opacity-40">
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-gradient-to-tr from-[#C8102E]/25 to-[#012169]/40 rounded-full blur-[120px]"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+    
+    <!-- Top Trust / Live Badge Row -->
+    <div class="inline-flex flex-wrap items-center justify-center gap-2.5 px-4 py-2 rounded-full bg-white/[0.05] border border-white/10 backdrop-blur-md mb-8">
+      <div class="flex items-center gap-1 text-amber-400">
+        <Star class="w-4 h-4 fill-amber-400 text-amber-400" />
+        <Star class="w-4 h-4 fill-amber-400 text-amber-400" />
+        <Star class="w-4 h-4 fill-amber-400 text-amber-400" />
+        <Star class="w-4 h-4 fill-amber-400 text-amber-400" />
+        <Star class="w-4 h-4 fill-amber-400 text-amber-400" />
+      </div>
+      <span class="text-xs sm:text-sm font-bold text-gray-200">
+        Rated <strong class="text-white">4.9/5</strong> by 1,485+ UK households
+      </span>
+      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span class="text-xs font-extrabold text-emerald-400 uppercase tracking-wider hidden sm:inline">
+        Live 4K Feeds
+      </span>
+    </div>
+
+    <!-- Main H1 (SEO & CTR Optimized) -->
+    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white max-w-5xl mx-auto leading-[1.08] mb-6">
+      Best IPTV UK (2026) &mdash; Stream All UK Channels, <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-400 to-blue-400">3PM Football & 4K Sport</span> Without Cable
+    </h1>
+
+    <!-- Subtitle Addressing Customer Pain Point (£100+/mo) -->
+    <p class="text-lg sm:text-xl text-blue-200/90 max-w-3xl mx-auto mb-10 leading-relaxed font-medium">
+      Stop paying &pound;100+/month across multiple expensive broadcast packages. Get uninterrupted 4K Ultra HD streaming, genuine Anti-Freeze&trade; servers, and instant automated setup on any device.
+    </p>
+
+    <!-- Dual Primary Call to Action Buttons -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-xl mx-auto mb-14">
+      <a 
+        href="https://wa.me/213550592200?text=Hello+I+would+like+to+activate+my+free+24h+trial" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full text-base font-black bg-[#C8102E] hover:bg-red-700 text-white shadow-xl shadow-red-900/50 hover:shadow-red-900/70 hover:scale-105 transition-all duration-300 group"
+      >
+        <MessageCircle class="w-5 h-5 text-white" />
+        <span>Start 24H Instant Trial (Free)</span>
+        <ArrowRight class="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+      </a>
+
+      <a 
+        href="#pricing" 
+        class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-extrabold bg-white/10 hover:bg-white/15 text-white border border-white/20 backdrop-blur-md transition-all hover:border-white/30"
+      >
+        <span>View Plans from &pound;7</span>
+      </a>
+    </div>
+
+    <!-- Trust Badges Bar (Grid on Mobile, Row on Desktop) -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto pt-6 border-t border-white/10">
+      <div class="flex items-center justify-center gap-2.5 p-3 rounded-2xl bg-white/[0.03] border border-white/5">
+        <Zap class="w-5 h-5 text-amber-400 flex-shrink-0" />
+        <span class="text-xs sm:text-sm font-bold text-gray-200 text-left">Instant 90s Setup</span>
+      </div>
+      <div class="flex items-center justify-center gap-2.5 p-3 rounded-2xl bg-white/[0.03] border border-white/5">
+        <ShieldCheck class="w-5 h-5 text-emerald-400 flex-shrink-0" />
+        <span class="text-xs sm:text-sm font-bold text-gray-200 text-left">Anti-Freeze™ 9.0</span>
+      </div>
+      <div class="flex items-center justify-center gap-2.5 p-3 rounded-2xl bg-white/[0.03] border border-white/5">
+        <Tv class="w-5 h-5 text-red-400 flex-shrink-0" />
+        <span class="text-xs sm:text-sm font-bold text-gray-200 text-left">4K 60FPS Sports</span>
+      </div>
+      <div class="flex items-center justify-center gap-2.5 p-3 rounded-2xl bg-white/[0.03] border border-white/5">
+        <CheckCircle2 class="w-5 h-5 text-blue-400 flex-shrink-0" />
+        <span class="text-xs sm:text-sm font-bold text-gray-200 text-left">24/7 UK Support</span>
+      </div>
+    </div>
+
+    <!-- Supported Device Pills Preview -->
+    <div class="mt-10 text-xs text-blue-300/70 font-semibold flex items-center justify-center gap-2 flex-wrap">
+      <span>Compatible with:</span>
+      <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Amazon Firestick</span>
+      <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Samsung & LG Smart TV</span>
+      <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Apple TV / iOS</span>
+      <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Android TV Box</span>
+      <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">TiviMate & Smarters</span>
+      <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Windows / Mac</span>
+    </div>
+
+  </div>
+</section>
