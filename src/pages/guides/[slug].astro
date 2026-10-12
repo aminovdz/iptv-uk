@@ -1,65 +1,169 @@
 ---
+// src/pages/guides/[slug].astro
+// High-authority guide layout rendering markdown content collections or legacy data guides
 export const prerender = true;
-import Layout from '../../layouts/Layout.astro';
-import { guides } from '../../data/guides.js';
 
-export function getStaticPaths() {
-  return guides.map(guide => ({
-    params: { slug: guide.slug },
-    props: { guide },
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import StickyHeader from '../../components/StickyHeader.astro';
+import Pricing from '../../components/Pricing.astro';
+import FAQSection from '../../components/FAQSection.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import Footer from '../../components/Footer.astro';
+import { guides as staticGuides } from '../../data/guides.js';
+
+export async function getStaticPaths() {
+  const contentGuides = await getCollection('guides');
+
+  const contentPaths = contentGuides.map(entry => ({
+    params: { slug: entry.id.replace(/\.(md|mdx)$/, '') },
+    props: { entry, isContent: true, guide: null }
   }));
+
+  const contentSlugs = new Set(contentPaths.map(p => p.params.slug));
+
+  const dataPaths = staticGuides
+    .filter(g => !contentSlugs.has(g.slug))
+    .map(guide => ({
+      params: { slug: guide.slug },
+      props: { entry: null, isContent: false, guide }
+    }));
+
+  return [...contentPaths, ...dataPaths];
 }
 
-const { guide } = Astro.props;
-const title = `${guide.title} | iptv uk Guides`;
-const description = guide.content.substring(0, 150) + "...";
+const { entry, guide, isContent } = Astro.props;
 
-const articleSchema = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": guide.title,
-  "author": {
-    "@type": "Organization",
-    "name": "iptv uk"
-  }
-};
+let title = "";
+let description = "";
+let pubDate = "";
+let author = "British IPTV Editorial Team";
+let readingTime = "7 min read";
+let quickSummary = "";
+let toc: Array<{ title: string; anchor: string }> = [];
+let faqs: Array<{ question: string; answer: string }> = [];
+let ContentComponent: any = null;
+
+if (isContent && entry) {
+  const rendered = await render(entry);
+  ContentComponent = rendered.Content;
+  title = entry.data.title;
+  description = entry.data.description;
+  pubDate = entry.data.pubDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  author = entry.data.author || "British IPTV Editorial Team";
+  readingTime = entry.data.readingTime || "7 min read";
+  quickSummary = entry.data.quickSummary || "";
+  toc = entry.data.toc || [];
+  faqs = entry.data.faqs || [];
+} else if (guide) {
+  title = guide.title;
+  description = guide.excerpt || guide.title;
+  pubDate = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+}
 ---
 
-<Layout title={title} description={description}>
-  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+<Layout 
+  title={`${title} | British IPTV Knowledge Base`} 
+  description={description}
+  type="article"
+  faqs={faqs}
+  authorName={author}
+>
+  <StickyHeader />
 
-  <header class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <div class="flex-shrink-0">
-        <a href="/" class="text-2xl font-bold text-secondary tracking-tight">iptv uk</a>
-      </div>
-      <div class="flex items-center gap-4">
-        <a href="/guides" class="text-gray-600 hover:text-primary font-medium">Back to Guides</a>
-        <a href="/#pricing" class="bg-primary text-white px-5 py-2 rounded-full font-semibold hover:bg-red-700 transition-all">Get Started</a>
-      </div>
-    </div>
-  </header>
+  <main class="flex-grow pt-28 pb-20 bg-[#050814] text-gray-200">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Article Header -->
+      <header class="mb-10 text-center sm:text-left">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-wider mb-4">
+          <span>📚</span> Official Streaming Guide • {readingTime}
+        </div>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
+          {title}
+        </h1>
+        <div class="mt-4 flex flex-wrap items-center gap-4 text-xs text-gray-400">
+          <span class="text-white font-medium">By {author}</span>
+          <span>•</span>
+          <span>Updated: {pubDate}</span>
+          <span>•</span>
+          <span class="text-emerald-400 font-semibold">Verified for 2026</span>
+        </div>
+      </header>
 
-  <main class="flex-grow bg-gray-50 py-20">
-    <article class="max-w-3xl mx-auto px-4">
-      <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
-        {guide.image && <img src={guide.image} alt={guide.title} class="w-full h-64 md:h-96 object-cover" />}
-        <div class="p-8 md:p-12">
-          <h1 class="text-3xl md:text-4xl font-extrabold text-secondary mb-8">{guide.title}</h1>
-          <div class="prose prose-lg text-gray-700 max-w-none" set:html={guide.content}></div>
+      <!-- Quick Summary Featured Snippet Box (Position 0 Target) -->
+      {quickSummary && (
+        <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-blue-950/40 via-[#0C1222] to-emerald-950/30 border border-blue-500/30 shadow-2xl mb-10">
+          <div class="flex items-center gap-2 text-blue-400 text-xs font-black uppercase tracking-wider mb-2">
+            <span>⚡</span> Direct Answer Summary
+          </div>
+          <p class="text-sm sm:text-base text-gray-200 leading-relaxed font-medium">
+            {quickSummary}
+          </p>
+        </div>
+      )}
+
+      <!-- Table of Contents (if provided) -->
+      {toc.length > 0 && (
+        <div class="p-6 rounded-2xl bg-[#090E1D] border border-white/10 mb-10 text-xs sm:text-sm">
+          <h2 class="font-black text-white uppercase tracking-wider mb-3 text-xs">Table of Contents</h2>
+          <ul class="space-y-2">
+            {toc.map((item) => (
+              <li>
+                <a href={item.anchor} class="text-blue-400 hover:text-blue-300 hover:underline transition-colors">
+                  &rarr; {item.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <!-- Guide Body -->
+      <div class="p-8 sm:p-12 rounded-3xl bg-[#090E1D] border border-white/10 shadow-2xl space-y-8 text-sm sm:text-base text-gray-300 leading-relaxed prose prose-invert max-w-none">
+        {ContentComponent ? (
+          <ContentComponent />
+        ) : guide ? (
+          <div set:html={guide.content} />
+        ) : null}
+      </div>
+
+      <!-- Mid-Article High Converting CTA Card -->
+      <div class="mt-12 p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-red-950/40 via-[#0C1222] to-blue-950/40 border border-white/10 text-center shadow-2xl">
+        <h3 class="text-2xl sm:text-3xl font-black text-white mb-3">
+          Tired of Buffering and Complicated Configurations?
+        </h3>
+        <p class="text-sm text-gray-300 max-w-xl mx-auto mb-6">
+          Switch to <strong class="text-white">British IPTV</strong> today. 99.9% uptime, true 4K Ultra HD at 60fps, and instant setup on WhatsApp for just £47/year.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          <a 
+            href="/#pricing" 
+            class="px-7 py-3.5 rounded-xl bg-gradient-to-r from-red-600 to-blue-600 text-white font-black text-sm hover:from-red-500 hover:to-blue-500 transition-all shadow-lg shadow-red-500/20"
+          >
+            View Subscription Plans (£47/Year) &rarr;
+          </a>
+          <a 
+            href="https://wa.me/213550592200?text=Hello%20British%20IPTV!%20I%20read%20your%20guide%20and%20want%20to%20test%20your%20service." 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="px-6 py-3.5 rounded-xl bg-[#25D366] text-black font-black text-sm hover:bg-[#1fb355] transition-all shadow-lg"
+          >
+            Get Free 24H Trial on WhatsApp
+          </a>
         </div>
       </div>
 
-      <!-- Permanent Promotional Banner -->
-      <div class="mt-12 bg-gradient-to-r from-secondary to-[#001440] rounded-3xl p-8 text-center text-white shadow-xl shadow-blue-900/20">
-        <h3 class="text-2xl font-bold mb-4">Tired of complicated setups and buffering?</h3>
-        <p class="text-blue-100 mb-6 max-w-xl mx-auto">
-          Switch to <strong class="text-white">iptv uk</strong> today for instant activation, 4K quality, and zero buffering on any device.
-        </p>
-        <a href="/#pricing" class="inline-block bg-primary hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition-transform transform hover:scale-105">
-          View Plans from £7
-        </a>
-      </div>
     </article>
+
+    <!-- Pricing Section -->
+    <div class="mt-20">
+      <Pricing />
+    </div>
+
+    <!-- Contact Form -->
+    <ContactForm />
   </main>
+
+  <Footer />
 </Layout>
