@@ -1,346 +1,102 @@
 ---
+// src/pages/index.astro
+// Master High-Converting Production Homepage for British IPTV
 import Layout from '../layouts/Layout.astro';
-import { Image } from 'astro:assets';
-import heroImage from '../assets/hero.jpg';
-
-import Features from '../components/Features.astro';
+import StickyHeader from '../components/StickyHeader.astro';
+import Hero from '../components/Hero.astro';
+import LiveScores from '../components/LiveScores.astro';
+import FeatureGrid from '../components/FeatureGrid.astro';
 import Pricing from '../components/Pricing.astro';
-import Channels from '../components/Channels.astro';
-import Testimonials from '../components/Testimonials.astro';
-import ReferAFriend from '../components/ReferAFriend.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import SupportedDevices from '../components/SupportedDevices.astro';
+import UserReviewsSection from '../components/UserReviewsSection.astro';
+import ReferralBanner from '../components/ReferralBanner.astro';
+import CitiesList from '../components/CitiesList.astro';
+import FAQSection from '../components/FAQSection.astro';
+import ContactForm from '../components/ContactForm.astro';
 import Footer from '../components/Footer.astro';
-import LiveScoreCarousel from '../components/LiveScoreCarousel.astro';
 
-// SEO details
-const title = "British IPTV | Top IPTV Subscription UK (2026)";
-const description = "Experience the best British IPTV service. Premium HD, 4K streaming, and the most reliable IPTV subscription UK with no buffering.";
-const keywords = "british iptv, iptv subscription uk, premium british iptv";
+const title = "British IPTV - #1 Best IPTV UK Provider 2026 | 4K UHD Streams";
+const description = "Experience the best IPTV UK subscription with 99.9% uptime, Anti-Freeze™ 9.0 technology, live Premier League sports, and instant WhatsApp activation. From £7/month.";
+const keywords = "best iptv uk, iptv subscription uk, buy iptv uk, iptv provider uk, iptv firestick uk, 4k iptv stream uk, premier league iptv, british iptv";
 
-// JSON-LD Schema for Homepage (Product/Service)
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "iptvuk Premium Subscription",
-  "provider": {
-    "@type": "Organization",
-    "name": "iptvuk"
+const homepageFaqs = [
+  {
+    question: "Is British IPTV compatible with my Amazon Firestick or Smart TV?",
+    answer: "Yes, 100%. Our service works smoothly on all generations of the Amazon Fire TV Stick, Smart TVs running Samsung Tizen, LG webOS, or Android TV, as well as Apple TV, iPhone, iPad, Android mobile, and Windows/Mac PCs. You can use standard players like TiviMate, IPTV Smarters Pro, or IBO Player."
   },
-  "publisher": {
-    "@type": "Organization",
-    "name": "iptvuk"
+  {
+    question: "Can I watch Saturday 3PM Premier League matches without blackouts?",
+    answer: "Yes. In the UK, the 3PM blackout rule (Article 48) prevents domestic channels from broadcasting Saturday afternoon games. Our international high-definition stadium feeds broadcast every single Saturday 3PM kickoff live in crystal-clear Full HD and 4K with English commentary."
   },
-  "areaServed": {
-    "@type": "Country",
-    "name": "United Kingdom"
+  {
+    question: "What internet speed do I need for buffer-free 4K streaming?",
+    answer: "We recommend a stable broadband connection of at least 15 Mbps for HD streams and 30 Mbps+ for raw 4K UHD 60FPS sports. Connecting your streaming device via an Ethernet cable or 5GHz Wi-Fi ensures optimal performance."
   },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "1458"
+  {
+    question: "Do I need a VPN to use British IPTV in the UK?",
+    answer: "In most cases, no. Our custom Anti-Freeze™ 9.0 server infrastructure uses dynamic IP rotation to bypass standard UK ISP throttling (BT, Virgin Media, Sky, EE). However, if you already own a VPN like Surfshark or NordVPN, you are welcome to use it."
   },
-  "offers": {
-    "@type": "AggregateOffer",
-    "lowPrice": "7.00",
-    "highPrice": "47.00",
-    "priceCurrency": "GBP"
+  {
+    question: "How quickly will I receive my login credentials after ordering?",
+    answer: "Instant delivery. Once your order is submitted, our automated provisioning system generates your unique M3U playlist URL and Xtream Codes API credentials, sending them to your WhatsApp and email address within 90 seconds."
+  },
+  {
+    question: "Can I test the service before committing to a paid pass?",
+    answer: "Yes! We offer a completely free 24-hour test stream with full access to live sports, UK entertainment channels, and our on-demand library so you can verify our speed and 4K picture quality before purchasing."
+  },
+  {
+    question: "What is your refund policy if I experience technical issues?",
+    answer: "We provide a strict 24-Hour Money-Back Guarantee. If our technical support team is unable to resolve your connection issues within 24 hours of your initial activation, you will receive a full refund."
   }
-};
-
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Is this the best IPTV UK service?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, we provide the most stable, 4K/HD streaming experience in the UK with a 99.9% uptime guarantee."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do you offer refunds?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, we offer a 7-day money-back guarantee for all our IPTV subscriptions."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is an IPTV subscription?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "IPTV (Internet Protocol Television) allows you to watch television via your internet connection instead of traditional cables or satellites."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I test the service before buying?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, we offer a free 24-hour trial to allow you to check the quality of our channels and VOD before committing."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do you offer catch-up (replay) channels?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, the majority of our premium channels have a replay function allowing you to catch up on shows for up to 72 hours."
-      }
-    }
-  ]
-};
+];
 ---
 
-<Layout title={title} description={description} keywords={keywords}>
-  <!-- Inject Schema -->
-  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
-  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-
-  <!-- Sticky Header -->
-  <header class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <div class="flex-shrink-0">
-        <a href="/" class="text-2xl font-bold text-secondary tracking-tight">iptv uk</a>
-      </div>
-      <nav class="hidden md:flex gap-8">
-        <a href="#features" class="text-gray-700 hover:text-primary font-medium transition-colors">Features</a>
-        <a href="/sports" class="text-primary font-bold transition-colors">Live Sports</a>
-        <a href="#pricing" class="text-gray-700 hover:text-primary font-medium transition-colors">Pricing</a>
-        <a href="#how-it-works" class="text-gray-700 hover:text-primary font-medium transition-colors">How it Works</a>
-        <a href="#faq" class="text-gray-700 hover:text-primary font-medium transition-colors">FAQ</a>
-      </nav>
-      <div class="flex items-center">
-        <a href="#pricing" class="bg-primary text-white px-5 py-2 rounded-full font-semibold shadow-lg shadow-primary/30 hover:bg-red-700 transition-all">Get Started</a>
-      </div>
-    </div>
-  </header>
+<Layout 
+  title={title} 
+  description={description} 
+  keywords={keywords}
+  type="home"
+  faqs={homepageFaqs}
+>
+  <!-- 1. Sticky Navigation Header -->
+  <StickyHeader />
 
   <main class="flex-grow">
-    <!-- Hero Section -->
-    <section class="relative bg-gradient-to-b from-secondary to-[#001440] text-white pt-24 pb-32 overflow-hidden">
-      <div class="absolute inset-0 z-0">
-        <Image src={heroImage} alt="Premium IPTV Streaming in 4K UK" class="h-full w-full object-cover opacity-20" format="webp" />
-        <div class="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/80 to-transparent"></div>
-      </div>
-      
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center lg:text-left lg:w-2/3">
-        <span class="inline-block py-1 px-3 rounded-full bg-white/10 border border-white/20 text-sm font-semibold mb-6">#1 Rated British IPTV Provider</span>
-        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight text-white">
-          Experience the ultimate <span class="text-primary">British IPTV</span> Service
-        </h1>
-        <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl">
-          Get the most reliable IPTV subscription UK. Stream thousands of live channels, movies, and TV shows in 4K UHD with no buffering.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4">
-          <a href="#pricing" class="bg-primary hover:bg-red-700 text-white text-lg font-bold py-4 px-8 rounded-full transition-transform transform hover:scale-105 shadow-xl shadow-primary/40 text-center">
-            View Subscription Plans
-          </a>
-          <a href="#features" class="bg-white/10 hover:bg-white/20 border border-white/30 text-white text-lg font-bold py-4 px-8 rounded-full backdrop-blur-sm transition-colors text-center">
-            See Features
-          </a>
-        </div>
-      </div>
-    </section>
+    <!-- 2. High-Converting Hero Section -->
+    <Hero />
 
-    <!-- Live Scores Infinite Loop Carousel (Click fixture to visit /livescore Match Center) -->
-    <LiveScoreCarousel />
+    <!-- 3. Real Live Scores Infinite Loop Carousel (Click cards -> /livescore Match Center) -->
+    <LiveScores />
 
-    <!-- Trust/Reviews Banner -->
-    <section class="bg-white py-10 border-b border-gray-100" itemscope itemtype="https://schema.org/Service">
-      <meta itemprop="name" content="iptv uk Premium Subscription" />
-      <div itemprop="provider" itemscope itemtype="https://schema.org/Organization">
-        <meta itemprop="name" content="iptv uk" />
-      </div>
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
-          <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-            <meta itemprop="bestRating" content="5" />
-            <div class="flex items-center justify-center md:justify-start gap-1 text-yellow-400 text-2xl mb-2" aria-label="Rated 4.9 out of 5 stars">
-              ★★★★★
-            </div>
-            <p class="text-gray-600 font-medium">
-              Rated <span itemprop="ratingValue" class="font-bold text-secondary">4.9</span>/5 by <span itemprop="reviewCount" class="font-bold">1458</span>+ users across the UK.
-            </p>
-          </div>
-          <div class="flex gap-8 opacity-60 grayscale hidden md:flex">
-            <span class="text-xl font-bold">4K Ultra HD</span>
-            <span class="text-xl font-bold">Anti-Buffer Tech</span>
-            <span class="text-xl font-bold">99.9% Uptime</span>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- 4. Core Features & Anti-Freeze Architecture -->
+    <FeatureGrid />
 
-    <!-- 1. Features Grid -->
-    <Features />
-
-    <!-- 2. Pricing Section (Requested to be under Features) -->
+    <!-- 5. Transparent Pricing Table (12-Month Plan £47 FIRST as Best Value) -->
     <Pricing />
-    
-    <!-- 2.5 Refer a Friend Banner -->
-    <ReferAFriend />
 
-    <!-- 3. Global Channels & VOD -->
-    <Channels />
+    <!-- 6. 3-Step Instant Activation Workflow -->
+    <ProcessSteps />
 
-    <!-- 4. Client Testimonials -->
-    <Testimonials />
+    <!-- 7. Comprehensive Supported Devices & Compatible Media Players -->
+    <SupportedDevices />
 
-    <!-- 5. Brief Competitor Comparison -->
-    <section class="py-24 bg-white border-t border-gray-100">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-secondary mb-6">Tired of Expensive Cable Bills? Switch to British IPTV</h2>
-        <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-12">
-          Stop paying £80+ per month for limited channels. See how we stack up against traditional UK providers.
-        </p>
-        <div class="flex flex-wrap justify-center gap-6">
-          <a href="/compare/iptv-uk-vs-premium-tv" class="px-8 py-4 bg-gray-50 border border-gray-200 rounded-full font-bold text-secondary hover:border-primary hover:text-primary transition">Compare vs Premium Smart TV</a>
-          <a href="/compare/iptv-uk-vs-bt-tv" class="px-8 py-4 bg-gray-50 border border-gray-200 rounded-full font-bold text-secondary hover:border-primary hover:text-primary transition">Compare vs BT TV</a>
-          <a href="/compare/iptv-uk-vs-virgin-media" class="px-8 py-4 bg-gray-50 border border-gray-200 rounded-full font-bold text-secondary hover:border-primary hover:text-primary transition">Compare vs Virgin Media</a>
-        </div>
-      </div>
-    </section>
+    <!-- 8. Verified UK Customer Reviews & 4.9 Star Rating Social Proof -->
+    <UserReviewsSection />
 
-    <!-- 6. Activation Steps -->
-    <section id="how-it-works" class="py-24 bg-gray-50 border-t border-gray-100">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-secondary">How to activate your British IPTV Subscription?</h2>
-          <p class="mt-4 text-gray-600 text-lg">A simple and fast process in 3 easy steps.</p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-          <!-- Step 1 -->
-          <div class="relative text-center">
-            <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-secondary text-white text-2xl font-black shadow-xl z-10 relative">1</div>
-            <h4 class="mt-6 text-xl font-bold text-secondary">Choose your Plan</h4>
-            <p class="mt-2 text-gray-500">Select the duration that suits you best: 1, 3, 6, or 12 months.</p>
-          </div>
-          <!-- Step 2 -->
-          <div class="relative text-center">
-            <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-secondary text-white text-2xl font-black shadow-xl z-10 relative">2</div>
-            <h4 class="mt-6 text-xl font-bold text-secondary">Secure Payment</h4>
-            <p class="mt-2 text-gray-500">Complete your purchase safely. You will receive an instant confirmation.</p>
-          </div>
-          <!-- Step 3 -->
-          <div class="relative text-center">
-            <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-secondary text-white text-2xl font-black shadow-xl z-10 relative">3</div>
-            <h4 class="mt-6 text-xl font-bold text-secondary">Guided Installation</h4>
-            <p class="mt-2 text-gray-500">Our automated system will send your credentials immediately with setup guides.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- 9. Refer-a-Friend Rewards Banner (+1 Month Free) -->
+    <ReferralBanner />
 
+    <!-- 10. Local UK Programmatic Geo-Coverage Grid (London, Manchester, etc.) -->
+    <CitiesList />
 
+    <!-- 11. FAQ Accordion (100% Synced to Server-Side FAQPage JSON-LD Schema) -->
+    <FAQSection />
 
-    <!-- FAQ Section -->
-    <section id="faq" class="py-24 bg-white">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl md:text-4xl font-bold text-center text-secondary mb-12">British IPTV Frequently Asked Questions</h2>
-        <div class="space-y-6">
-          <div class="p-6 border border-gray-200 rounded-2xl bg-gray-50">
-            <h3 class="text-xl font-bold text-secondary mb-2">Is this the best IPTV UK service?</h3>
-            <p class="text-gray-600">Yes, we provide the most stable, 4K/HD streaming experience in the UK with a 99.9% uptime guarantee powered by local servers.</p>
-          </div>
-          <div class="p-6 border border-gray-200 rounded-2xl bg-gray-50">
-            <h3 class="text-xl font-bold text-secondary mb-2">What devices are supported?</h3>
-            <p class="text-gray-600">Our IPTV service works on Smart TVs, Amazon Firestick, MAG boxes, Android devices, iOS, and PC using standard apps like Smarters, Tivimate, and GSE.</p>
-          </div>
-          <div class="p-6 border border-gray-200 rounded-2xl bg-gray-50">
-            <h3 class="text-xl font-bold text-secondary mb-2">How fast is the setup?</h3>
-            <p class="text-gray-600">Instant. As soon as your payment is confirmed, you will receive an email with your credentials and easy-to-follow setup guides.</p>
-          </div>
-          <div class="p-6 border border-gray-200 rounded-2xl bg-gray-50">
-            <h3 class="text-xl font-bold text-secondary mb-2">What is an IPTV subscription?</h3>
-            <p class="text-gray-600">IPTV (Internet Protocol Television) allows you to watch television via your internet connection instead of traditional cables or satellites, providing higher quality and more options.</p>
-          </div>
-          <div class="p-6 border border-gray-200 rounded-2xl bg-gray-50">
-            <h3 class="text-xl font-bold text-secondary mb-2">Can I test the service before buying?</h3>
-            <p class="text-gray-600">Yes, we offer a completely free 24-hour trial so you can verify the 4K quality, stability, and vast library of our channels and VOD before making any commitment.</p>
-          </div>
-          <div class="p-6 border border-gray-200 rounded-2xl bg-gray-50">
-            <h3 class="text-xl font-bold text-secondary mb-2">Do you offer catch-up (replay) channels?</h3>
-            <p class="text-gray-600">Yes, the majority of our premium UK and international channels have a replay (catch-up) function for up to 72 hours, meaning you'll never miss your favorite shows.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Free Trial CTA Section -->
-    <section class="bg-secondary py-16 border-t border-gray-800">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl font-bold text-white mb-4">Still not convinced? Try it for free!</h2>
-        <p class="mt-2 text-lg text-gray-300 max-w-2xl mx-auto mb-8">
-          Claim your 24-hour free trial today. No credit card required. See why over 10,000 UK residents trust us for their daily entertainment.
-        </p>
-        <div class="flex flex-col sm:flex-row justify-center gap-4">
-          <a href="https://wa.me/213550592200?text=I%20would%20like%20a%20free%2024h%20trial" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-xl bg-[#25D366] px-8 py-4 text-lg font-bold text-white transition hover:bg-[#128C7E] shadow-xl">
-            <svg class="mr-3 h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.94 3.659 1.437 5.63 1.438h.004c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
-            Request Free Trial via WhatsApp
-          </a>
-        </div>
-      </div>
-    </section>
+    <!-- 12. 24/7 Technical Support & WhatsApp Instant Routing Form -->
+    <ContactForm />
   </main>
 
+  <!-- 13. High-Converting Footer (Flame Map Embed, Westminster HQ & Compliance Links) -->
   <Footer />
-
-  <!-- Promotional / Exit-Intent Popup -->
-  <div id="promo-popup" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-500">
-    <div class="relative w-full max-w-md bg-white rounded-3xl p-8 shadow-2xl scale-90 transition-transform duration-500" id="popup-content">
-      <button id="close-popup" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition" aria-label="Close popup">
-        ✕
-      </button>
-      <div class="text-center">
-        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary mb-6 text-3xl">
-          🎁
-        </div>
-        <h3 class="text-2xl font-bold text-secondary mb-4">Don't Miss Out!</h3>
-        <p class="text-gray-600 mb-8">Join our official VIP channel for the latest updates, exclusive promo codes, and live support.</p>
-        <a href="#pricing" class="block w-full bg-[#25D366] text-white font-bold py-4 rounded-xl hover:opacity-90 transition shadow-lg mb-4">
-          Join VIP WhatsApp
-        </a>
-        <a href="#pricing" class="block w-full bg-[#0088cc] text-white font-bold py-4 rounded-xl hover:opacity-90 transition shadow-lg">
-          Join Telegram Group
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Popup Script -->
-  <script is:inline>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Check if popup has already been shown in this session
-      if (!sessionStorage.getItem('promoPopupShown')) {
-        // Show popup after 10 seconds
-        setTimeout(() => {
-          const popup = document.getElementById('promo-popup');
-          const content = document.getElementById('popup-content');
-          
-          if(popup && content) {
-            popup.classList.remove('opacity-0', 'pointer-events-none');
-            popup.classList.add('opacity-100', 'pointer-events-auto');
-            content.classList.remove('scale-90');
-            content.classList.add('scale-100');
-            
-            // Mark as shown for this session
-            sessionStorage.setItem('promoPopupShown', 'true');
-          }
-        }, 10000);
-      }
-
-      // Close popup logic
-      const closeBtn = document.getElementById('close-popup');
-      if(closeBtn) {
-        closeBtn.addEventListener('click', () => {
-          const popup = document.getElementById('promo-popup');
-          popup.classList.remove('opacity-100', 'pointer-events-auto');
-          popup.classList.add('opacity-0', 'pointer-events-none');
-        });
-      }
-    });
-  </script>
 </Layout>
