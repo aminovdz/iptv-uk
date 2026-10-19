@@ -12,8 +12,8 @@ import Footer from '../../components/Footer.astro';
 import { currentYear } from '../../utils/year';
 
 const title = `UK Locations & Regional Coverage (${currentYear}) | British IPTV Edge Network`;
-const description = "Discover British IPTV's dedicated edge server coverage across the United Kingdom. Ultra-low latency 4K streaming in London, Birmingham, Manchester, Edinburgh, Liverpool.";
-const keywords = "iptv uk locations, best iptv london, iptv manchester, iptv birmingham, iptv edinburgh, iptv liverpool, uk iptv edge servers";
+const description = `Discover British IPTV's dedicated edge server coverage across the United Kingdom in ${currentYear}. Ultra-low latency 4K streaming in London, Manchester, Scotland, Glasgow, Birmingham, Leeds, Liverpool.`;
+const keywords = "iptv uk locations, best iptv london, iptv manchester, iptv scotland, iptv glasgow, iptv birmingham, iptv edinburgh, iptv liverpool, iptv leeds, uk iptv edge servers";
 
 const cities = [
   { 
@@ -26,6 +26,15 @@ const cities = [
     subscribers: '12,400+'
   },
   { 
+    slug: 'manchester', 
+    name: 'Manchester', 
+    county: 'Greater Manchester',
+    clubs: 'Manchester City & Manchester United',
+    broadband: 'CityFibre, Virgin Media & BT FTTP',
+    latency: '<15ms',
+    subscribers: '9,800+'
+  },
+  { 
     slug: 'birmingham', 
     name: 'Birmingham', 
     county: 'West Midlands',
@@ -35,13 +44,22 @@ const cities = [
     subscribers: '8,200+'
   },
   { 
-    slug: 'manchester', 
-    name: 'Manchester', 
-    county: 'Greater Manchester',
-    clubs: 'Manchester City & Manchester United',
-    broadband: 'CityFibre, Virgin Media & BT FTTP',
-    latency: '<15ms',
-    subscribers: '9,800+'
+    slug: 'scotland', 
+    name: 'Scotland', 
+    county: 'Scotland (Nationwide)',
+    clubs: 'Celtic, Rangers, Aberdeen & Hearts',
+    broadband: 'Virgin Media, Openreach FTTP & CityFibre Scotland',
+    latency: '<16ms',
+    subscribers: '8,900+'
+  },
+  { 
+    slug: 'glasgow', 
+    name: 'Glasgow', 
+    county: 'Greater Glasgow & Clyde',
+    clubs: 'Rangers & Celtic (The Old Firm)',
+    broadband: 'Virgin Media Gig1, Hyperoptic & CityFibre',
+    latency: '<17ms',
+    subscribers: '6,400+'
   },
   { 
     slug: 'edinburgh', 
@@ -60,6 +78,42 @@ const cities = [
     broadband: 'Virgin Media & BT Ultrafast Fibre',
     latency: '<15ms',
     subscribers: '7,300+'
+  },
+  { 
+    slug: 'leeds', 
+    name: 'Leeds', 
+    county: 'West Yorkshire',
+    clubs: 'Leeds United',
+    broadband: 'CityFibre, Openreach FTTP & Virgin Media',
+    latency: '<15ms',
+    subscribers: '4,800+'
+  },
+  { 
+    slug: 'newcastle', 
+    name: 'Newcastle', 
+    county: 'Tyne and Wear',
+    clubs: 'Newcastle United & Sunderland',
+    broadband: 'Virgin Media Gig1 & Openreach Full Fibre',
+    latency: '<16ms',
+    subscribers: '4,200+'
+  },
+  { 
+    slug: 'cardiff', 
+    name: 'Cardiff', 
+    county: 'Wales',
+    clubs: 'Cardiff City & Swansea City',
+    broadband: 'Openreach FTTP & Virgin Media Gig1',
+    latency: '<16ms',
+    subscribers: '3,900+'
+  },
+  { 
+    slug: 'belfast', 
+    name: 'Belfast', 
+    county: 'Northern Ireland',
+    clubs: 'Linfield & Glentoran',
+    broadband: 'Fibrus Full Fibre, Openreach & Virgin Media',
+    latency: '<19ms',
+    subscribers: '3,400+'
   }
 ];
 

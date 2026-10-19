@@ -31,12 +31,36 @@ const {
 
 const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://britishiptv.pro';
 
+// City Geo Coordinates & Regional Postal Codes for LocalBusiness Schema
+const CITY_GEO: Record<string, { lat: number; lng: number; postalCode: string; region: string }> = {
+  London: { lat: 51.5074, lng: -0.1278, postalCode: "SW1A 1AA", region: "Greater London" },
+  Manchester: { lat: 53.4808, lng: -2.2426, postalCode: "M1 1AD", region: "Greater Manchester" },
+  Birmingham: { lat: 52.4862, lng: -1.8904, postalCode: "B1 1BB", region: "West Midlands" },
+  Edinburgh: { lat: 55.9533, lng: -3.1883, postalCode: "EH1 1YZ", region: "Midlothian (Scotland)" },
+  Liverpool: { lat: 53.4084, lng: -2.9916, postalCode: "L1 8JQ", region: "Merseyside" },
+  Scotland: { lat: 56.4907, lng: -4.2026, postalCode: "EH1 1YZ", region: "Scotland" },
+  Glasgow: { lat: 55.8642, lng: -4.2518, postalCode: "G1 1XQ", region: "Strathclyde" },
+  Leeds: { lat: 53.8008, lng: -1.5491, postalCode: "LS1 1UR", region: "West Yorkshire" },
+  Newcastle: { lat: 54.9783, lng: -1.6178, postalCode: "NE1 1AD", region: "Tyne and Wear" },
+  Cardiff: { lat: 51.4816, lng: -3.1791, postalCode: "CF10 1EP", region: "Wales" },
+  Belfast: { lat: 54.5973, lng: -5.9301, postalCode: "BT1 5GS", region: "Northern Ireland" }
+};
+
+const cityData = cityName ? CITY_GEO[cityName] : null;
+
 // 1. Organization & LocalBusiness Entity Graph
 const organizationSchema: any = {
   "@type": type === 'city' ? "LocalBusiness" : "Organization",
   "@id": `${siteUrl}/#organization`,
   "name": "British IPTV",
-  "alternateName": ["IPTV UK", "BritishIPTV Pro", "IPTVUK"],
+  "alternateName": [
+    "British IPTV UK",
+    "Royal British IPTV",
+    "BritishIPTV",
+    "IPTV British",
+    "BritishIPTV Pro",
+    "IPTV UK"
+  ],
   "url": siteUrl,
   "logo": {
     "@type": "ImageObject",
@@ -47,14 +71,21 @@ const organizationSchema: any = {
     "@type": "PostalAddress",
     "streetAddress": "123 Westminster Bridge Rd",
     "addressLocality": cityName || "London",
-    "addressRegion": "Greater London",
-    "postalCode": "SE1 7HR",
+    "addressRegion": cityData?.region || "Greater London",
+    "postalCode": cityData?.postalCode || "SE1 7HR",
     "addressCountry": "GB"
   },
   "geo": {
     "@type": "GeoCoordinates",
-    "latitude": 51.5007,
-    "longitude": -0.1172
+    "latitude": cityData ? cityData.lat : 51.5007,
+    "longitude": cityData ? cityData.lng : -0.1172
+  },
+  "areaServed": cityName ? {
+    "@type": "City",
+    "name": cityName
+  } : {
+    "@type": "Country",
+    "name": "United Kingdom"
   },
   "contactPoint": [
     {

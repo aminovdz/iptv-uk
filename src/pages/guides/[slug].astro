@@ -48,20 +48,22 @@ let ContentComponent: any = null;
 if (isContent && entry) {
   const rendered = await render(entry);
   ContentComponent = rendered.Content;
-  title = entry.data.title.replace(/2026/g, String(currentYear));
-  description = entry.data.description.replace(/2026/g, String(currentYear));
+  const yearRegex = /\b202[0-9]\b/g;
+  title = entry.data.title.replace(yearRegex, String(currentYear));
+  description = entry.data.description.replace(yearRegex, String(currentYear));
   pubDate = entry.data.pubDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
   author = entry.data.author || "British IPTV Editorial Team";
   readingTime = entry.data.readingTime || "7 min read";
-  quickSummary = (entry.data.quickSummary || "").replace(/2026/g, String(currentYear));
-  toc = (entry.data.toc || []).map(t => ({ title: t.title.replace(/2026/g, String(currentYear)), anchor: t.anchor }));
+  quickSummary = (entry.data.quickSummary || "").replace(yearRegex, String(currentYear));
+  toc = (entry.data.toc || []).map(t => ({ title: t.title.replace(yearRegex, String(currentYear)), anchor: t.anchor }));
   faqs = (entry.data.faqs || []).map(f => ({ 
-    question: f.question.replace(/2026/g, String(currentYear)), 
-    answer: f.answer.replace(/2026/g, String(currentYear)) 
+    question: f.question.replace(yearRegex, String(currentYear)), 
+    answer: f.answer.replace(yearRegex, String(currentYear)) 
   }));
 } else if (guide) {
-  title = guide.title.replace(/2026/g, String(currentYear));
-  description = (guide.excerpt || guide.title).replace(/2026/g, String(currentYear));
+  const yearRegex = /\b202[0-9]\b/g;
+  title = guide.title.replace(yearRegex, String(currentYear));
+  description = (guide.excerpt || guide.title).replace(yearRegex, String(currentYear));
   pubDate = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
@@ -154,7 +156,7 @@ if (slug.includes('firestick')) {
         {ContentComponent ? (
           <ContentComponent />
         ) : guide ? (
-          <div set:html={guide.content} />
+          <div set:html={(guide.content || '').replace(/\b202[0-9]\b/g, String(currentYear))} />
         ) : null}
       </div>
 

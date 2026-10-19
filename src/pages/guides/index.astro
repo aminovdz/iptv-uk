@@ -15,11 +15,13 @@ const description = "Master your IPTV streaming setup. Step-by-step tutorials fo
 
 const contentGuides = await getCollection('guides');
 
+const yearRegex = /\b202[0-9]\b/g;
+
 // Merge and deduplicate
 const formattedContentGuides = contentGuides.map(g => ({
   slug: g.id.replace(/\.(md|mdx)$/, ''),
-  title: g.data.title,
-  excerpt: g.data.description,
+  title: g.data.title.replace(yearRegex, String(currentYear)),
+  excerpt: g.data.description.replace(yearRegex, String(currentYear)),
   category: g.data.category,
   readingTime: g.data.readingTime,
   pubDate: g.data.pubDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
@@ -30,8 +32,8 @@ const formattedStaticGuides = staticGuides
   .filter(g => !existingSlugs.has(g.slug))
   .map(g => ({
     slug: g.slug,
-    title: g.title,
-    excerpt: g.excerpt,
+    title: g.title.replace(yearRegex, String(currentYear)),
+    excerpt: g.excerpt.replace(yearRegex, String(currentYear)),
     category: "Streaming Tutorial",
     readingTime: "5 min read",
     pubDate: String(currentYear)

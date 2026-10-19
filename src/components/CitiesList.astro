@@ -4,14 +4,24 @@ import { MapPin, ArrowRight, Wifi } from 'lucide-astro';
 
 const primaryCities = [
   { name: "London", slug: "london", region: "Greater London", ping: "< 4ms", hubs: "Westminster & Docklands" },
+  { name: "Manchester", slug: "manchester", region: "North West", ping: "< 5ms", hubs: "MediaCityUK & Manchester Exchange" },
+  { name: "Scotland", slug: "scotland", region: "Nationwide Hub", ping: "< 7ms", hubs: "Lothian & Clyde High-Speed Node" },
   { name: "Birmingham", slug: "birmingham", region: "West Midlands", ping: "< 6ms", hubs: "Central England Hub" },
-  { name: "Manchester", slug: "manchester", region: "North West", ping: "< 5ms", hubs: "MediaCityUK Relay" },
-  { name: "Edinburgh", slug: "edinburgh", region: "Scotland", ping: "< 8ms", hubs: "Lothian High-Speed Node" },
-  { name: "Liverpool", slug: "liverpool", region: "Merseyside", ping: "< 6ms", hubs: "Mersey Fibre Exchange" }
+  { name: "Glasgow", slug: "glasgow", region: "Strathclyde", ping: "< 7ms", hubs: "Clyde Fibre Relay" },
+  { name: "Liverpool", slug: "liverpool", region: "Merseyside", ping: "< 6ms", hubs: "Mersey Fibre Exchange" },
+  { name: "Leeds", slug: "leeds", region: "West Yorkshire", ping: "< 6ms", hubs: "Yorkshire Data Hub" },
+  { name: "Edinburgh", slug: "edinburgh", region: "Midlothian", ping: "< 8ms", hubs: "Edinburgh Edge Exchange" }
 ];
 
 const secondaryRegions = [
-  "Glasgow", "Leeds", "Bristol", "Sheffield", "Newcastle", "Cardiff", "Belfast", "Southampton", "Leicester", "Nottingham"
+  { name: "Newcastle", slug: "newcastle" },
+  { name: "Cardiff", slug: "cardiff" },
+  { name: "Belfast", slug: "belfast" },
+  { name: "Bristol", slug: null },
+  { name: "Sheffield", slug: null },
+  { name: "Southampton", slug: null },
+  { name: "Leicester", slug: null },
+  { name: "Nottingham", slug: null }
 ];
 ---
 
@@ -32,8 +42,8 @@ const secondaryRegions = [
       </p>
     </div>
 
-    <!-- 5 Primary City Cards -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-10">
+    <!-- 8 Primary Regional Hub Cards (2 rows of 4) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
       {primaryCities.map((city) => (
         <a 
           href={`/locations/${city.slug}`}
@@ -58,7 +68,7 @@ const secondaryRegions = [
           </div>
 
           <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-bold text-blue-300 group-hover:text-white transition-colors">
-            <span>Explore City Hub</span>
+            <span>Explore {city.name} Hub</span>
             <ArrowRight class="w-3.5 h-3.5 text-red-500 group-hover:translate-x-1 transition-transform" />
           </div>
         </a>
@@ -72,9 +82,19 @@ const secondaryRegions = [
       </span>
       <div class="flex flex-wrap items-center justify-center gap-2">
         {secondaryRegions.map((region) => (
-          <span class="px-3 py-1 rounded-full text-xs font-medium bg-white/5 text-gray-300 border border-white/5">
-            {region}
-          </span>
+          region.slug ? (
+            <a 
+              href={`/locations/${region.slug}`} 
+              class="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/5 hover:border-red-500/30 transition-all flex items-center gap-1.5"
+            >
+              <span>{region.name}</span>
+              <span class="text-[10px] text-emerald-400 font-bold">&bull; Active Hub</span>
+            </a>
+          ) : (
+            <span class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-white/[0.03] text-gray-400 border border-white/5">
+              {region.name}
+            </span>
+          )
         ))}
       </div>
     </div>

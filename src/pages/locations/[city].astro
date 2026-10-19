@@ -53,6 +53,48 @@ export function getStaticPaths() {
       county: 'Merseyside',
       clubs: 'Liverpool FC & Everton',
       broadband: 'Virgin Media & BT Ultrafast Fibre'
+    },
+    { 
+      slug: 'scotland', 
+      name: 'Scotland', 
+      county: 'Scotland (Nationwide)',
+      clubs: 'Celtic, Rangers, Aberdeen & Hearts',
+      broadband: 'Virgin Media, Openreach FTTP & CityFibre Scotland'
+    },
+    { 
+      slug: 'glasgow', 
+      name: 'Glasgow', 
+      county: 'Greater Glasgow & Clyde',
+      clubs: 'Rangers & Celtic (The Old Firm)',
+      broadband: 'Virgin Media Gig1, Hyperoptic & CityFibre'
+    },
+    { 
+      slug: 'leeds', 
+      name: 'Leeds', 
+      county: 'West Yorkshire',
+      clubs: 'Leeds United',
+      broadband: 'CityFibre, Openreach FTTP & Virgin Media'
+    },
+    { 
+      slug: 'newcastle', 
+      name: 'Newcastle', 
+      county: 'Tyne and Wear',
+      clubs: 'Newcastle United & Sunderland',
+      broadband: 'Virgin Media Gig1 & Openreach Full Fibre'
+    },
+    { 
+      slug: 'cardiff', 
+      name: 'Cardiff', 
+      county: 'Wales',
+      clubs: 'Cardiff City & Swansea City',
+      broadband: 'Openreach FTTP & Virgin Media Gig1'
+    },
+    { 
+      slug: 'belfast', 
+      name: 'Belfast', 
+      county: 'Northern Ireland',
+      clubs: 'Linfield & Glentoran',
+      broadband: 'Fibrus Full Fibre, Openreach & Virgin Media'
     }
   ];
 
@@ -65,9 +107,9 @@ export function getStaticPaths() {
 const { cityInfo } = Astro.props;
 const { name: cityName, county, clubs, broadband } = cityInfo;
 
-const title = `Best IPTV in ${cityName} (${currentYear}) | #1 4K UK Streaming Provider`;
-const description = `Looking for the most reliable IPTV in ${cityName}? Stream 4K live sports, 3PM football & movies with zero buffering. Dedicated local UK servers from £7/mo.`;
-const keywords = `best iptv ${cityName.toLowerCase()}, iptv subscription ${cityName.toLowerCase()}, buy iptv in ${cityName.toLowerCase()}, iptv provider ${cityName.toLowerCase()}, firestick iptv ${cityName.toLowerCase()}`;
+const title = `IPTV ${cityName} (${currentYear}) | #1 Best 4K UK Streaming & Sports Provider`;
+const description = `Looking for the best IPTV in ${cityName}? ⚡ Free 24h trial available. Stream 4K live sports, 3PM football & UK channels with zero buffering from £7/mo. Instant activation.`;
+const keywords = `iptv ${cityName.toLowerCase()}, ${cityName.toLowerCase()} iptv, best iptv ${cityName.toLowerCase()}, iptv subscription ${cityName.toLowerCase()}, buy iptv in ${cityName.toLowerCase()}, iptv provider ${cityName.toLowerCase()}, firestick iptv ${cityName.toLowerCase()}`;
 
 const localFaqs = [
   {
@@ -113,7 +155,7 @@ const localFaqs = [
         </div>
 
         <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight max-w-5xl mx-auto leading-tight">
-          The <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-300 to-blue-400">#1 Best IPTV in {cityName}</span> <br class="hidden sm:inline" />
+          IPTV {cityName} ({currentYear}) &mdash; <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-300 to-blue-400">#1 Best 4K UK Streaming</span> <br class="hidden sm:inline" />
           Ultra HD 4K &amp; Zero Buffering.
         </h1>
 
