@@ -9,5 +9,6 @@ export default defineConfig({
   },
   site: 'https://britishiptv.pro',
   output: 'static',
+  trailingSlash: 'always',
   integrations: [sitemap()],
 });

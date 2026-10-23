@@ -204,7 +204,7 @@ const defaultFixtures: Fixture[] = [
       
       <!-- Left: Header info & Live pulse -->
       <a 
-        href="/livescore" 
+        href="/livescore/" 
         class="group inline-flex items-center gap-3 focus:outline-none"
         title="Open Live Match Center"
       >
@@ -230,7 +230,7 @@ const defaultFixtures: Fixture[] = [
       <!-- Right: Redirect button to /livescore -->
       <div class="flex items-center gap-3">
         <a 
-          href="/livescore" 
+          href="/livescore/" 
           class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-extrabold bg-[#C8102E] hover:bg-red-700 text-white shadow-lg shadow-red-900/40 hover:shadow-red-900/60 transition-all transform hover:-translate-y-0.5"
         >
           <span>Open Full Match Center</span>
@@ -256,7 +256,7 @@ const defaultFixtures: Fixture[] = [
       <div class="flex gap-4 flex-shrink-0 items-center fixture-set" id="fixture-set-1">
         {defaultFixtures.map((fixture) => (
           <a
-            href="/livescore"
+            href="/livescore/"
             class="fixture-card group relative flex-shrink-0 w-72 sm:w-80 bg-white/[0.04] hover:bg-white/[0.09] backdrop-blur-md rounded-2xl p-4 border border-white/10 hover:border-red-500/50 shadow-lg hover:shadow-red-500/20 transition-all duration-300 cursor-pointer block text-left"
             data-fixture-id={fixture.id}
           >
@@ -344,7 +344,7 @@ const defaultFixtures: Fixture[] = [
       <div class="flex gap-4 flex-shrink-0 items-center fixture-set" id="fixture-set-2" aria-hidden="true">
         {defaultFixtures.map((fixture) => (
           <a
-            href="/livescore"
+            href="/livescore/"
             class="fixture-card group relative flex-shrink-0 w-72 sm:w-80 bg-white/[0.04] hover:bg-white/[0.09] backdrop-blur-md rounded-2xl p-4 border border-white/10 hover:border-red-500/50 shadow-lg hover:shadow-red-500/20 transition-all duration-300 cursor-pointer block text-left"
             data-fixture-id={fixture.id}
             tabindex="-1"
@@ -433,7 +433,7 @@ const defaultFixtures: Fixture[] = [
   <!-- Bottom subtitle callout -->
   <div class="text-center mt-6 text-xs text-blue-300/80 font-medium">
     Click any match fixture to open the dedicated 
-    <a href="/livescore" class="text-white underline font-bold hover:text-red-400 transition-colors">
+    <a href="/livescore/" class="text-white underline font-bold hover:text-red-400 transition-colors">
       /livescore Match Center
     </a> 
     with live ESPN scoreboards and UK TV channels.

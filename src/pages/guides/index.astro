@@ -64,7 +64,7 @@ const allGuides = [...formattedContentGuides, ...formattedStaticGuides];
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {allGuides.map((g) => (
           <a 
-            href={`/guides/${g.slug}`}
+            href={`/guides/${g.slug}/`}
             class="group p-6 rounded-3xl bg-[#090E1D] border border-white/10 hover:border-blue-500/40 transition-all flex flex-col justify-between shadow-xl hover:-translate-y-1 duration-300"
           >
             <div>

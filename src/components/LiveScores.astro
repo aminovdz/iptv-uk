@@ -89,7 +89,7 @@ const displayMatches = matches.slice(0, 10);
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
       
       <!-- Section Heading -->
-      <a href="/livescore" class="group flex items-center gap-3 focus:outline-none" title="Open Full Match Center">
+      <a href="/livescore/" class="group flex items-center gap-3 focus:outline-none" title="Open Full Match Center">
         <span class="relative flex h-3 w-3">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
           <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
@@ -106,7 +106,7 @@ const displayMatches = matches.slice(0, 10);
 
       <!-- Direct Match Center CTA -->
       <a 
-        href="/livescore" 
+        href="/livescore/" 
         class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-black bg-[#C8102E] hover:bg-red-700 text-white shadow-lg shadow-red-900/40 hover:scale-105 transition-all self-start sm:self-auto"
       >
         <span>Open Match Center &rarr;</span>
@@ -129,8 +129,8 @@ const displayMatches = matches.slice(0, 10);
         {displayMatches.map((m) => (
           <div class="match-card group relative flex-shrink-0 w-72 sm:w-80 backdrop-blur-md bg-neutral-900/80 border border-neutral-800 rounded-2xl p-4 shadow-lg hover:border-red-500/50 transition-all duration-300">
             
-            <!-- Click-to-Redirect Rule: Entire Card Links to /livescore -->
-            <a href="/livescore" class="absolute inset-0 z-10" aria-label={`Open match center for ${m.homeTeam.name} vs ${m.awayTeam.name}`}></a>
+            <!-- Click-to-Redirect Rule: Entire Card Links to /livescore/ -->
+            <a href="/livescore/" class="absolute inset-0 z-10" aria-label={`Open match center for ${m.homeTeam.name} vs ${m.awayTeam.name}`}></a>
 
             <!-- Card Header: League & Live Indicator -->
             <div class="flex items-center justify-between mb-3 text-xs">
@@ -225,7 +225,7 @@ const displayMatches = matches.slice(0, 10);
         {displayMatches.map((m) => (
           <div class="match-card group relative flex-shrink-0 w-72 sm:w-80 backdrop-blur-md bg-neutral-900/80 border border-neutral-800 rounded-2xl p-4 shadow-lg hover:border-red-500/50 transition-all duration-300">
             
-            <a href="/livescore" class="absolute inset-0 z-10" tabindex="-1"></a>
+            <a href="/livescore/" class="absolute inset-0 z-10" tabindex="-1"></a>
 
             <div class="flex items-center justify-between mb-3 text-xs">
               <span class="font-bold text-blue-300 truncate max-w-[140px]">{m.league}</span>
